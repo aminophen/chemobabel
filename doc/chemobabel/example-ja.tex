@@ -1,0 +1,57 @@
+%#! 使い方：ファイル名が「example-ja.tex」のとき
+%    1. platex example-ja.tex
+%    2. pdflatex -shell-escape ChemFigFile.tex
+%    3. platex example-ja.tex
+%    4. dvipdfmx example-ja.dvi
+
+\documentclass{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{chemobabel}
+
+%! ----- For the purpose of extracting codes of all SMILES figures -----
+\input{chemobabel-extract.tex}
+
+\title{\textsf{chemobabel.sty} の使用例}
+\author{アセトアミノフェン}
+\begin{document}
+\maketitle
+以下の構造式は、\textsf{chemobabel} パッケージを用いて Open Babel と Inkscape を介した自動変換により生成しました。
+
+\begin{figure}[ht]
+  \centering
+  \smilesobabel{CCO}{}
+  \caption{エタノール}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \smilesobabel[scale=0.8]{C1[C@H](C)C[C@@H](O)C1}{}
+  \caption{(1\textit{S},3\textit{S})-3-メチルシクロペンタノール}
+\end{figure}
+
+\begin{figure}[ht]
+   \centering
+  \begingroup
+    \catcode`\~=0
+    \catcode`\%=11
+    \catcode`\\=11
+    ~smilesobabel[scale=0.7]{Cl/C=C/Br}{}
+    ~smilesobabel[scale=0.7]{Cl/C=C\Br}{}
+  ~endgroup
+  \caption{(\textit{E})-1-ブロモ-2-クロロエテンと(\textit{Z})-1-ブロモ-2-クロロエテン}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \chemobabel[scale=0.6]{draw/ATP.cdx}{-xd}
+  \caption{ATP （アデノシン三リン酸）}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \chemobabel[scale=0.4]{draw/Brevetoxin A.mol}{}
+  \caption{ブレベトキシンA}
+\end{figure}
+
+\end{document}

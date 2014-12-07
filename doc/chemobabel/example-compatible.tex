@@ -1,0 +1,86 @@
+%#! Usage: (suppose this source file = `example.tex')
+%    1. pdflatex example.tex
+%    2. pdflatex -shell-escape ChemFigFile.tex
+%    3. pdflatex example.tex
+% Some commands for \smiles and \obabel are included, so omit them if you want; see below.
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{chemobabel}
+
+%% ----- Optional: for compatibility -----
+%% You can delete this region when you use \smilesobabel only (not \smiles and \obabel commands)
+% ----- for \smiles command -----
+\newcounter{smilescounter}
+\setcounter{smilescounter}{1}
+\newcommand{\smiles}[1]{
+  \immediate\write18{obabel -:"#1" -O smilesimg\arabic{smilescounter}.png}
+  \includegraphics{smilesimg\arabic{smilescounter}.png}
+  \addtocounter{smilescounter}{1}
+}
+% ----- for \obabel command -----
+\usepackage{graphvizObabel}
+%% ----------
+
+%! ----- For the purpose of extracting codes of all SMILES figures -----
+%% Loading the compatible version...
+\input{chemobabel-extract-compatible.tex}
+
+\title{An Example for \textsf{chemobabel} Package \\ (compatible version)}
+\author{Acetaminophen}
+\begin{document}
+\maketitle
+
+The formulas below are generated using \textsf{chemobabel} package with the help of Open Babel and Inkscape.
+The last two formulas are generated with obsolete \verb|\smiles| and \verb|\obabel| commands.
+
+\begin{figure}[ht]
+  \centering
+  \smilesobabel{CCO}{}
+  \caption{Ethanol}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \smilesobabel[scale=0.8]{C1[C@H](C)C[C@@H](O)C1}{}
+  \caption{(1\textit{S},3\textit{S})-3-Methylcyclopentanol}
+\end{figure}
+
+\begin{figure}[ht]
+   \centering
+  \begingroup
+    \catcode`\~=0
+    \catcode`\%=11
+    \catcode`\\=11
+    ~smilesobabel[scale=0.7]{Cl/C=C/Br}{}
+    ~smilesobabel[scale=0.7]{Cl/C=C\Br}{}
+  ~endgroup
+  \caption{(\textit{E})-1-bromo-2-chloroethene \& (\textit{Z})-1-bromo-2-chloroethene}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \chemobabel[scale=0.6]{draw/ATP.cdx}{-xd}
+  \caption{ATP (Adenosine triphosphate)}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \chemobabel[scale=0.4]{draw/Brevetoxin A.mol}{}
+  \caption{Brevetoxin A}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \smiles{C1[C@H](C)C[C@@H](O)C1}
+  \caption{(1\textit{S},3\textit{S})-3-Methylcyclopentanol}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \obabel[scale=0.8]{C1[C@H](C)C[C@@H](O)C1}
+  \caption{(1\textit{S},3\textit{S})-3-Methylcyclopentanol}
+\end{figure}
+
+\end{document}

@@ -1,0 +1,83 @@
+%%
+%% This is file `chemobabel.sty',
+%% for generating chemical structural formulas using Open Babel and Inkscape.
+%% 
+%% Copyright 2014 Acetaminophen (Hironobu YAMASHITA)
+%%   Email  :     h.y.acetaminophen[a t]gmail.com
+%%   GitHub :     https://github.com/aminophen
+%%   Blog   :     http://acetaminophen.hatenablog.com/
+%% 
+%% This work is based on a lot of resources published online.
+%%  -Noel O'Boyle http://baoilleach.blogspot.jp/
+%%  -Jakob Lykke Andersen http://imada.sdu.dk/~jlandersen/
+%%  -TeX Forum http://oku.edu.mie-u.ac.jp/tex/
+%%
+\NeedsTeXFormat{LaTeX2e}
+  [1994/12/01]% LaTeX date must be December 1994 or later
+\ProvidesPackage{chemobabel}[2014/12/07 v0.3 by Acetaminophen]
+
+% Original source at http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
+\RequirePackage{verbatim}
+\RequirePackage{graphicx}
+
+%% ----- Make a directory for images -----
+\immediate\write18{mkdir chemobabelimgdir}
+
+%% ----- Definition of \smilesobabel -----
+\newcounter{smilesobabelCounter}
+\setcounter{smilesobabelCounter}{1}
+\newcommand\smilesobabelPrefix{chemobabelimgdir/smilesobabelimg}
+\newcommand\smilesobabelGetName{\smilesobabelPrefix\arabic{smilesobabelCounter}}
+
+% 1: (optional) options for includegraphics
+% 2: SMILES notation
+% 3: options for obabel
+\makeatletter
+\newcommand\@smilesobabel[3][scale=1]{
+	\immediate\write18{obabel -:"#2" -O \smilesobabelGetName.svg #3 2> \smilesobabelGetName.log && inkscape -f \smilesobabelGetName.svg --export-pdf=\smilesobabelGetName.pdf 2>> \smilesobabelGetName.log || rm -f \smilesobabelGetName.pdf}
+	\IfFileExists{\smilesobabelGetName.pdf}
+	{\includegraphics[#1]{\smilesobabelGetName.pdf}}% the pdf exists: include it
+	{% the pdf was not created - show a hint and std error
+		\fbox{\begin{minipage}{\textwidth}
+			Error in chemobabel: the file was not compiled. Remember to use \texttt{pdflatex} (or \texttt{platex} for Japanese) with the \texttt{-shell-escape} option.\\
+			obabel log (might be empty):
+			\verbatiminput{\smilesobabelGetName.log}
+		\end{minipage}}
+	}
+	\addtocounter{smilesobabelCounter}{1}% select next name
+}
+\let\smilesobabel=\@smilesobabel
+\makeatother
+%% ----- Definition of \smilesobabel end -----
+
+%% ----- Definition of \chemobabel -----
+\newcounter{chemobabelCounter}
+\setcounter{chemobabelCounter}{1}
+\newcommand\chemobabelPrefix{chemobabelimgdir/chemobabelimg}
+\newcommand\chemobabelGetName{\chemobabelPrefix\arabic{chemobabelCounter}}
+
+% 1: (optional) options for includegraphics
+% 2: original files (.mol, .cdx, etc.)
+% 3: options for obabel
+\makeatletter
+\newcommand\@chemobabel[3][scale=1]{
+	\immediate\write18{obabel "#2" -O \chemobabelGetName.svg #3 2> \chemobabelGetName.log && inkscape -f \chemobabelGetName.svg --export-pdf=\chemobabelGetName.pdf 2>> \chemobabelGetName.log || rm -f \chemobabelGetName.pdf}
+	\IfFileExists{\chemobabelGetName.pdf}
+	{\includegraphics[#1]{\chemobabelGetName.pdf}}% the pdf exists: include it
+	{% the pdf was not created - show a hint and std error
+		\fbox{\begin{minipage}{\textwidth}
+			Error in chemobabel: the file was not compiled. Remember to use \texttt{pdflatex} (or \texttt{platex} for Japanese) with the \texttt{-shell-escape} option.\\
+			obabel log (might be empty):
+			\verbatiminput{\chemobabelGetName.log}
+		\end{minipage}}
+	}
+	\addtocounter{chemobabelCounter}{1}% select next name
+}
+\let\chemobabel=\@chemobabel
+\makeatother
+%% ----- Definition of \chemobabel end -----
+
+\endinput
+
+%%
+%% End of file `chemobabel.sty'.

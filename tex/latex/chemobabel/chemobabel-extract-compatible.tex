@@ -1,0 +1,82 @@
+%! ----- For the purpose of extracting all codes of Open Babel figures -----
+%%
+%% This is file `chemobabel-extract-comp.tex', bundled with `chemobabel.sty'.
+%% 
+%% Copyright 2014 Acetaminophen (Hironobu Yamashita)
+%%   GitHub: https://github.com/aminophen
+%%   Blog: http://acetaminophen.hatenablog.com/
+%%
+% Thanks: http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=1411
+
+%% Define intermediate output file and load packages
+\newwrite\ChemFigFile
+ \immediate\openout\ChemFigFile=ChemFigFile.tex\relax
+ \immediate\write\ChemFigFile{\string\documentclass{article}}
+ \immediate\write\ChemFigFile{\string\usepackage{graphicx}}
+% for \smilesobabel and \chemobabel
+ \immediate\write\ChemFigFile{\string\usepackage{chemobabel}}
+%%
+
+%% ----- Definition (Optional: for compatibility) -----
+%% You can delete this region when you use \smilesobabel only (not \smiles and \obabel commands)
+% for \smiles (Delete following 9 lines if you don't intend to use \smiles ; if you wish)
+ \immediate\write\ChemFigFile{\string\newcounter{smilescounter}}
+ \immediate\write\ChemFigFile{\string\setcounter{smilescounter}{1}}
+ \immediate\write\ChemFigFile{%
+  \string\newcommand{\string\smiles}[1]{%
+   \string\immediate\string\write18{obabel -:"\string#1" -O smilesimg\string\arabic{smilescounter}.png}
+   \string\includegraphics{smilesimg\string\arabic{smilescounter}.png}
+   \string\addtocounter{smilescounter}{1}%
+  }%
+ }
+% for \obabel (Delete the next line if you don't intend to use `graphvizObabel.sty'; necessary if you don't have `graphvizObabel.sty')
+ \immediate\write\ChemFigFile{\string\usepackage{graphvizObabel}}
+%% ----------
+
+%% Read and write
+ \immediate\write\ChemFigFile{\string\begin{document}}
+  \immediate\write\ChemFigFile{\string\begingroup}
+  \immediate\write\ChemFigFile{\string\catcode`\string\~=0}
+  \immediate\write\ChemFigFile{\string\catcode`\string\%=11}
+  \immediate\write\ChemFigFile{\string\catcode`\string\\=11}
+ \AtEndDocument{%
+  \immediate\write\ChemFigFile{\string~endgroup}
+  \immediate\write\ChemFigFile{\string\end{document}}%
+  \immediate\closeout\ChemFigFile%
+ }
+% Support for SMILES notations including "backslash" and "percent"
+% for \smilesobabel (~ is used as an escape character instead of \)
+ \let\oldsmilesobabel=\smilesobabel
+ \renewcommand\smilesobabel[3][scale=1]{%
+  \immediate\write\ChemFigFile{%
+   \string~smilesobabel[#1]{#2}{#3}%
+   \string~newpage}%
+  \oldsmilesobabel[#1]{#2}{#3}}
+% for \chemobabel (~ is used as an escape character instead of \)
+ \let\oldchemobabel=\chemobabel
+ \renewcommand\chemobabel[3][scale=1]{%
+  \immediate\write\ChemFigFile{%
+   \string~chemobabel[#1]{#2}{#3}%
+   \string~newpage}%
+  \oldchemobabel[#1]{#2}{#3}}
+%%
+
+%% ----- Read and write (Optional: for compatibility) -----
+%% You can delete this region when you use \smilesobabel only (not \smiles and \obabel commands)
+% for \smiles
+ \let\oldsmiles=\smiles
+ \def\smiles#1{%
+  \immediate\write\ChemFigFile{%
+   \string~smiles{#1}%
+   \string~newpage}%
+  \oldsmiles{#1}}
+% for \obabel
+ \let\oldobabel=\obabel
+ \def\obabel[#1]#2{%
+  \immediate\write\ChemFigFile{%
+   \string~obabel[#1]{#2}%
+   \string~newpage}%
+  \oldobabel[#1]{#2}}
+%% ----------
+
+% ----- [EOF] -----
