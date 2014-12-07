@@ -34,17 +34,17 @@
 % 3: options for obabel
 \makeatletter
 \newcommand\@smilesobabel[3][scale=1]{
-	\immediate\write18{obabel -:"#2" -O \smilesobabelGetName.svg #3 2> \smilesobabelGetName.log && inkscape -f \smilesobabelGetName.svg --export-pdf=\smilesobabelGetName.pdf 2>> \smilesobabelGetName.log || rm -f \smilesobabelGetName.pdf}
-	\IfFileExists{\smilesobabelGetName.pdf}
-	{\includegraphics[#1]{\smilesobabelGetName.pdf}}% the pdf exists: include it
-	{% the pdf was not created - show a hint and std error
-		\fbox{\begin{minipage}{\textwidth}
-			Error in chemobabel: the file was not compiled. Remember to use \texttt{pdflatex} (or \texttt{platex} for Japanese) with the \texttt{-shell-escape} option.\\
-			obabel log (might be empty):
-			\verbatiminput{\smilesobabelGetName.log}
-		\end{minipage}}
-	}
-	\addtocounter{smilesobabelCounter}{1}% select next name
+  \immediate\write18{obabel -:"#2" -O \smilesobabelGetName.svg #3 2> \smilesobabelGetName.log && inkscape -f \smilesobabelGetName.svg --export-pdf=\smilesobabelGetName.pdf 2>> \smilesobabelGetName.log || rm -f \smilesobabelGetName.pdf}
+  \IfFileExists{\smilesobabelGetName.pdf}
+  {\includegraphics[#1]{\smilesobabelGetName.pdf}}% the pdf exists: include it
+  {% the pdf was not created - show a hint and std error
+    \fbox{\begin{minipage}{\textwidth}
+      Error in chemobabel: the file was not compiled. Remember to use \texttt{pdflatex} (or \texttt{platex} for Japanese) with the \texttt{-shell-escape} option.\\
+      obabel log (might be empty):
+      \verbatiminput{\smilesobabelGetName.log}
+    \end{minipage}}
+  }
+  \addtocounter{smilesobabelCounter}{1}% select next name
 }
 \let\smilesobabel=\@smilesobabel
 \makeatother
@@ -61,17 +61,17 @@
 % 3: options for obabel
 \makeatletter
 \newcommand\@chemobabel[3][scale=1]{
-	\immediate\write18{obabel "#2" -O \chemobabelGetName.svg #3 2> \chemobabelGetName.log && inkscape -f \chemobabelGetName.svg --export-pdf=\chemobabelGetName.pdf 2>> \chemobabelGetName.log || rm -f \chemobabelGetName.pdf}
-	\IfFileExists{\chemobabelGetName.pdf}
-	{\includegraphics[#1]{\chemobabelGetName.pdf}}% the pdf exists: include it
-	{% the pdf was not created - show a hint and std error
-		\fbox{\begin{minipage}{\textwidth}
-			Error in chemobabel: the file was not compiled. Remember to use \texttt{pdflatex} (or \texttt{platex} for Japanese) with the \texttt{-shell-escape} option.\\
-			obabel log (might be empty):
-			\verbatiminput{\chemobabelGetName.log}
-		\end{minipage}}
-	}
-	\addtocounter{chemobabelCounter}{1}% select next name
+  \immediate\write18{obabel "#2" -O \chemobabelGetName.svg #3 2> \chemobabelGetName.log && inkscape -f \chemobabelGetName.svg --export-pdf=\chemobabelGetName.pdf 2>> \chemobabelGetName.log || rm -f \chemobabelGetName.pdf}
+  \IfFileExists{\chemobabelGetName.pdf}
+  {\includegraphics[#1]{\chemobabelGetName.pdf}}% the pdf exists: include it
+  {% the pdf was not created - show a hint and std error
+    \fbox{\begin{minipage}{\textwidth}
+      Error in chemobabel: the file was not compiled. Remember to use \texttt{pdflatex} (or \texttt{platex} for Japanese) with the \texttt{-shell-escape} option.\\
+      obabel log (might be empty):
+      \verbatiminput{\chemobabelGetName.log}
+    \end{minipage}}
+  }
+  \addtocounter{chemobabelCounter}{1}% select next name
 }
 \let\chemobabel=\@chemobabel
 \makeatother
