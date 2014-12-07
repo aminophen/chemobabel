@@ -12,6 +12,8 @@ With this package you can insert chemical structural formulas into your PDF file
 
 Various chemical formats are allowed for input: for example, .cdx, .mol, .smi
 
+See http://acetaminophen.hatenablog.com/entry/2014/12/08/053519 for detail. (Sorry in Japanese)
+
  This work is based on a lot of resources published online:
   - Noel O'Boyle http://baoilleach.blogspot.jp/
   - Jakob Lykke Andersen http://imada.sdu.dk/~jlandersen/
