@@ -4,10 +4,12 @@ chemobabel.sty
 LaTeX package for generating chemical structural formula from ChemDraw files or SMILES notations using Open Babel
 
 Copyright 2014 Acetaminophen (Hironobu YAMASHITA)
+
   Blog: http://acetaminophen.hatenablog.com/
 
 This package offers a new choice for chemists who need chemical structures in their LaTeX documents.
 With this package you can insert chemical structural formulas into your PDF files easily with the help of Open Babel and Inkscape.
+
 Various chemical formats are allowed for input: for example, .cdx, .mol, .smi
 
  This work is based on a lot of resources published online:
