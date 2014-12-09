@@ -820,7 +820,7 @@ I read online \href{http://www.daylight.com/meetings/summerschool98/course/dave/
 
 It is important to prevent these characters from being translated as {\LaTeX} control sequence.
 However, a backslash (\verb|\|) is a default escape character in {\LaTeX}, and a percent symbol (\verb|%|) also has a special meaning as a comment character.
-To solve this problem, I chose a tilde (\verb|~|) to work as a escape character in replace of a backslash by changing category codes. \\
+To solve this problem, I chose a tilde (\verb|~|) to work as an escape character in replace of a backslash by changing category codes. \\
 
 本パッケージを制作するにあたり、オンラインの \href{http://www.daylight.com/meetings/summerschool98/course/dave/smiles-intro.html}{SMILES Tutorial}を読んで SMILES 表記法に用いられる文字の種類を調べました（一覧は英語部分参照）。
 
@@ -831,11 +831,11 @@ To solve this problem, I chose a tilde (\verb|~|) to work as a escape character 
 
 To do (if possible):
 \begin{itemize}
-\item Check whether \texttt{obabel} and \texttt{inkscape} are successfully installed or not, before runnning programs.
+\item Check whether \texttt{obabel} and \texttt{inkscape} are successfully installed or not, before running programs.
 \item The method for changing category codes is not sophisticated (users have to change them on their own!), so further improvement needed.
 \end{itemize}
 
-\section{Version Hisory}
+\section{Version History}
 
 \begin{table}[h]
 \centering
@@ -844,7 +844,9 @@ Version 0.1 (December 1, 2014): & Made public (as \textsf{smilesobabel.sty}) \\
 Version 0.2 (December 2, 2014): & Add options which can be passed to obabel. \\
 Version 0.3 (December 7, 2014): & Change name of package: \textsf{chemobabel.sty} \\
  & Images are stored in \texttt{chemobabelimgdir}. \\
- & Add \verb|\chemobabel| command.
+ & Add \verb|\chemobabel| command. \\
+Version 0.4 (December 9, 2014): & Fix a bug: (Thanks: Yusuke Terada) \\
+ & Extra spaces at the end of lines are removed.
 \end{tabular}
 \end{table}
 
@@ -854,26 +856,36 @@ Version 0.3 (December 7, 2014): & Change name of package: \textsf{chemobabel.sty
 \item From Version 0.3, the package name is changed to \textsf{chemobabel.sty}.
 \end{itemize}
 
+\clearpage
+
 \begin{thebibliography}{9}
 \bibitem{NOB1}
-\href{http://baoilleach.blogspot.jp/2012/03/cheer-up-your-latex-with-smiles-support.html}{Cheer up your LaTeX with SMILES support} -- Noel O'Blog
+\href{http://baoilleach.blogspot.jp/2012/03/cheer-up-your-latex-with-smiles-support.html}{Cheer up your {\LaTeX} with SMILES support} -- Noel O'Blog
 \bibitem{NOB2}
-\href{http://baoilleach.blogspot.jp/2012/04/cheer-up-your-latex-with-smiles-support.html}{Cheer up your LaTeX with SMILES support II} -- Noel O'Blog
+\href{http://baoilleach.blogspot.jp/2012/04/cheer-up-your-latex-with-smiles-support.html}{Cheer up your {\LaTeX} with SMILES support II} -- Noel O'Blog
 \bibitem{JLA}
-\href{http://imada.sdu.dk/~jlandersen/}{LaTeX: Graphviz and OpenBabel} -- Jakob Lykke Andersen
+\href{http://imada.sdu.dk/~jlandersen/}{{\LaTeX}: Graphviz and OpenBabel} -- Jakob Lykke Andersen
 \bibitem{OKU}
-\href{http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=1411}{文章内の画像のみを表示する方法} -- TeX Forum \\
+\href{http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=1411}{文章内の画像のみを表示する方法} -- {\TeX} Forum \\
 (How to extract only figures in {\LaTeX} source)
 \bibitem{ACE1}
-\href{http://acetaminophen.hatenablog.com/entry/2014/11/02/130624}{化学構造式をTeXで(1)：自動化による簡単生成} -- Acetaminophen's diary \\
-(Chemical Structural Formula in LaTeX (1): An Easy Method by Auto-generation)
+\href{http://acetaminophen.hatenablog.com/entry/2014/11/02/130624}{化学構造式を \TeX で(1)：自動化による簡単生成} -- Acetaminophen's diary \\
+(Chemical Structural Formula in {\LaTeX} (1): An Easy Method by Auto-generation)
 \bibitem{ACE2}
-\href{http://acetaminophen.hatenablog.com/entry/2014/11/02/130624}{化学構造式をTeXで(2)：自動化の注意点と解消法} -- Acetaminophen's diary \\
-(Chemical Structural Formula in LaTeX (2): Important Notes for Auto-generation and Solution)
+\href{http://acetaminophen.hatenablog.com/entry/2014/11/02/130624}{化学構造式を \TeX で(2)：自動化の注意点と解消法} -- Acetaminophen's diary \\
+(Chemical Structural Formula in {\LaTeX} (2): Important Notes for Auto-generation and Solution)
 \bibitem{ACE3}
-\href{http://acetaminophen.hatenablog.com/entry/2014/11/05/135927}{化学構造式をTeXで(3)：補足事項 } -- Acetaminophen's diary \\
-(Chemical Structural Formula in LaTeX (3): Supplement)
+\href{http://acetaminophen.hatenablog.com/entry/2014/11/05/135927}{化学構造式を \TeX で(3)：補足事項} -- Acetaminophen's diary \\
+(Chemical Structural Formula in {\LaTeX} (3): Supplement)
 \end{thebibliography}
-Note: \href{http://acetaminophen.hatenablog.com/}{Acetaminophen's diary} is my own blog! (Sorry, but only in Japanese)
+
+\noindent
+\textbf{Note}: \href{http://acetaminophen.hatenablog.com/}{Acetaminophen's diary} is my own blog! (Sorry, but only in Japanese)
+
+I added a post about this package on the 8th day of \href{http://www.adventar.org/calendars/553}{{\TeX} \& {\LaTeX} Advent Calendar 2014} (in Japanese):
+\begin{itemize}
+\item \href{http://acetaminophen.hatenablog.com/entry/2014/12/08/053519}{誰でも簡単！ 化学構造式を \LaTeX に取り込むパッケージ} -- Acetaminophen's diary \\
+(An easy way to insert chemical structural formulas into {\LaTeX} documents)
+\end{itemize}
 
 \end{document}

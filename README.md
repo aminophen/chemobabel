@@ -25,6 +25,7 @@ Explanation for files:
  - chemobabel.pdf: Basic usage (source: usage.tex)
  - example.pdf: Examples in English (source: example.tex)
  - example-ja.pdf: Examples in Japanese (source: example-ja.tex)
+
 Sample ChemDraw files and MDL Molfiles are also included.
 
 Obsolete (but perhaps useful) Files:
@@ -36,3 +37,4 @@ Version History:
  - 2014-12-01 Version 0.1 (First commit)
  - 2014-12-02 Version 0.2 (Add a parameter to be passed to obabel; the number of parameters changed!)
  - 2014-12-07 Version 0.3 (Change name of package: chemobabel.sty; add \chemobabel command)
+ - 2014-12-09 Version 0.4 (Fix a bug: extra blank spaces at the end of some lines are removed)
