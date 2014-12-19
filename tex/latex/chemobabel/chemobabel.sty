@@ -14,7 +14,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
   [1994/12/01]% LaTeX date must be December 1994 or later
-\ProvidesPackage{chemobabel}[2014/12/09 v0.4 by Acetaminophen]
+\ProvidesPackage{chemobabel}[2014/12/20 v0.5 by Acetaminophen]
 
 % Original source at http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
 \RequirePackage{verbatim}
@@ -72,6 +72,11 @@
 }
 \let\chemobabel=\@chemobabel
 %% ----- Definition of \chemobabel end -----
+
+%% ----- Declaration of options (load macros for extracting \chemobabel and \smilesobabel commands) -----
+\DeclareOption{extract}{\input{chemobabel-extract.tex}}
+\ProcessOptions
+%% ----- Declaration of options end -----
 
 \endinput
 

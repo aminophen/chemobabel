@@ -6,6 +6,7 @@ LaTeX package for generating chemical structural formula from ChemDraw files or 
 Copyright 2014 Acetaminophen (Hironobu YAMASHITA)
 
   Blog: http://acetaminophen.hatenablog.com/
+  Twitter: @aminophen
 
 This package offers a new choice for chemists who need chemical structures in their LaTeX documents.
 With this package you can insert chemical structural formulas into your PDF files easily with the help of Open Babel and Inkscape.
@@ -23,14 +24,16 @@ Explanation for files:
  - chemobabel.sty: Package itself
  - chemobabel-extract.tex: Macros for extracting \chemobabel and \smilesobabel commands
  - chemobabel.pdf: Basic usage (source: usage.tex)
- - example.pdf: Examples in English (source: example.tex)
+ - example-en.pdf: Examples in English (source: example-en.tex)
+ - example-en-new.pdf: Examples in English for ver.0.5 or higher (source: example-en-new.tex)
  - example-ja.pdf: Examples in Japanese (source: example-ja.tex)
+ - example-ja-new.pdf: Examples in Japanese for ver.0.5 or higher (source: example-ja-new.tex)
 
 Sample ChemDraw files and MDL Molfiles are also included.
 
 Obsolete (but perhaps useful) Files:
  - chemobabel-extract-compatible.tex: Macros for extracting \smiles and \obabel commands with \smilesobabel commands at the same time
- - example-compatible.pdf, example-compatible.tex
+ - example-en-compatible.pdf, example-en-compatible.tex
  - example-ja-compatible.pdf, example-ja-compatible.tex
 
 Version History:
@@ -38,3 +41,4 @@ Version History:
  - 2014-12-02 Version 0.2 (Add a parameter to be passed to obabel; the number of parameters changed!)
  - 2014-12-07 Version 0.3 (Change name of package: chemobabel.sty; add \chemobabel command)
  - 2014-12-09 Version 0.4 (Fix a bug: extra blank spaces at the end of some lines are removed)
+ - 2014-12-20 Version 0.5 (Add an option: "extract" option can load the macro easily.)
