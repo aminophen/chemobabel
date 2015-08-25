@@ -1,16 +1,16 @@
-%#! 使い方：ファイル名が「example-ja.tex」のとき
-%    1. platex example-ja.tex
-%    2. pdflatex -shell-escape ChemFigFile.tex
-%    3. platex example-ja.tex
-%    4. dvipdfmx example-ja.dvi
+%#! 使い方：
+% * 一度にタイプセットする場合：
+%    $ platex -shell-escape example-ja.tex     ※これは [extract] オプションなし
+%    $ dvipdfmx example-ja.dvi
+% * より安全にタイプセットしたい場合：
+%    $ platex example-ja.tex                   ※このときは [extract] オプション付き \usepackage[extract]{chemobabel}
+%    $ pdflatex -shell-escape ChemFigFile.tex  ※自動生成する ChemFigFile.tex は pdflatex 用ソース
+%    $ platex example-ja.tex                   ※今度は [extract] オプションを付けない
+%    $ dvipdfmx example-ja.dvi
 
 \documentclass{jsarticle}
 \usepackage[dvipdfmx]{graphicx}
-\usepackage[dvipdfmx]{hyperref}
 \usepackage{chemobabel}
-
-%! ----- すべての化学構造式に関するコマンドを抽出 -----
-\input{chemobabel-extract.tex}
 
 \title{\textsf{chemobabel.sty} の使用例}
 \author{アセトアミノフェン}
@@ -31,14 +31,9 @@
 \end{figure}
 
 \begin{figure}[ht]
-   \centering
-  \begingroup
-    \catcode`\~=0
-    \catcode`\%=11
-    \catcode`\\=11
-    ~smilesobabel[scale=0.7]{Cl/C=C/Br}{}
-    ~smilesobabel[scale=0.7]{Cl/C=C\Br}{}
-  ~endgroup
+  \centering
+  \smilesobabel[scale=0.7]{Cl/C=C/Br}{}
+  \smilesobabel[scale=0.7]{Cl/C=C\Br}{}
   \caption{(\textit{E})-1-ブロモ-2-クロロエテンと(\textit{Z})-1-ブロモ-2-クロロエテン}
 \end{figure}
 

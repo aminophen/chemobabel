@@ -25,16 +25,9 @@ Explanation for files:
  - chemobabel-extract.tex: Macros for extracting \chemobabel and \smilesobabel commands
  - chemobabel.pdf: Basic usage (source: usage.tex)
  - example-en.pdf: Examples in English (source: example-en.tex)
- - example-en-new.pdf: Examples in English for ver.0.5 or higher (source: example-en-new.tex)
  - example-ja.pdf: Examples in Japanese (source: example-ja.tex)
- - example-ja-new.pdf: Examples in Japanese for ver.0.5 or higher (source: example-ja-new.tex)
 
 Sample ChemDraw files and MDL Molfiles are also included.
-
-Obsolete (but perhaps useful) Files:
- - chemobabel-extract-compatible.tex: Macros for extracting \smiles and \obabel commands with \smilesobabel commands at the same time
- - example-en-compatible.pdf, example-en-compatible.tex
- - example-ja-compatible.pdf, example-ja-compatible.tex
 
 Version History:
  - 2014-12-01 Version 0.1 (First commit)
@@ -43,3 +36,4 @@ Version History:
  - 2014-12-09 Version 0.4 (Fix a bug: extra blank spaces at the end of some lines are removed)
  - 2014-12-20 Version 0.5 (Add an option: "extract" option can load the macro easily)
  - 2015-06-29 Version 0.6 (Improve warning messages)
+ - 2015-08-26 Version 0.7 (Solve `\catcode`-related problems)

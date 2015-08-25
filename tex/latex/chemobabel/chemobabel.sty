@@ -14,7 +14,8 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
   [1994/12/01]% LaTeX date must be December 1994 or later
-\ProvidesPackage{chemobabel}[2015/06/29 v0.6 by Acetaminophen]
+\ProvidesPackage{chemobabel}
+  [2015/08/26 v0.7 by Acetaminophen]
 
 % Original source at http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
 \RequirePackage{verbatim}
@@ -32,10 +33,23 @@
 % 1: (optional) options for includegraphics
 % 2: SMILES notation
 % 3: options for obabel
-\newcommand\@smilesobabel[3][scale=1]{%
+\newwrite\smilesobabelfile
+\newcommand\@smilesobabel{%
+  \begingroup
+  \let\do\@makeother
+  \dospecials
+  \catcode`\{=1
+  \catcode`\}=2
+  \@@smilesobabel
+}
+\newcommand\@@smilesobabel[3][scale=1]{%
+  \endgroup
   \immediate\write18{obabel -:"#2" -O \smilesobabelGetName.svg #3 2> \smilesobabelGetName.log && inkscape -f \smilesobabelGetName.svg --export-pdf=\smilesobabelGetName.pdf 2>> \smilesobabelGetName.log || rm -f \smilesobabelGetName.pdf}%
   \IfFileExists{\smilesobabelGetName.pdf}{% the PDF exists: include it
-    \includegraphics[#1]{\smilesobabelGetName.pdf}%
+    \immediate\openout\smilesobabelfile=\smilesobabelGetName.tex\relax
+    \immediate\write\smilesobabelfile{\string\includegraphics[#1]{\smilesobabelGetName.pdf}}%
+    \immediate\closeout\smilesobabelfile
+    \begingroup\catcode13=9\input{\smilesobabelGetName.tex}\endgroup%
   }{% the PDF was not created - show a warning and a hint
     \PackageWarning{chemobabel}{Processing of SMILES string failed}%
     \fbox{\begin{minipage}{0.9\textwidth}
@@ -82,7 +96,7 @@
       \end{minipage}}%
     }%
   }{% the file does not exist: show a std error
-    \PackageWarning{chemobabel}{File ``#2'' not found}%
+    \PackageError{chemobabel}{File ``#2'' not found}{}%
     \fbox{\begin{minipage}{0.9\textwidth}
       Error in chemobabel: the file ``#2'' does not exist.
     \end{minipage}}%
@@ -93,7 +107,10 @@
 %% ----- Definition of \chemobabel end -----
 
 %% ----- Declaration of options (load macros for extracting \chemobabel and \smilesobabel commands) -----
-\DeclareOption{extract}{\input{chemobabel-extract.tex}}
+\DeclareOption{extract}{%
+  \PackageWarningNoLine{chemobabel}{You are using [extract] option.\MessageBreak
+                                    No chemical structures will be printed}
+  \input{chemobabel-extract.tex}}
 \ProcessOptions
 %% ----- Declaration of options end -----
 

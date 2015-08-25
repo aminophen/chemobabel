@@ -1,15 +1,14 @@
-%#! Usage: (suppose this source file = `example.tex')
-%    1. pdflatex example.tex
-%    2. pdflatex -shell-escape ChemFigFile.tex
-%    3. pdflatex example.tex
+%#! Usage:
+% * To typeset all at once:
+%    $ pdflatex -shell-escape example-en.tex   (without ``extract'' option)
+% * To typeset more safely:
+%    $ pdflatex example-en.tex                 (with ``extract'' option: \usepackage[extract]{chemobabel})
+%    $ pdflatex -shell-escape ChemFigFile.tex  (auto-generated pdfLaTeX source)
+%    $ pdflatex example-en.tex                 (without ``extract'' option)
 
 \documentclass{article}
 \usepackage{graphicx}
-\usepackage{hyperref}
 \usepackage{chemobabel}
-
-%! ----- For the purpose of extracting codes of all chemical structural formulas -----
-\input{chemobabel-extract.tex}
 
 \title{An Example for \textsf{chemobabel} Package}
 \author{Acetaminophen}
@@ -31,14 +30,9 @@ The formulas below are generated using \textsf{chemobabel} package with the help
 \end{figure}
 
 \begin{figure}[ht]
-   \centering
-  \begingroup
-    \catcode`\~=0
-    \catcode`\%=11
-    \catcode`\\=11
-    ~smilesobabel[scale=0.7]{Cl/C=C/Br}{}
-    ~smilesobabel[scale=0.7]{Cl/C=C\Br}{}
-  ~endgroup
+  \centering
+  \smilesobabel[scale=0.7]{Cl/C=C/Br}{}
+  \smilesobabel[scale=0.7]{Cl/C=C\Br}{}
   \caption{(\textit{E})-1-bromo-2-chloroethene \& (\textit{Z})-1-bromo-2-chloroethene}
 \end{figure}
 
