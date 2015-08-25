@@ -3,7 +3,7 @@ chemobabel.sty
 
 LaTeX package for generating chemical structural formula from ChemDraw files or SMILES notations using Open Babel
 
-Copyright 2014 Acetaminophen (Hironobu YAMASHITA)
+Copyright 2014-2015 Acetaminophen (Hironobu YAMASHITA)
 
   Blog: http://acetaminophen.hatenablog.com/
   Twitter: @aminophen
@@ -41,4 +41,5 @@ Version History:
  - 2014-12-02 Version 0.2 (Add a parameter to be passed to obabel; the number of parameters changed!)
  - 2014-12-07 Version 0.3 (Change name of package: chemobabel.sty; add \chemobabel command)
  - 2014-12-09 Version 0.4 (Fix a bug: extra blank spaces at the end of some lines are removed)
- - 2014-12-20 Version 0.5 (Add an option: "extract" option can load the macro easily.)
+ - 2014-12-20 Version 0.5 (Add an option: "extract" option can load the macro easily)
+ - 2015-06-29 Version 0.6 (Improve warning messages)

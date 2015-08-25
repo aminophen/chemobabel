@@ -2,7 +2,7 @@
 %% This is file `chemobabel.sty',
 %% for generating chemical structural formulas using Open Babel and Inkscape.
 %% 
-%% Copyright 2014 Acetaminophen (Hironobu YAMASHITA)
+%% Copyright 2014-2015 Acetaminophen (Hironobu YAMASHITA)
 %%   Email  :     h.y.acetaminophen[a t]gmail.com
 %%   GitHub :     https://github.com/aminophen
 %%   Blog   :     http://acetaminophen.hatenablog.com/
@@ -14,7 +14,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
   [1994/12/01]% LaTeX date must be December 1994 or later
-\ProvidesPackage{chemobabel}[2014/12/20 v0.5 by Acetaminophen]
+\ProvidesPackage{chemobabel}[2015/06/29 v0.6 by Acetaminophen]
 
 % Original source at http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
 \RequirePackage{verbatim}
@@ -34,14 +34,20 @@
 % 3: options for obabel
 \newcommand\@smilesobabel[3][scale=1]{%
   \immediate\write18{obabel -:"#2" -O \smilesobabelGetName.svg #3 2> \smilesobabelGetName.log && inkscape -f \smilesobabelGetName.svg --export-pdf=\smilesobabelGetName.pdf 2>> \smilesobabelGetName.log || rm -f \smilesobabelGetName.pdf}%
-  \IfFileExists{\smilesobabelGetName.pdf}
-  {\includegraphics[#1]{\smilesobabelGetName.pdf}}% the pdf exists: include it
-  {% the pdf was not created - show a hint and std error
-    \fbox{\begin{minipage}{\textwidth}
-      Error in chemobabel: the file was not compiled. Remember to use \texttt{pdflatex} (or \texttt{platex} for Japanese) with the \texttt{-shell-escape} option.\\
-      obabel log (might be empty):
-      \verbatiminput{\smilesobabelGetName.log}
-    \end{minipage}}
+  \IfFileExists{\smilesobabelGetName.pdf}{% the PDF exists: include it
+    \includegraphics[#1]{\smilesobabelGetName.pdf}%
+  }{% the PDF was not created - show a warning and a hint
+    \PackageWarning{chemobabel}{Processing of SMILES string failed}%
+    \fbox{\begin{minipage}{0.9\textwidth}
+      Error in chemobabel: the file was not compiled. Remember to run \texttt{latex}
+      (\texttt{pdflatex}, \texttt{platex}, etc.) with the \texttt{-shell-escape} option.\\
+      \IfFileExists{\smilesobabelGetName.log}{%
+        obabel log (might be empty):
+        \verbatiminput{\smilesobabelGetName.log}%
+      }{%
+        No log file.
+      }%
+    \end{minipage}}%
   }%
   \addtocounter{smilesobabelCounter}{1}% select next name
 }
@@ -58,15 +64,28 @@
 % 2: original files (.mol, .cdx, etc.)
 % 3: options for obabel
 \newcommand\@chemobabel[3][scale=1]{%
-  \immediate\write18{obabel "#2" -O \chemobabelGetName.svg #3 2> \chemobabelGetName.log && inkscape -f \chemobabelGetName.svg --export-pdf=\chemobabelGetName.pdf 2>> \chemobabelGetName.log || rm -f \chemobabelGetName.pdf}%
-  \IfFileExists{\chemobabelGetName.pdf}
-  {\includegraphics[#1]{\chemobabelGetName.pdf}}% the pdf exists: include it
-  {% the pdf was not created - show a hint and std error
-    \fbox{\begin{minipage}{\textwidth}
-      Error in chemobabel: the file was not compiled. Remember to use \texttt{pdflatex} (or \texttt{platex} for Japanese) with the \texttt{-shell-escape} option.\\
-      obabel log (might be empty):
-      \verbatiminput{\chemobabelGetName.log}
-    \end{minipage}}
+  \IfFileExists{"#2"}{% the file exists: start processing (``#2'' can contain spaces, so ``"'' required)
+    \immediate\write18{obabel "#2" -O \chemobabelGetName.svg #3 2> \chemobabelGetName.log && inkscape -f \chemobabelGetName.svg --export-pdf=\chemobabelGetName.pdf 2>> \chemobabelGetName.log || rm -f \chemobabelGetName.pdf}%
+    \IfFileExists{\chemobabelGetName.pdf}{% the pdf exists: include it
+      \includegraphics[#1]{\chemobabelGetName.pdf}%
+    }{% the pdf was not created - show a warning and a hint
+      \PackageWarning{chemobabel}{Processing of file ``#2'' failed}%
+      \fbox{\begin{minipage}{0.9\textwidth}
+        Error in chemobabel: the file was not compiled. Remember to run \texttt{latex}
+        (\texttt{pdflatex}, \texttt{platex}, etc.) with the \texttt{-shell-escape} option.\\
+        \IfFileExists{\chemobabelGetName.log}{%
+          obabel log (might be empty):
+          \verbatiminput{\chemobabelGetName.log}%
+        }{%
+          No log file.
+        }%
+      \end{minipage}}%
+    }%
+  }{% the file does not exist: show a std error
+    \PackageWarning{chemobabel}{File ``#2'' not found}%
+    \fbox{\begin{minipage}{0.9\textwidth}
+      Error in chemobabel: the file ``#2'' does not exist.
+    \end{minipage}}%
   }%
   \addtocounter{chemobabelCounter}{1}% select next name
 }
