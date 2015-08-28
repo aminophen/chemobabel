@@ -42,6 +42,7 @@ See license.txt.
  - 2015-06-29 Version 0.6 (Improve warning messages)
  - 2015-08-26 Version 0.7 (Solve `\catcode`-related problems)
  - 2015-08-27 Version 0.8 (Improve `\smilesobabel` a little)
+ - 2015-08-28 Version 0.9 (Exclude e-TeX dependency in `\smilesobabel`)
 
 --------------------
 Hironobu YAMASHITA (aka. "Acetaminophen" or "@aminophen")

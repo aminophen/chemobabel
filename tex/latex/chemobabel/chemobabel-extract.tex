@@ -26,7 +26,15 @@
   \immediate\write\ChemFigFile{\string\end{document}}%
   \immediate\closeout\ChemFigFile%
 }
-\renewcommand\@@smilesobabel[3][scale=1]{%
+\renewcommand\smilesobabel{%
+  \begingroup
+  \let\do\@makeother
+  \dospecials
+  \catcode`\{=1
+  \catcode`\}=2
+  \@@smilesobabel
+}
+\newcommand\@@smilesobabel[3][scale=1]{%
   \endgroup
   \immediate\write\ChemFigFile{%
     \string\smilesobabel[#1]{#2}{#3}%
