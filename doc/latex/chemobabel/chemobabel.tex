@@ -52,7 +52,7 @@ X\kern-.30em\smash{\raise.50ex\hbox{$\fam\TestCount\Upsilon$}}%
 \kern-.30em{M}}
 \def\XyMTeX{\XyM\kern-.1em\TeX}
 % ------
-\title{\textsf{chemobabel.sty} \\[1ex] \normalsize --- Chemical Strucrures from MDL Molfiles, ChemDraw Files or SMILES Notations --- \\ 化学構造式を MOL ファイルや ChemDraw ファイル、SMILES 表記法から自動生成}
+\title{\textsf{chemobabel.sty} \\[1ex] \normalsize --- Chemical Strucrures from MDL Molfiles, ChemDraw Files or SMILES Notations --- \\ 化学構造式を MOL ファイルや ChemDraw ファイル，SMILES 表記法から自動生成}
 \author{Acetaminophen （アセトアミノフェン）}
 \begin{document}
 \renewcommand{\figurename}{Fig.\,}
@@ -64,8 +64,8 @@ The formulas can be generated \textbf{from many kinds of chemical data formats},
 This document is written in both English and Japanese.
 The formulas below are generated using this method. \\
 
-この文書では、\LaTeX 文書中に挿入する\textbf{化学構造式を生成}するパッケージである \textsf{chemobabel.sty} と同梱リソースの使い方を説明します。
-構造式は Open Babel と Inkscape の機能を利用することにより、MDL Molfile, ChemDraw ファイル、さらには SMILES 表記法を含む\textbf{さまざまな化学データ形式から生成}することができます。
+この文書では，\textbf{化学構造式を生成}して \LaTeX の文書中に挿入するためのパッケージである \textsf{chemobabel.sty} と同梱リソースの使い方を説明します。
+構造式は Open Babel と Inkscape の機能を利用することにより，MDL Molfile, ChemDraw ファイル，さらには SMILES 表記法を含む\textbf{さまざまな化学データ形式から生成}することができます。
 説明は英語と日本語の両方で書かれています。
 以下の構造式はこの方法によって出力されたものです。 \\
 
@@ -117,8 +117,8 @@ I think it is mainly due to lack of both reliable and simple methods of doing th
 
 Some \TeX/\LaTeX\ macros and packages are already available from \href{http://www.ctan.org/}{CTAN}:
 \begin{itemize}
-\item \href{http://www.ctan.org/pkg/xymtex}{\XyMTeX}: a set of pack­ages for draw­ing chem­i­cal struc­tural for­mu­las
-\item \href{http://www.ctan.org/pkg/chemfig}{\textsf{chemfig}}: a package which draws molecules us­ing Ti\textit{k}Z
+\item \href{http://www.ctan.org/pkg/xymtex}{\XyMTeX}: a set of packages for drawing chemical structural formulas
+\item \href{http://www.ctan.org/pkg/chemfig}{\textsf{chemfig}}: a package which draws molecules using Ti\textit{k}Z
 \end{itemize}
 These packages are reliable and almost all kinds of structural formulas can be drawn in a consistent way.
 However, a lot of practice will be required before one can come to make full use of them.
@@ -140,29 +140,29 @@ See \href{http://openbabel.org/}{Official Website} for detail.
 
 \subsubsection{日本語}
 
-ご存じのとおり、\LaTeX は世界中で使われています。
-しかし、化学構造式を描くという点で考えると、\LaTeX 文書中に構造式を挿入する手段は非常に限られています。
-この目的を達成する確実かつ容易な方法が存在しないことは、化学分野における多くの研究者が \LaTeX システムを使わない要因になっていると考えられます。
+ご存じのとおり，\LaTeX は世界中で使われています。
+しかし，化学構造式を描くという点で考えると，\LaTeX 文書中に構造式を挿入する手段は非常に限られています。
+この目的を達成する確実かつ容易な方法が存在しないことは，化学分野における多くの研究者が \LaTeX システムを使わない要因になっていると考えられます。
 
 すでに \href{http://www.ctan.org/}{CTAN} からいくつかのパッケージが利用可能です：
 \begin{itemize}
 \item \href{http://www.ctan.org/pkg/xymtex}{\XyMTeX}: 化学構造式を描くためのパッケージ集
 \item \href{http://www.ctan.org/pkg/chemfig}{\textsf{chemfig}}: Ti\textit{k}Z を利用して構造式を描画するパッケージ
 \end{itemize}
-これらのパッケージは確実で、あらゆる構造式を一貫性をもって描画することができます。
-しかし、十分にその機能を活用できるようになるには相当の熟練を要します。
+これらのパッケージは確実で，あらゆる構造式を一貫性をもって描画することができます。
+しかし，十分にその機能を活用できるようになるには相当の熟練を要します。
 
-化学者向けの専用ツール（\href{http://www.cambridgesoft.com/Ensemble_for_Chemistry/ChemDraw/}{ChemDraw} など）で PDF や EPS 形式で出力し、\verb|\includegraphics| によって構造式を取り込むという手段もあります。
-この場合、化学用のフォーマット（\verb|.cdx| や \verb|.mol| など）と画像フォーマット（\verb|.pdf| や \verb|.eps| など）の両方で保存する必要があります。
+化学者向けの専用ツール（\href{http://www.cambridgesoft.com/Ensemble_for_Chemistry/ChemDraw/}{ChemDraw} など）で PDF や EPS 形式で出力し，\verb|\includegraphics| によって構造式を取り込むという手段もあります。
+この場合，化学用のフォーマット（\verb|.cdx| や \verb|.mol| など）と画像フォーマット（\verb|.pdf| や \verb|.eps| など）の両方で保存する必要があります。
 
-新しいパッケージ \textsf{chemobabel.sty} は、\LaTeX 文書中に化学構造式を挿入する必要がある化学者に新たな選択肢を提供することでしょう。
-この方法では、\href{http://openbabel.org/}{Open Babel} によって SVG 形式の構造式画像を生成し、さらに \href{https://inkscape.org/ja/}{Inkscape} によって SVG から PDF に変換します。
-どちらのプログラムもオープンソースかつクロスプラットフォームであり、盛んに開発が行われています。 \\
+新しいパッケージ \textsf{chemobabel.sty} は，\LaTeX 文書中に化学構造式を挿入する必要がある化学者に新たな選択肢を提供することでしょう。
+この方法では，\href{http://openbabel.org/}{Open Babel} によって SVG 形式の構造式画像を生成し，さらに \href{https://inkscape.org/ja/}{Inkscape} によって SVG から PDF に変換します。
+どちらのプログラムもオープンソースかつクロスプラットフォームであり，盛んに開発が行われています。 \\
 
 \noindent \textbf{Open Babel について}
 
 Open Babel はさまざまな化学データを扱うために特別に設計されたツールです。
-オープンな共同プロジェクトで、分子モデリング・化学・固体物性・生化学や関連分野のデータを誰もが検索・変換・分析・保存できることを目指しています。
+オープンな共同プロジェクトで，分子モデリング・化学・固体物性・生化学や関連分野のデータを誰もが検索・変換・分析・保存できることを目指しています。
 詳細は\href{http://openbabel.org/}{公式サイト}を参照してください。
 
 \clearpage
@@ -172,7 +172,7 @@ Open Babel はさまざまな化学データを扱うために特別に設計さ
 \subsubsection{English}
 First I found a post on Noel O'Blog \cite{NOB1}, \cite{NOB2} and the comment \cite{JLA} about generating chemical structural formulas from SMILES notations using Open Babel.
 I thought the method described in these posts were very interesting, but I didn't like all the programs could be executed by \verb|-shell-escape| option.
-At the same time, I found a macro for copying all \verb|\includegraphics| from one source file to another \cite{OKU}, which made me conceive of an idea of extracting minimal source code which needs \verb|-shell-escape| option.
+At the same time, I encountered a macro for copying all \verb|\includegraphics| from one source file to another \cite{OKU}, which made me conceive of an idea of extracting minimal source code which needs \verb|-shell-escape| option.
 
 I thought this method would be applicable to converting ChemDraw files into graphics, but I could not find any project attempting to realize this idea.
 I found a project named \href{http://chemdrawinlatex.sourceforge.net/}{Chemdraw in \LaTeX} on sourceforge, but now it was closed.
@@ -181,11 +181,11 @@ This drove me to develop a new package to simplify the process for inserting che
 \subsubsection{日本語}
 
 最初に Open Babel を用いて SMILES 表記から化学構造式を生成するという Noel O'Blog の記事 \cite{NOB1}, \cite{NOB2} とコメント \cite{JLA} を見つけました。
-これらの投稿に示された手法は非常におもしろいと思いましたが、すべてのプログラムが \verb|-shell-escape| オプションによって実行されてしまうことがあまり好きではありませんでした。
-それと同じころ、あるソース中の \verb|\includegraphics| を別のソースに書き出すというマクロを発見 \cite{OKU} し、このとき私は \verb|-shell-escape| が必要な最小のコードだけを抽出するという着想を得ました。
+これらの投稿に示された手法は非常におもしろいと思いましたが，すべてのプログラムが \verb|-shell-escape| オプションによって実行されてしまうことがあまり好きではありませんでした。
+それと同じころ，あるソース中の \verb|\includegraphics| を別のソースに書き出すというマクロ \cite{OKU} を偶然みつけ，このとき私は \verb|-shell-escape| が必要な最小のコードだけを抽出するという着想を得ました。
 
-この方法は ChemDraw ファイルを画像に変換する目的にも応用できると考えたのですが、この発想を実現したプロジェクトが見当たらず、ただ一つ見つけた Sourceforge の \href{http://chemdrawinlatex.sourceforge.net/}{Chemdraw in \LaTeX} はすでに終了していました。
-そこで、化学構造式を \LaTeX 文書中に挿入する手順を簡略化するパッケージを開発しようと考えました。
+この方法は ChemDraw ファイルを画像に変換する目的にも応用できると考えたのですが，この発想を実現したプロジェクトが見当たらず，ただ一つ見つけた Sourceforge の \href{http://chemdrawinlatex.sourceforge.net/}{Chemdraw in \LaTeX} はすでに終了していました。
+そこで，化学構造式を \LaTeX 文書中に挿入する手順を簡略化するパッケージを開発しようと考えました。
 
 \clearpage
 
@@ -214,7 +214,7 @@ And when you get some command echo, installation should be successful.
 
 \subsubsection{日本語}
 
-初めにコンピュータに \href{http://openbabel.org/}{Open Babel} と \href{https://inkscape.org/ja/}{Inkscape} をインストールし、コマンドライン実行ファイルである obabel と inkscape に PATH を通します。
+初めにコンピュータに \href{http://openbabel.org/}{Open Babel} と \href{https://inkscape.org/ja/}{Inkscape} をインストールし，コマンドライン実行ファイルである obabel と inkscape に PATH を通します。
 正しく PATH が通っているかどうかは以下のコマンドによって確認できます：
 
 UNIX 系の場合：
@@ -229,7 +229,7 @@ Windows の場合：
 > where inkscape
 \end{verbatim}
 
-何らかのディレクトリ名が返ってきた場合は、正しくインストールできているはずです。
+何らかのディレクトリ名が返ってきた場合は，正しくインストールできているはずです。
 
 \clearpage
 
@@ -293,7 +293,8 @@ The syntax is:
 \verb|\smilesobabel[|\textit{options}\verb|]{|\textit{SMILES notation}\verb|}{|\textit{obabel options}\verb|}|
 \end{center}
 The only difference from \verb|\chemobabel| is that \textit{SMILES notation} should be placed in the first braces.
-You can put any kinds of SMILES notations as a parameter of \verb|\smilesobabel|, even when they contain some special characters such as a backslash (\verb|\|) and a percent symbol (\verb|%|).
+You can put any kinds of SMILES notations in parameters of \verb|\smilesobabel|, even when they contain some special characters such as a backslash (\verb|\|) and a percent symbol (\verb|%|).
+Similarly, parameters of \verb|\chemobabel| can also contain these special characters.
 \begin{verbatim}
 \smilesobabel[scale=0.7]{Cl/C=C/Br}{}
 \smilesobabel[scale=0.7]{Cl/C=C\Br}{}
@@ -324,7 +325,7 @@ Note that the undesirable workaround (like changing \verb|\catcode| inside \verb
 \chemobabel[scale=0.4]{draw/ATP.cdx}{}
 \chemobabel[scale=0.4]{draw/Brevetoxin A.mol}{}
 \end{verbatim}
-のようにして使います\footnote{ここでは元のファイルを \texttt{draw} というサブディレクトリに置いたので、ファイル名の前に \texttt{draw/} を付けました。もちろん \LaTeX ソースと同一ディレクトリに置くこともできます。}。これを \verb|-shell-escape| オプションを付けてタイプセットします。
+のようにして使います\footnote{ここでは元のファイルを \texttt{draw} というサブディレクトリに置いたので，ファイル名の前に \texttt{draw/} を付けました。もちろん \LaTeX ソースと同一ディレクトリに置くこともできます。}。これを \verb|-shell-escape| オプションを付けてタイプセットします。
 \begin{verbatim}
 $ platex -shell-escape test.tex
 \end{verbatim}
@@ -332,14 +333,14 @@ $ platex -shell-escape test.tex
 \begin{verbatim}
 $ dvipdfmx test.dvi
 \end{verbatim}
-と実行すると、出力される「test.pdf」は以下のようになります：
+と実行すると，出力される「test.pdf」は以下のようになります：
 \begin{figure}[h]
   \centering
   \chemobabel[scale=0.4]{draw/ATP.cdx}{} \\
   \chemobabel[scale=0.4]{draw/Brevetoxin A.mol}{}
 \end{figure}
 
-\verb|ATP.cdx| は ATP （アデノシン三リン酸）の構造式を ChemDraw で描画したファイル、\verb|Brevetoxin A.mol| は \href{http://www.chemspider.com/}{ChemSpider} から入手できるファイルです（もとのファイル名は \verb|9041092.mol| となっています）。
+\verb|ATP.cdx| は ATP （アデノシン三リン酸）の構造式を ChemDraw で描画したファイル，\verb|Brevetoxin A.mol| は \href{http://www.chemspider.com/}{ChemSpider} から入手できるファイルです（もとのファイル名は \verb|9041092.mol| となっています）。
 
 タイプセット時に \verb|-shell-escape| オプションを与えるのを忘れないようにしてください。このオプションを与えることで \LaTeX が外部プログラムである obabel や inkscape を呼んで実行することができます。
 
@@ -347,14 +348,14 @@ $ dvipdfmx test.dvi
 \begin{center}
 \verb|\chemobabel[|\textit{options}\verb|]{|\textit{filename}\verb|}{|\textit{obabel options}\verb|}|
 \end{center}
-引数として、中括弧の1つめにファイル名を与え、2つめに obabel に送るオプション（例は
+引数として，中括弧の1つめにファイル名を与え，2つめに obabel に送るオプション（例は
 第\ref{depict}節を参照）を指定してください。
 2つめの引数は空にすることもできます。
 
-また、オプションとして角括弧に \verb|\includegraphics| に渡すオプションを指定することができます。
-このオプションは省略可能で、何も指定しない場合は scale=1 が適用されます。 \\
+また，オプションとして角括弧に \verb|\includegraphics| に渡すオプションを指定することができます。
+このオプションは省略可能で，何も指定しない場合は scale=1 が適用されます。 \\
 
-\LaTeX ソースファイル中に直接 SMILES 表記を書き込んで、構造式に変換することもできます。\verb|\smilesobabel| コマンドを以下のようにして使います：
+\LaTeX ソースファイル中に直接 SMILES 表記を書き込んで，構造式に変換することもできます。\verb|\smilesobabel| コマンドを以下のようにして使います：
 \begin{verbatim}
 \smilesobabel{CCO}{}
 \smilesobabel[scale=0.65]{CC(=O)Nc1ccc(cc1)O}{}
@@ -364,17 +365,18 @@ $ dvipdfmx test.dvi
 $ platex -shell-escape test.tex
 $ dvipdfmx test.dvi
 \end{verbatim}
-すると今度は「smilesobabelimg[NUM].pdf」のようなファイルが生成し、出力される「test.pdf」は以下のようになります： \\
+すると今度は「smilesobabelimg[NUM].pdf」のようなファイルが生成し，出力される「test.pdf」は以下のようになります： \\
 \smilesobabel{CCO}{}
 \smilesobabel[scale=0.65]{CC(=O)Nc1ccc(cc1)O}{} \\
-\verb|CCO| はエタノールの SMILES 表記、\verb|CC(=O)Nc1ccc(cc1)O| はアセトアミノフェンの SMILES 表記です。
+\verb|CCO| はエタノールの SMILES 表記，\verb|CC(=O)Nc1ccc(cc1)O| はアセトアミノフェンの SMILES 表記です。
 
 構文は以下のとおりです。
 \begin{center}
 \verb|\smilesobabel[|\textit{options}\verb|]{|\textit{SMILES notation}\verb|}{|\textit{obabel options}\verb|}|
 \end{center}
-\verb|\chemobabel| との唯一の違いは、中括弧の1つめに SMILES 表記法のテキストを与えることだけです。
-\verb|\smilesobabel| の引数としては、任意の SMILES 表記を用いることができます（バックスラッシュ (\verb|\|) やパーセント記号 (\verb|%|) のような特別な文字が入っていてもかまいません）。
+\verb|\chemobabel| との唯一の違いは，中括弧の1つめに SMILES 表記法のテキストを与えることだけです。
+\verb|\smilesobabel| の引数としては，任意の SMILES 表記を用いることができます（バックスラッシュ (\verb|\|) やパーセント記号 (\verb|%|) のような特別な文字が入っていてもかまいません）。
+なお，\verb|\chemobabel| の引数についても同様に，特別な文字を含むことができる設計になっています。
 \begin{verbatim}
 \smilesobabel[scale=0.7]{Cl/C=C/Br}{}
 \smilesobabel[scale=0.7]{Cl/C=C\Br}{}
@@ -384,12 +386,12 @@ $ dvipdfmx test.dvi
 
 \noindent \textbf{旧バージョンのユーザに対する注意} ($\le$ \textsf{chemobabel} v0.6 [2015/06/29])
 
-古いバージョンの \textsf{chemobabel} では、これらの \LaTeX で特別な意味を持つ文字に注意を払う必要がありました。
-従来私が紹介してきた回避策は“カジュアルな \LaTeX ユーザ”にカテゴリーコードを手動で変更させていたため、好ましいものではありませんでした。
+古いバージョンの \textsf{chemobabel} では，これらの \LaTeX で特別な意味を持つ文字に注意を払う必要がありました。
+従来私が紹介してきた回避策は“カジュアルな \LaTeX ユーザ”にカテゴリーコードを手動で変更させていたため，好ましいものではありませんでした。
 
-この問題を解決するため、パッケージ本体の側でこれらの文字をサポートするマクロを組み込みました（\textsf{chemobabel} v0.7 [2015/08/26] 以降）。
-これにより、\verb|\| や \verb|%| といった特別な文字を心配することなく、任意の SMILES 表記を直接引数に渡すことができるようになっています。
-従来の回避策（\verb|\begingroup| ... \verb|\endgroup| 内で \verb|\catcode| を変更する方法）は今ではむしろ有害になっていますので、注意してください。
+この問題を解決するため，パッケージ本体の側でこれらの文字をサポートするマクロを組み込みました（\textsf{chemobabel} v0.7 [2015/08/26] 以降）。
+これにより，\verb|\| や \verb|%| といった特別な文字を心配することなく，任意の SMILES 表記を直接引数に渡すことができるようになっています。
+従来の回避策（\verb|\begingroup| ... \verb|\endgroup| 内で \verb|\catcode| を変更する方法）は今ではむしろ有害になっていますので，注意してください。
 
 \clearpage
 
@@ -431,12 +433,12 @@ This method will also save you a lot of time for typesetting.
 
 \subsubsection{日本語}
 
-第\ref{basic}節で述べた基本的な使い方で、ほとんどの場合問題ないでしょう。
-しかし、\verb|-shell-escape| オプションを付けてタイプセットするため、好むと好まざるとにかかわらず \LaTeX が\textbf{どんな外部コマンドでも}実行できてしまいます。
-つまり、知らないうちにプログラムが実行されてしまう可能性を示唆しており、これはとりわけ自分で書いた \LaTeX ソースでない場合には危険を伴います。
-この問題を回避するために、\verb|\chemobabel| と \verb|\smilesobabel| コマンドだけを別の \LaTeX ファイルに抽出するマクロを作成しました（参考：\TeX\ Forum \cite{OKU}）。
+第\ref{basic}節で述べた基本的な使い方で，ほとんどの場合問題ないでしょう。
+しかし，\verb|-shell-escape| オプションを付けてタイプセットするため，好むと好まざるとにかかわらず \LaTeX が\textbf{どんな外部コマンドでも}実行できてしまいます。
+つまり，知らないうちにプログラムが実行されてしまう可能性を示唆しており，これはとりわけ自分で書いた \LaTeX ソースでない場合には危険を伴います。
+この問題を回避するために，\verb|\chemobabel| と \verb|\smilesobabel| コマンドだけを別の \LaTeX ファイルに抽出するマクロを作成しました（参考：\TeX\ Forum \cite{OKU}）。
 
-この場合は、パッケージを読み込む際に
+この場合は，パッケージを読み込む際に
 \begin{verbatim}
 \usepackage[extract]{chemobabel}
 \end{verbatim}
@@ -446,19 +448,19 @@ This method will also save you a lot of time for typesetting.
 $ platex test.tex
 \end{verbatim}
 というコマンドを使います。
-\verb|extract| オプションを付けると、\textsf{chemobabel} パッケージは単に元の \LaTeX ソースから \verb|\chemobabel| と \verb|\smilesobabel| コマンドだけを抽出するはたらきをします。
-その結果、同じディレクトリに「ChemFigFile.tex」というファイルが生成します。これは元のソースに書かれていた \verb|\chemobabel| と \verb|\smilesobabel| コマンドをすべて含む最小の \LaTeX ソースで、これは直接
+\verb|extract| オプションを付けると，\textsf{chemobabel} パッケージは単に元の \LaTeX ソースから \verb|\chemobabel| と \verb|\smilesobabel| コマンドだけを抽出するはたらきをします。
+その結果，同じディレクトリに「ChemFigFile.tex」というファイルが生成します。これは元のソースに書かれていた \verb|\chemobabel| と \verb|\smilesobabel| コマンドをすべて含む最小の \LaTeX ソースで，これは直接
 \begin{verbatim}
 $ pdflatex -shell-escape ChemFigFile.tex
 \end{verbatim}
-とタイプセットできます\footnote{欧文と同じ仕様に統一したため、「ChemFigFile.tex」では \textsf{graphicx} パッケージに \texttt{dvipdfmx} オプションを与えずに読み込んでいます。したがって、このタイプセットだけは pdflatex を用いてください。}。
-すると、第\ref{basic}節と同様に PDF 形式の図のファイルが生成しますので、あとは \verb|extract| オプションを除去して再度
+とタイプセットできます\footnote{欧文と同じ仕様に統一したため，「ChemFigFile.tex」では \textsf{graphicx} パッケージに \texttt{dvipdfmx} オプションを与えずに読み込んでいます。したがって，このタイプセットだけは \texttt{pdflatex} を用いてください。}。
+すると，第\ref{basic}節と同様に PDF 形式の図のファイルが生成しますので，あとは \verb|extract| オプションを除去して再度
 \begin{verbatim}
 $ platex test.tex
 $ dvipdfmx test.dvi
 \end{verbatim}
-と実行すれば、適切に図を取り込んだ望みどおりの「test.pdf」が得られます。
-この方法を用いれば、タイプセットに要する時間を大幅に短縮することも期待できます。
+と実行すれば，適切に図を取り込んだ望みどおりの「test.pdf」が得られます。
+この方法を用いれば，タイプセットに要する時間を大幅に短縮することも期待できます。
 
 \clearpage
 
@@ -499,8 +501,8 @@ $ obabel -:"ATP.cdx" -O chemobabelimg[NUM].svg -xd
 
 \subsubsection{日本語}
 
-既に述べたとおり、\verb|\chemobabel| と \verb|\smilesobabel| の両方について、2つめの中括弧に \textit{obabel options} を与えることができます。
-ここで、いくつかの有用な例を挙げておきます。
+既に述べたとおり，\verb|\chemobabel| と \verb|\smilesobabel| の両方について，2つめの中括弧に \textit{obabel options} を与えることができます。
+ここで，いくつかの有用な例を挙げておきます。
 \begin{itemize}
 \item
 \begin{verbatim}
@@ -514,7 +516,7 @@ $ obabel -:"CC(=O)Nc1ccc(cc1)O" -O smilesobabelimg[NUM].svg -xa
 \begin{verbatim}
 \smilesobabel[scale=0.6]{CC(=O)Nc1ccc(cc1)O}{-xu -xC}
 \end{verbatim}
-元素の着色を行わず、末端の炭素原子を明示しない構造式を出力します：
+元素の着色を行わず，末端の炭素原子を明示しない構造式を出力します：
 \begin{verbatim}
 $ obabel -:"CC(=O)Nc1ccc(cc1)O" -O smilesobabelimg[NUM].svg -xu -xC
 \end{verbatim}
@@ -522,7 +524,7 @@ $ obabel -:"CC(=O)Nc1ccc(cc1)O" -O smilesobabelimg[NUM].svg -xu -xC
 \begin{verbatim}
 \chemobabel[scale=0.6]{ATP.cdx}{-xd}
 \end{verbatim}
-ChemDraw の図からファイル名を取り除くには、\texttt{-xd} オプションを付けます：
+ChemDraw の図からファイル名を取り除くには，\texttt{-xd} オプションを付けます：
 \begin{verbatim}
 $ obabel -:"ATP.cdx" -O chemobabelimg[NUM].svg -xd
 \end{verbatim}
@@ -658,14 +660,14 @@ However, the fact that many complex structures can be generated from only one ch
 
 Open Babel は SMILES 表記から複雑な構造式を生成することができます。
 
-しかし、時には結果が望ましくないことがあり、また使用するバージョン番号によって出力が異なることがあります。
+しかし，時には結果が望ましくないことがあり，また使用するバージョン番号によって出力が異なることがあります。
 いくつかの例を示します： \\
 
-また、Open Babel は SMILES 表記から誤った構造式を生成することもあります。
-ホタルルシフェリンの図で、SMILES 表記から生成した構造式には二重結合が一つ欠けています。
+また，Open Babel は SMILES 表記から誤った構造式を生成することもあります。
+ホタルルシフェリンの図で，SMILES 表記から生成した構造式には二重結合が一つ欠けています。
 
 このような問題点は全て \verb|.mol| または \verb|.cdx| を用意して \verb|\chemobabel| を利用することで回避できます。
-とはいえ、ただの文字列から複雑な構造式を生成しうるということ自体、おもしろいとは思いませんか？
+とはいえ，ただの文字列から複雑な構造式を生成しうるということ自体，おもしろいとは思いませんか？
 
 \clearpage
 
@@ -697,9 +699,9 @@ These problems are solved in \verb|\smilesobabel|, so \verb|\smilesobabel| comma
 
 \subsubsection{日本語}
 
-手元に \verb|\smiles| や \verb|\obabel| を含む \LaTeX\ ソースがある場合は、代わりに \verb|\smilesobabel| に置き換えることをお勧めします。
-\verb|\smiles| はラスター画像 (.png) を生成してかつ \verb|\includegraphics| に渡すオプションを扱えず、\verb|\obabel| は拡張子 (.pdf) が欠落していたりオプション引数が空の場合にエラーが発生したりという理由で正しく処理できない可能性があります。
-これらの問題は \verb|\smilesobabel| では解決されていますので、特別な理由がない限り \verb|\smilesobabel| コマンドを推奨します。
+手元に \verb|\smiles| や \verb|\obabel| を含む \LaTeX\ ソースがある場合は，代わりに \verb|\smilesobabel| に置き換えることをお勧めします。
+\verb|\smiles| はラスター画像 (.png) を生成してかつ \verb|\includegraphics| に渡すオプションを扱えず，\verb|\obabel| は拡張子 (.pdf) が欠落していたりオプション引数が空の場合にエラーが発生したりという理由で正しく処理できない可能性があります。
+これらの問題は \verb|\smilesobabel| では解決されていますので，特別な理由がない限り \verb|\smilesobabel| コマンドを推奨します。
 
 \clearpage
 
@@ -720,13 +722,13 @@ I also found following packages which can be used for similar purpose:
 
 \subsection{日本語}
 
-この方法は Open Babel に依存して構造式を生成しており、一切自分で構造式を描画することなく済ませることさえ可能です。
-もちろんある程度はそれらの構造を修正したりカスタマイズしたりできますが、この方法は出力の緻密な調節には不向きでしょう。
-また、コンピュータによって生成される構造式は時に見た目が不自然で、好ましくない場合もあるかもしれません。
-したがって、この方法は構造式の出力を完全に制御したいという意図がなく、構造式を簡便に挿入したい場合にのみ。
-出力に満足できない場合は、\XyMTeX や \textsf{chemfig} のようなパッケージを代わりに使うことをご検討ください。
+この方法は Open Babel に依存して構造式を生成しており，一切自分で構造式を描画することなく済ませることさえ可能です。
+もちろんある程度はそれらの構造を修正したりカスタマイズしたりできますが，この方法は出力の緻密な調節には不向きでしょう。
+また，コンピュータによって生成される構造式は時に見た目が不自然で，好ましくない場合もあるかもしれません。
+したがって，この方法は構造式の出力を完全に制御したいという意図がなく，構造式を簡便に挿入したい場合にのみ。
+出力に満足できない場合は，\XyMTeX や \textsf{chemfig} のようなパッケージを代わりに使うことをご検討ください。
 
-同様の目的を達成するために使えそうなパッケージとして、以下のようなものもあります：
+同様の目的を達成するために使えそうなパッケージとして，以下のようなものもあります：
 \begin{itemize}
 \item \href{http://www.ctan.org/pkg/mol2chemfig}{\textsf{mol2chemfig}}: convert chemical structures from MDL molfile format to \textsf{chemfig} source code
 \end{itemize}
@@ -761,10 +763,10 @@ It is important to prevent these characters from being translated as \LaTeX\ con
 However, a backslash (\verb|\|) is a default escape character in \LaTeX, and a percent symbol (\verb|%|) also has a special meaning as a comment character.
 In \textsf{chemobabel} (higher than v0.7), all these characters are handled properly by changing category codes temporarily. \\
 
-本パッケージを制作するにあたり、オンラインの \href{http://www.daylight.com/meetings/summerschool98/course/dave/smiles-intro.html}{SMILES Tutorial}を読んで SMILES 表記法に用いられる文字の種類を調べました（一覧は英語部分参照）。
+本パッケージを制作するにあたり，オンラインの \href{http://www.daylight.com/meetings/summerschool98/course/dave/smiles-intro.html}{SMILES Tutorial}を読んで SMILES 表記法に用いられる文字の種類を調べました（一覧は英語部分参照）。
 
-これらの文字が \LaTeX におけるコントロールシーケンスとして解釈されることを防ぐ必要がありますが、バックスラッシュ \verb|\| はデフォルトのエスケープ文字であり、またパーセント記号 \verb|%| もコメント文字としての特殊な意味を持っています。
-\textsf{chemobabel} v0.7 以上では、カテゴリーコードを一時的に変更することでこれらすべての文字を適切に扱うようになっています。
+これらの文字が \LaTeX におけるコントロールシーケンスとして解釈されることを防ぐ必要がありますが，バックスラッシュ \verb|\| はデフォルトのエスケープ文字であり，またパーセント記号 \verb|%| もコメント文字としての特殊な意味を持っています。
+\textsf{chemobabel} v0.7 以上では，カテゴリーコードを一時的に変更することでこれらすべての文字を適切に扱うようになっています。
 
 \clearpage
 
@@ -791,7 +793,8 @@ Version 0.6 & (June     29, 2015): & Improve warning messages. \\
 Version 0.7 & (August   26, 2015): & Solve \verb|\catcode|-related problems in \verb|\smilesobabel|. \\
 Version 0.8 & (August   27, 2015): & Improve \verb|\smilesobabel| a little. \\
 Version 0.9 & (August   28, 2015): & Improve \verb|\smilesobabel|: (Thanks: ZR) \\
-            &                      & Exclude e-\TeX\ dependency.
+            &                      & Exclude e-\TeX\ dependency. \\
+Version 0.9a & (August   29, 2015): & Improve \verb|\chemobabel| a little.
 \end{tabular}
 \end{table}
 

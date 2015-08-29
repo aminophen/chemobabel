@@ -41,7 +41,16 @@
     \string\newpage}%
   [\smilesobabelGetName.pdf]%
   \addtocounter{smilesobabelCounter}{1}}
-\renewcommand\chemobabel[3][scale=1]{%
+\renewcommand\chemobabel{%
+  \begingroup
+  \let\do\@makeother
+  \dospecials
+  \catcode`\{=1
+  \catcode`\}=2
+  \@@chemobabel
+}
+\newcommand\@@chemobabel[3][scale=1]{%
+  \endgroup
   \immediate\write\ChemFigFile{%
     \string\chemobabel[#1]{#2}{#3}%
     \string\newpage}%

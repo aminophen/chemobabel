@@ -16,7 +16,7 @@
 \NeedsTeXFormat{LaTeX2e}
   [1994/12/01]% LaTeX date must be December 1994 or later
 \ProvidesPackage{chemobabel}
-  [2015/08/28 v0.9 Chemical structures with Open Babel]
+  [2015/08/29 v0.9a Chemical structures with Open Babel]
 
 % Original source at http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
 \RequirePackage{verbatim}
@@ -36,7 +36,7 @@
 % 2: SMILES notation
 % 3: options for obabel
 \newcommand\smilesobabel[1][scale=1]{%
-  \def\chemobabel@next{\includegraphics[#1]}%
+  \def\smilesobabel@next{\includegraphics[#1]}%
   \begingroup
   \let\do\@makeother
   \dospecials
@@ -51,11 +51,11 @@
     && inkscape -f \smilesobabelGetName.svg --export-pdf=\smilesobabelGetName.pdf 2>>\smilesobabelGetName.log
     || rm -f \smilesobabelGetName.pdf}%
   \IfFileExists{\smilesobabelGetName.pdf}{% the PDF exists: include it
-    \chemobabel@next{\smilesobabelGetName.pdf}%
+    \smilesobabel@next{\smilesobabelGetName.pdf}%
   }{% the PDF was not created - show a warning and a hint
     \PackageWarning{chemobabel}{Processing of SMILES string failed}%
     \fbox{\begin{minipage}{0.9\textwidth}
-      Error in chemobabel: the file was not compiled. Remember to run \texttt{latex}
+      Warning in chemobabel: SMILES string was not processed. Remember to run \texttt{latex}
       (\texttt{pdflatex}, \texttt{platex}, etc.) with the \texttt{-shell-escape} option.\\
       \IfFileExists{\smilesobabelGetName.log}{%
         obabel log (might be empty):
@@ -78,18 +78,28 @@
 % 1: (optional) options for includegraphics
 % 2: original files (.mol, .cdx, etc.)
 % 3: options for obabel
-\newcommand\chemobabel[3][scale=1]{%
-  \IfFileExists{"#2"}{% the file exists: start processing (``#2'' can contain spaces, so ``"'' required)
+\newcommand\chemobabel[1][scale=1]{%
+  \def\chemobabel@next{\includegraphics[#1]}%
+  \begingroup
+  \let\do\@makeother
+  \dospecials
+  \catcode`\{=1
+  \catcode`\}=2
+  \@chemobabel
+}
+\newcommand\@chemobabel[2]{%
+  \endgroup
+  \IfFileExists{"#1"}{% the file exists: start processing (``#1'' can contain spaces, so ``"'' required)
     \immediate\write18{%
-      obabel "#2" -O \chemobabelGetName.svg #3 2>\chemobabelGetName.log
+      obabel "#1" -O \chemobabelGetName.svg #2 2>\chemobabelGetName.log
       && inkscape -f \chemobabelGetName.svg --export-pdf=\chemobabelGetName.pdf 2>>\chemobabelGetName.log
       || rm -f \chemobabelGetName.pdf}%
     \IfFileExists{\chemobabelGetName.pdf}{% the PDF exists: include it
-      \includegraphics[#1]{\chemobabelGetName.pdf}%
+      \chemobabel@next{\chemobabelGetName.pdf}%
     }{% the PDF was not created - show a warning and a hint
-      \PackageWarning{chemobabel}{Processing of file ``#2'' failed}%
+      \PackageWarning{chemobabel}{Processing of file ``#1'' failed}%
       \fbox{\begin{minipage}{0.9\textwidth}
-        Error in chemobabel: the file was not compiled. Remember to run \texttt{latex}
+        Warning in chemobabel: the file was not processed. Remember to run \texttt{latex}
         (\texttt{pdflatex}, \texttt{platex}, etc.) with the \texttt{-shell-escape} option.\\
         \IfFileExists{\chemobabelGetName.log}{%
           obabel log (might be empty):
@@ -100,9 +110,9 @@
       \end{minipage}}%
     }%
   }{% the file does not exist: show a std error
-    \PackageError{chemobabel}{File ``#2'' not found}{}%
+    \PackageError{chemobabel}{File ``#1'' not found}{}%
     \fbox{\begin{minipage}{0.9\textwidth}
-      Error in chemobabel: the file ``#2'' does not exist.
+      Error in chemobabel: the file ``#1'' does not exist.
     \end{minipage}}%
   }%
   \addtocounter{chemobabelCounter}{1}% select next name
