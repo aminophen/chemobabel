@@ -2,7 +2,7 @@
 %% This is file `chemobabel.sty',
 %% for generating chemical structural formulas using Open Babel and Inkscape.
 %% 
-%% Copyright 2014-2015 Acetaminophen (Hironobu YAMASHITA)
+%% Copyright 2014-2016 Acetaminophen (Hironobu YAMASHITA)
 %%   Email   :  h.y.acetaminophen[a t]gmail.com
 %%   GitHub  :  https://github.com/aminophen
 %%   Blog    :  http://acetaminophen.hatenablog.com/
@@ -14,9 +14,8 @@
 %%  - TeX Forum http://oku.edu.mie-u.ac.jp/tex/
 %%
 \NeedsTeXFormat{LaTeX2e}
-  [1994/12/01]% LaTeX date must be December 1994 or later
 \ProvidesPackage{chemobabel}
-  [2015/08/29 v0.9a Chemical structures with Open Babel]
+  [2016/01/06 v0.9b Chemical structures with Open Babel]
 
 % Original source at http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
 \RequirePackage{verbatim}
@@ -46,10 +45,17 @@
 }
 \newcommand\@smilesobabel[2]{%
   \endgroup
-  \immediate\write18{%
+  \@ifundefined{directlua}{%
+    \immediate\write18{%
     obabel -:"#1" -O \smilesobabelGetName.svg #2 2>\smilesobabelGetName.log
     && inkscape -f \smilesobabelGetName.svg --export-pdf=\smilesobabelGetName.pdf 2>>\smilesobabelGetName.log
     || rm -f \smilesobabelGetName.pdf}%
+  }{%
+    \directlua{os.execute[[%
+    obabel -:"#1" -O \smilesobabelGetName.svg #2 2>\smilesobabelGetName.log
+    && inkscape -f \smilesobabelGetName.svg --export-pdf=\smilesobabelGetName.pdf 2>>\smilesobabelGetName.log
+    || rm -f \smilesobabelGetName.pdf]]}%
+  }%
   \IfFileExists{\smilesobabelGetName.pdf}{% the PDF exists: include it
     \smilesobabel@next{\smilesobabelGetName.pdf}%
   }{% the PDF was not created - show a warning and a hint
@@ -90,10 +96,17 @@
 \newcommand\@chemobabel[2]{%
   \endgroup
   \IfFileExists{"#1"}{% the file exists: start processing (``#1'' can contain spaces, so ``"'' required)
-    \immediate\write18{%
+    \@ifundefined{directlua}{%
+      \immediate\write18{%
       obabel "#1" -O \chemobabelGetName.svg #2 2>\chemobabelGetName.log
       && inkscape -f \chemobabelGetName.svg --export-pdf=\chemobabelGetName.pdf 2>>\chemobabelGetName.log
       || rm -f \chemobabelGetName.pdf}%
+    }{%
+      \directlua{os.execute[[%
+      obabel "#1" -O \chemobabelGetName.svg #2 2>\chemobabelGetName.log
+      && inkscape -f \chemobabelGetName.svg --export-pdf=\chemobabelGetName.pdf 2>>\chemobabelGetName.log
+      || rm -f \chemobabelGetName.pdf]]}%
+    }%
     \IfFileExists{\chemobabelGetName.pdf}{% the PDF exists: include it
       \chemobabel@next{\chemobabelGetName.pdf}%
     }{% the PDF was not created - show a warning and a hint

@@ -38,12 +38,13 @@ See license.txt.
  - 2014-12-02 Version 0.2  (Add a parameter to be passed to obabel; the number of parameters changed!)
  - 2014-12-07 Version 0.3  (Change name of package: chemobabel.sty; add \chemobabel command)
  - 2014-12-09 Version 0.4  (Fix a bug: extra blank spaces at the end of some lines are removed)
- - 2014-12-20 Version 0.5  (Add an option: "extract" option can load the macro easily)
+ - 2014-12-20 Version 0.5  (Add "extract" option)
  - 2015-06-29 Version 0.6  (Improve warning messages)
  - 2015-08-26 Version 0.7  (Solve `\catcode`-related problems)
  - 2015-08-27 Version 0.8  (Improve `\smilesobabel` a little)
  - 2015-08-28 Version 0.9  (Exclude e-TeX dependency in `\smilesobabel`)
  - 2015-08-29 Version 0.9a (Improve `\chemobabel` a little)
+ - 2016-01-06 Version 0.9b (Support LuaTeX beta-0.85.0 or later)
 
 --------------------
 Hironobu YAMASHITA (aka. "Acetaminophen" or "@aminophen")

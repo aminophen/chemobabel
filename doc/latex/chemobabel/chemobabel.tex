@@ -17,7 +17,7 @@
 %% This document describes the usage of `chemobabel.sty',
 %% a LaTeX package for generating chemical structural formulas using Open Babel and Inkscape.
 %% 
-%% Copyright 2014-2015 Acetaminophen (Hironobu YAMASHITA)
+%% Copyright 2014-2016 Acetaminophen (Hironobu YAMASHITA)
 %%   Email   :  h.y.acetaminophen[a t]gmail.com
 %%   GitHub  :  https://github.com/aminophen
 %%   Blog    :  http://acetaminophen.hatenablog.com/
@@ -25,25 +25,24 @@
 %% 
 %
 \documentclass[12pt]{jsarticle}
-\usepackage[margin=20mm]{geometry}
-\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfm,margin=20mm]{geometry}
 \usepackage[english]{babel}
+\usepackage[dvipdfmx]{graphicx}
 \usepackage{chemobabel}
-\usepackage[dvipdfmx,bookmarksnumbered=true,%
+\usepackage[dvipdfmx,bookmarksnumbered=true,hidelinks,%
  pdftitle={User Manual for chemobabel.sty},pdfauthor={Hironobu Yamashita (Acetaminophen)},%
- pdfsubject={TeX & LaTeX Advent Calendar 2014},%
+ pdfsubject={TeX \& LaTeX Advent Calendar 2014},%
  pdfkeywords={chemistry,open babel,chemdraw,smiles}]{hyperref}
 \usepackage{pxjahyper}
 \usepackage{footnotebackref}
 % --- Change the style of captions (Japanese jsarticle style => English style) ---
 \makeatletter
-\long\def\@makecaption#1#2{
+\long\def\@makecaption#1#2{%
 \vskip\abovecaptionskip
 \sbox\@tempboxa{#1: #2}
 \global\@minipagefalse
 \hbox to\hsize{\hfil\box\@tempboxa\hfil}
-\vskip\belowcaptionskip
-}
+\vskip\belowcaptionskip}
 \makeatother
 % --- XyMTeX logo definition ---
 \newcount\TestCount
@@ -725,7 +724,7 @@ I also found following packages which can be used for similar purpose:
 この方法は Open Babel に依存して構造式を生成しており，一切自分で構造式を描画することなく済ませることさえ可能です。
 もちろんある程度はそれらの構造を修正したりカスタマイズしたりできますが，この方法は出力の緻密な調節には不向きでしょう。
 また，コンピュータによって生成される構造式は時に見た目が不自然で，好ましくない場合もあるかもしれません。
-したがって，この方法は構造式の出力を完全に制御したいという意図がなく，構造式を簡便に挿入したい場合にのみ。
+したがって，この方法は構造式の出力を完全に制御したいという意図がなく，構造式を簡便に挿入したい場合にのみ役に立つでしょう。
 出力に満足できない場合は，\XyMTeX や \textsf{chemfig} のようなパッケージを代わりに使うことをご検討ください。
 
 同様の目的を達成するために使えそうなパッケージとして，以下のようなものもあります：
@@ -787,14 +786,14 @@ Version 0.3 & (December  7, 2014): & Change name of package: \textsf{chemobabel.
             &                      & Add \verb|\chemobabel| command. \\
 Version 0.4 & (December  9, 2014): & Fix a bug: (Thanks: Yusuke Terada) \\
             &                      & Extra spaces at the end of lines are removed. \\
-Version 0.5 & (December 20, 2014): & Add an option: \\
-            &                      & \verb|extract| option can load the macro easily. \\
+Version 0.5 & (December 20, 2014): & Add \verb|extract| option. \\
 Version 0.6 & (June     29, 2015): & Improve warning messages. \\
 Version 0.7 & (August   26, 2015): & Solve \verb|\catcode|-related problems in \verb|\smilesobabel|. \\
 Version 0.8 & (August   27, 2015): & Improve \verb|\smilesobabel| a little. \\
 Version 0.9 & (August   28, 2015): & Improve \verb|\smilesobabel|: (Thanks: ZR) \\
-            &                      & Exclude e-\TeX\ dependency. \\
-Version 0.9a & (August   29, 2015): & Improve \verb|\chemobabel| a little.
+            &                      & Exclude $\varepsilon$-\TeX\ dependency. \\
+Version 0.9a & (August   29, 2015): & Improve \verb|\chemobabel| a little. \\
+Version 0.9b & (January   6, 2016): & Support Lua\TeX-0.85.0 and later versions.
 \end{tabular}
 \end{table}
 
