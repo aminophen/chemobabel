@@ -45,6 +45,7 @@ See license.txt.
  - 2015-08-28 Version 0.9  (Exclude e-TeX dependency in `\smilesobabel`)
  - 2015-08-29 Version 0.9a (Improve `\chemobabel` a little)
  - 2016-01-06 Version 0.9b (Support LuaTeX beta-0.85.0 or later)
+ - 2016-02-09 Version 0.9c (Fix a bug; forgotten in Version 0.9b)
 
 --------------------
 Hironobu YAMASHITA (aka. "Acetaminophen" or "@aminophen")
