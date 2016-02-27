@@ -2,14 +2,16 @@
 %%
 %% This is file `chemobabel-extract.tex', bundled with `chemobabel.sty'.
 %% 
-%% Copyright 2014-2015 Acetaminophen (Hironobu Yamashita)
+%% Copyright 2014-2016 Acetaminophen (Hironobu Yamashita)
 %%   GitHub: https://github.com/aminophen
 %%   Blog: http://acetaminophen.hatenablog.com/
 %%
 %% Thanks: http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=1411
 %
 
-\makeatletter
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{chemobabel-extract.tex}
+  [2016/02/28 v0.9d Support file for chemobabel.sty]
 
 %% Define intermediate output file and load packages
 \newwrite\ChemFigFile
@@ -39,8 +41,8 @@
   \immediate\write\ChemFigFile{%
     \string\smilesobabel[#1]{#2}{#3}%
     \string\newpage}%
-  [\smilesobabelGetName.pdf]%
-  \addtocounter{smilesobabelCounter}{1}}
+  [\smilesob@belGetName.\chemob@belExt,]%
+  \addtocounter{smilesob@belCounter}{1}}
 \renewcommand\chemobabel{%
   \begingroup
   \let\do\@makeother
@@ -54,10 +56,8 @@
   \immediate\write\ChemFigFile{%
     \string\chemobabel[#1]{#2}{#3}%
     \string\newpage}%
-  [\chemobabelGetName.pdf]%
-  \addtocounter{chemobabelCounter}{1}}
+  [\chemob@belGetName.\chemob@belExt,]%
+  \addtocounter{chemob@belCounter}{1}}
 %%
-
-\makeatother
 
 % ----- [EOF] -----

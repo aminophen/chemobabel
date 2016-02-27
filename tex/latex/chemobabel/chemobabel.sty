@@ -15,14 +15,14 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{chemobabel}
-  [2016/02/09 v0.9c Chemical structures with Open Babel]
+  [2016/02/28 v0.9d Chemical structures with Open Babel]
 
 % Original source at http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
 \RequirePackage{verbatim}
 \RequirePackage{graphicx}
 
 %% ----- Make a directory for images -----
-\providecommand\chemobabelimgdir{chemobabelimgdir}
+\newcommand\chemobabelimgdir{chemobabelimgdir}
 \@ifundefined{directlua}{%
   \immediate\write18{mkdir \chemobabelimgdir}%
 }{%
@@ -30,10 +30,10 @@
 }
 
 %% ----- Definition of \smilesobabel -----
-\newcounter{smilesobabelCounter}
-\setcounter{smilesobabelCounter}{1}
-\newcommand\smilesobabelPrefix{\chemobabelimgdir/smilesobabelimg}
-\newcommand\smilesobabelGetName{\smilesobabelPrefix\arabic{smilesobabelCounter}}
+\newcounter{smilesob@belCounter}
+\setcounter{smilesob@belCounter}{1}
+\newcommand\smilesob@belPrefix{\chemobabelimgdir/smilesobabelimg}
+\newcommand\smilesob@belGetName{\smilesob@belPrefix\arabic{smilesob@belCounter}}
 
 % 1: (optional) options for includegraphics
 % 2: SMILES notation
@@ -51,39 +51,39 @@
   \endgroup
   \@ifundefined{directlua}{%
     \immediate\write18{%
-    obabel -:"#1" -O \smilesobabelGetName.svg #2 2>\smilesobabelGetName.log
-    && inkscape -f \smilesobabelGetName.svg --export-pdf=\smilesobabelGetName.pdf 2>>\smilesobabelGetName.log
-    || rm -f \smilesobabelGetName.pdf}%
+    obabel -:"#1" -O \smilesob@belGetName.svg #2 2>\smilesob@belGetName.log
+    && inkscape -f \smilesob@belGetName.svg --export-\chemob@belExt,=\smilesob@belGetName.\chemob@belExt, 2>>\smilesob@belGetName.log
+    || rm -f \smilesob@belGetName.\chemob@belExt,}%
   }{%
     \directlua{os.execute[[%
-    obabel -:"#1" -O \smilesobabelGetName.svg #2 2>\smilesobabelGetName.log
-    && inkscape -f \smilesobabelGetName.svg --export-pdf=\smilesobabelGetName.pdf 2>>\smilesobabelGetName.log
-    || rm -f \smilesobabelGetName.pdf]]}%
+    obabel -:"#1" -O \smilesob@belGetName.svg #2 2>\smilesob@belGetName.log
+    && inkscape -f \smilesob@belGetName.svg --export-\chemob@belExt,=\smilesob@belGetName.\chemob@belExt, 2>>\smilesob@belGetName.log
+    || rm -f \smilesob@belGetName.\chemob@belExt,]]}%
   }%
-  \IfFileExists{\smilesobabelGetName.pdf}{% the PDF exists: include it
-    \smilesobabel@next{\smilesobabelGetName.pdf}%
-  }{% the PDF was not created - show a warning and a hint
+  \IfFileExists{\smilesob@belGetName.\chemob@belExt,}{% the image exists: include it
+    \smilesobabel@next{\smilesob@belGetName.\chemob@belExt,}%
+  }{% the image was not created - show a warning and a hint
     \PackageWarning{chemobabel}{Processing of SMILES string failed}%
     \fbox{\begin{minipage}{0.9\textwidth}
       Warning in chemobabel: SMILES string was not processed. Remember to run \texttt{latex}
       (\texttt{pdflatex}, \texttt{platex}, etc.) with the \texttt{-shell-escape} option.\\
-      \IfFileExists{\smilesobabelGetName.log}{%
+      \IfFileExists{\smilesob@belGetName.log}{%
         obabel log (might be empty):
-        \verbatiminput{\smilesobabelGetName.log}%
+        \verbatiminput{\smilesob@belGetName.log}%
       }{%
         No log file.%
       }%
     \end{minipage}}%
   }%
-  \addtocounter{smilesobabelCounter}{1}% select next name
+  \addtocounter{smilesob@belCounter}{1}% select next name
 }
 %% ----- Definition of \smilesobabel end -----
 
 %% ----- Definition of \chemobabel -----
-\newcounter{chemobabelCounter}
-\setcounter{chemobabelCounter}{1}
-\newcommand\chemobabelPrefix{\chemobabelimgdir/chemobabelimg}
-\newcommand\chemobabelGetName{\chemobabelPrefix\arabic{chemobabelCounter}}
+\newcounter{chemob@belCounter}
+\setcounter{chemob@belCounter}{1}
+\newcommand\chemob@belPrefix{\chemobabelimgdir/chemobabelimg}
+\newcommand\chemob@belGetName{\chemob@belPrefix\arabic{chemob@belCounter}}
 
 % 1: (optional) options for includegraphics
 % 2: original files (.mol, .cdx, etc.)
@@ -102,25 +102,25 @@
   \IfFileExists{"#1"}{% the file exists: start processing (``#1'' can contain spaces, so ``"'' required)
     \@ifundefined{directlua}{%
       \immediate\write18{%
-      obabel "#1" -O \chemobabelGetName.svg #2 2>\chemobabelGetName.log
-      && inkscape -f \chemobabelGetName.svg --export-pdf=\chemobabelGetName.pdf 2>>\chemobabelGetName.log
-      || rm -f \chemobabelGetName.pdf}%
+      obabel "#1" -O \chemob@belGetName.svg #2 2>\chemob@belGetName.log
+      && inkscape -f \chemob@belGetName.svg --export-\chemob@belExt,=\chemob@belGetName.\chemob@belExt, 2>>\chemob@belGetName.log
+      || rm -f \chemob@belGetName.\chemob@belExt,}%
     }{%
       \directlua{os.execute[[%
-      obabel "#1" -O \chemobabelGetName.svg #2 2>\chemobabelGetName.log
-      && inkscape -f \chemobabelGetName.svg --export-pdf=\chemobabelGetName.pdf 2>>\chemobabelGetName.log
-      || rm -f \chemobabelGetName.pdf]]}%
+      obabel "#1" -O \chemob@belGetName.svg #2 2>\chemob@belGetName.log
+      && inkscape -f \chemob@belGetName.svg --export-\chemob@belExt,=\chemob@belGetName.\chemob@belExt, 2>>\chemob@belGetName.log
+      || rm -f \chemob@belGetName.\chemob@belExt,]]}%
     }%
-    \IfFileExists{\chemobabelGetName.pdf}{% the PDF exists: include it
-      \chemobabel@next{\chemobabelGetName.pdf}%
-    }{% the PDF was not created - show a warning and a hint
+    \IfFileExists{\chemob@belGetName.\chemob@belExt,}{% the image exists: include it
+      \chemobabel@next{\chemob@belGetName.\chemob@belExt,}%
+    }{% the image was not created - show a warning and a hint
       \PackageWarning{chemobabel}{Processing of file ``#1'' failed}%
       \fbox{\begin{minipage}{0.9\textwidth}
         Warning in chemobabel: the file was not processed. Remember to run \texttt{latex}
         (\texttt{pdflatex}, \texttt{platex}, etc.) with the \texttt{-shell-escape} option.\\
-        \IfFileExists{\chemobabelGetName.log}{%
+        \IfFileExists{\chemob@belGetName.log}{%
           obabel log (might be empty):
-          \verbatiminput{\chemobabelGetName.log}%
+          \verbatiminput{\chemob@belGetName.log}%
         }{%
           No log file.%
         }%
@@ -132,15 +132,20 @@
       Error in chemobabel: the file ``#1'' does not exist.
     \end{minipage}}%
   }%
-  \addtocounter{chemobabelCounter}{1}% select next name
+  \addtocounter{chemob@belCounter}{1}% select next name
 }
 %% ----- Definition of \chemobabel end -----
 
-%% ----- Declaration of options (load macros for extracting \chemobabel and \smilesobabel commands) -----
+%% ----- Declaration of options -----
+% load macros for extracting \chemobabel and \smilesobabel commands)
 \DeclareOption{extract}{%
   \PackageWarningNoLine{chemobabel}{You are using [extract] option.\MessageBreak
                                     No chemical structures will be printed}
   \input{chemobabel-extract.tex}}
+% define the image extension
+\DeclareOption{pdf}{\def\chemob@belExt,{pdf}}
+\DeclareOption{eps}{\def\chemob@belExt,{eps}}
+\ExecuteOptions{pdf}
 \ProcessOptions
 %% ----- Declaration of options end -----
 

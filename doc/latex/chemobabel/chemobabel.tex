@@ -394,6 +394,40 @@ $ dvipdfmx test.dvi
 
 \clearpage
 
+\subsection{Package options （パッケージオプション）}
+
+\subsubsection{English}
+
+By default, \textsf{chemobabel} converts chemical structures into PDF images.
+However, when you are using drivers which do not support PDF figures (such as dvips), it will be helpful if \textsf{chemobabel} converts them into EPS images.
+For this purpose, you can use:
+\begin{verbatim}
+\usepackage[eps]{chemobabel}
+\end{verbatim}
+The option \verb|eps| switches the image format (that is, output format from Inkscape) into EPS ($\ge$ \textsf{chemobabel} v0.9d [2016/02/28]).
+The default behavior is equivalent to the \verb|pdf| option:
+\begin{verbatim}
+\usepackage[pdf]{chemobabel}
+\end{verbatim}
+Currently, only \verb|pdf| and \verb|eps| are supported.
+
+\subsubsection{日本語}
+
+\textsf{chemobabel} パッケージは，デフォルトでは化学構造式を PDF 形式の画像ファイルに変換して文書中に取り込みます。
+しかし，dvips などの PDF 非対応のドライバを使用する場合は EPS 形式の画像ファイルに変換したほうが便利でしょう。
+この場合
+\begin{verbatim}
+\usepackage[eps]{chemobabel}
+\end{verbatim}
+というように \verb|eps| オプションを指定すれば，内部で Inkscape から出力される画像形式を PDF ではなく EPS に変更します（\textsf{chemobabel} v0.9d [2016/02/28] 以降）。
+デフォルトは \verb|pdf| オプションを指定した場合と同じです。
+\begin{verbatim}
+\usepackage[pdf]{chemobabel}
+\end{verbatim}
+現時点では \verb|pdf| と \verb|eps| のみ指定可能です。
+
+\clearpage
+
 \subsection{For Safer Typesetting... （安全なタイプセットのために）} \label{extract}
 
 \subsubsection{English}
@@ -794,7 +828,8 @@ Version 0.9 & (August   28, 2015): & Improve \verb|\smilesobabel|: (Thanks: ZR) 
             &                      & Exclude $\varepsilon$-\TeX\ dependency. \\
 Version 0.9a & (August   29, 2015): & Improve \verb|\chemobabel| a little. \\
 Version 0.9b & (January   6, 2016): & Support Lua\TeX-0.85.0 and later versions. \\
-Version 0.9c & (February  9, 2016): & Fix a bug; forgotten in Version 0.9b.
+Version 0.9c & (February  9, 2016): & Fix a bug; forgotten in Version 0.9b. \\
+Version 0.9d & (February 28, 2016): & Add \verb|eps| and \verb|pdf| options.
 \end{tabular}
 \end{table}
 
