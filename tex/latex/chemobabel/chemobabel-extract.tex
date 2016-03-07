@@ -11,7 +11,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{chemobabel-extract.tex}
-  [2016/02/28 v0.9d Support file for chemobabel.sty]
+  [2016/03/07 v0.9e Support file for chemobabel.sty]
 
 %% Define intermediate output file and load packages
 \newwrite\ChemFigFile
@@ -41,7 +41,7 @@
   \immediate\write\ChemFigFile{%
     \string\smilesobabel[#1]{#2}{#3}%
     \string\newpage}%
-  [\smilesob@belGetName.\chemob@belExt,]%
+  [\smilesob@belGetName.\chemob@belimgExt]%
   \addtocounter{smilesob@belCounter}{1}}
 \renewcommand\chemobabel{%
   \begingroup
@@ -56,7 +56,7 @@
   \immediate\write\ChemFigFile{%
     \string\chemobabel[#1]{#2}{#3}%
     \string\newpage}%
-  [\chemob@belGetName.\chemob@belExt,]%
+  [\chemob@belGetName.\chemob@belimgExt]%
   \addtocounter{chemob@belCounter}{1}}
 %%
 

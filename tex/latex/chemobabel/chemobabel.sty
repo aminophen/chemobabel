@@ -15,7 +15,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{chemobabel}
-  [2016/02/28 v0.9d Chemical structures with Open Babel]
+  [2016/03/07 v0.9e Chemical structures with Open Babel]
 
 % Original source at http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
 \RequirePackage{verbatim}
@@ -28,6 +28,12 @@
 }{%
   \directlua{os.execute[[mkdir \chemobabelimgdir]]}%
 }
+
+%% ----- Definition of external commands -----
+\newcommand\smilesob@bel@obabelcmd[2]{obabel -:"#1" -O \smilesob@belGetName.svg #2}
+\newcommand\chemob@bel@obabelcmd[2]{obabel "#1" -O \chemob@belGetName.svg #2}
+\newcommand\chemob@bel@inkscapecmd[2]{inkscape -f #1.svg --export-#2=#1.#2}
+\newcommand\chemob@bel@librsvgcmd[2]{rsvg-convert -f #2 -o #1.#2 #1.svg}
 
 %% ----- Definition of \smilesobabel -----
 \newcounter{smilesob@belCounter}
@@ -51,17 +57,17 @@
   \endgroup
   \@ifundefined{directlua}{%
     \immediate\write18{%
-    obabel -:"#1" -O \smilesob@belGetName.svg #2 2>\smilesob@belGetName.log
-    && inkscape -f \smilesob@belGetName.svg --export-\chemob@belExt,=\smilesob@belGetName.\chemob@belExt, 2>>\smilesob@belGetName.log
-    || rm -f \smilesob@belGetName.\chemob@belExt,}%
+    \smilesob@bel@obabelcmd{#1}{#2} 2>\smilesob@belGetName.log
+    && \chemob@bel@svgtoimgcmd{\smilesob@belGetName}{\chemob@belimgExt} 2>>\smilesob@belGetName.log
+    || rm -f \smilesob@belGetName.\chemob@belimgExt}%
   }{%
     \directlua{os.execute[[%
-    obabel -:"#1" -O \smilesob@belGetName.svg #2 2>\smilesob@belGetName.log
-    && inkscape -f \smilesob@belGetName.svg --export-\chemob@belExt,=\smilesob@belGetName.\chemob@belExt, 2>>\smilesob@belGetName.log
-    || rm -f \smilesob@belGetName.\chemob@belExt,]]}%
+    \smilesob@bel@obabelcmd{#1}{#2} 2>\smilesob@belGetName.log
+    && \chemob@bel@svgtoimgcmd{\smilesob@belGetName}{\chemob@belimgExt} 2>>\smilesob@belGetName.log
+    || rm -f \smilesob@belGetName.\chemob@belimgExt]]}%
   }%
-  \IfFileExists{\smilesob@belGetName.\chemob@belExt,}{% the image exists: include it
-    \smilesobabel@next{\smilesob@belGetName.\chemob@belExt,}%
+  \IfFileExists{\smilesob@belGetName.\chemob@belimgExt}{% the image exists: include it
+    \smilesobabel@next{\smilesob@belGetName.\chemob@belimgExt}%
   }{% the image was not created - show a warning and a hint
     \PackageWarning{chemobabel}{Processing of SMILES string failed}%
     \fbox{\begin{minipage}{0.9\textwidth}
@@ -102,17 +108,17 @@
   \IfFileExists{"#1"}{% the file exists: start processing (``#1'' can contain spaces, so ``"'' required)
     \@ifundefined{directlua}{%
       \immediate\write18{%
-      obabel "#1" -O \chemob@belGetName.svg #2 2>\chemob@belGetName.log
-      && inkscape -f \chemob@belGetName.svg --export-\chemob@belExt,=\chemob@belGetName.\chemob@belExt, 2>>\chemob@belGetName.log
-      || rm -f \chemob@belGetName.\chemob@belExt,}%
+      \chemob@bel@obabelcmd{#1}{#2} 2>\chemob@belGetName.log
+      && \chemob@bel@svgtoimgcmd{\chemob@belGetName}{\chemob@belimgExt} 2>>\chemob@belGetName.log
+      || rm -f \chemob@belGetName.\chemob@belimgExt}%
     }{%
       \directlua{os.execute[[%
-      obabel "#1" -O \chemob@belGetName.svg #2 2>\chemob@belGetName.log
-      && inkscape -f \chemob@belGetName.svg --export-\chemob@belExt,=\chemob@belGetName.\chemob@belExt, 2>>\chemob@belGetName.log
-      || rm -f \chemob@belGetName.\chemob@belExt,]]}%
+      \chemob@bel@obabelcmd{#1}{#2} 2>\chemob@belGetName.log
+      && \chemob@bel@svgtoimgcmd{\chemob@belGetName}{\chemob@belimgExt} 2>>\chemob@belGetName.log
+      || rm -f \chemob@belGetName.\chemob@belimgExt]]}%
     }%
-    \IfFileExists{\chemob@belGetName.\chemob@belExt,}{% the image exists: include it
-      \chemobabel@next{\chemob@belGetName.\chemob@belExt,}%
+    \IfFileExists{\chemob@belGetName.\chemob@belimgExt}{% the image exists: include it
+      \chemobabel@next{\chemob@belGetName.\chemob@belimgExt}%
     }{% the image was not created - show a warning and a hint
       \PackageWarning{chemobabel}{Processing of file ``#1'' failed}%
       \fbox{\begin{minipage}{0.9\textwidth}
@@ -137,15 +143,19 @@
 %% ----- Definition of \chemobabel end -----
 
 %% ----- Declaration of options -----
-% load macros for extracting \chemobabel and \smilesobabel commands)
+% load macros for extracting \chemobabel and \smilesobabel commands
 \DeclareOption{extract}{%
   \PackageWarningNoLine{chemobabel}{You are using [extract] option.\MessageBreak
                                     No chemical structures will be printed}
   \input{chemobabel-extract.tex}}
 % define the image extension
-\DeclareOption{pdf}{\def\chemob@belExt,{pdf}}
-\DeclareOption{eps}{\def\chemob@belExt,{eps}}
-\ExecuteOptions{pdf}
+\DeclareOption{pdf}{\def\chemob@belimgExt{pdf}}
+\DeclareOption{eps}{\def\chemob@belimgExt{eps}}
+% determine image conversion command
+\DeclareOption{inkscape}{\def\chemob@bel@svgtoimgcmd{\chemob@bel@inkscapecmd}}
+\DeclareOption{librsvg}{\def\chemob@bel@svgtoimgcmd{\chemob@bel@librsvgcmd}}
+% default settings
+\ExecuteOptions{pdf,inkscape}
 \ProcessOptions
 %% ----- Declaration of options end -----
 

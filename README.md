@@ -47,6 +47,7 @@ See license.txt.
  - 2016-01-06 Version 0.9b (Support LuaTeX beta-0.85.0 or later)
  - 2016-02-09 Version 0.9c (Fix a bug; forgotten in Version 0.9b)
  - 2016-02-28 Version 0.9d (Add `eps` and `pdf` options; now dvips supported)
+ - 2016-03-07 Version 0.9e (Add `librsvg` and `inkscape` options)
 
 --------------------
 Hironobu YAMASHITA (aka. "Acetaminophen" or "@aminophen")

@@ -25,6 +25,8 @@
 %% 
 %
 \documentclass[12pt]{jsarticle}
+\usepackage[deluxe,expert]{otf}
+\usepackage{newpxtext,newpxmath}
 \usepackage[dvipdfm,margin=20mm]{geometry}
 \usepackage[english]{babel}
 \usepackage[dvipdfmx]{graphicx}
@@ -194,38 +196,42 @@ This drove me to develop a new package to simplify the process for inserting che
 
 \subsubsection{English}
 
-First, you have to install \href{http://openbabel.org/}{Open Babel} and \href{https://inkscape.org/en/}{Inkscape} on your computer, and export PATH to the command-line binary of both programs, obabel and inkscape.
+First, you have to install \href{http://openbabel.org/}{Open Babel} and \href{https://inkscape.org/en/}{Inkscape} (or \href{http://librsvg.sourceforge.net/download/}{librsvg}) on your computer, and export PATH to the command-line binary of both programs, obabel and inkscape (or librsvg).
 You can confirm by executing following commands:
 
 In UNIX operating system:
 \begin{verbatim}
 $ which obabel
-$ which inkscape
+$ which inkscape        (if you choose inkscape)
+$ which rsvg-convert    (if you choose librsvg)
 \end{verbatim}
 
 In Windows operating system:
 \begin{verbatim}
 > where obabel
-> where inkscape
+> where inkscape        (if you choose inkscape)
+> where rsvg-convert    (if you choose librsvg)
 \end{verbatim}
 
 And when you get some command echo, installation should be successful.
 
 \subsubsection{日本語}
 
-初めにコンピュータに \href{http://openbabel.org/}{Open Babel} と \href{https://inkscape.org/ja/}{Inkscape} をインストールし，コマンドライン実行ファイルである obabel と inkscape に PATH を通します。
+初めにコンピュータに \href{http://openbabel.org/}{Open Babel} と \href{https://inkscape.org/ja/}{Inkscape}（または \href{http://librsvg.sourceforge.net/download/}{librsvg}）をインストールし，コマンドライン実行ファイルである obabel と inkscape（または rsvg-convert）に PATH を通します。
 正しく PATH が通っているかどうかは以下のコマンドによって確認できます：
 
 UNIX 系の場合：
 \begin{verbatim}
 $ which obabel
-$ which inkscape
+$ which inkscape        （Inkscape の場合）
+$ which rsvg-convert    （librsvg の場合）
 \end{verbatim}
 
 Windows の場合：
 \begin{verbatim}
 > where obabel
-> where inkscape
+> where inkscape        （Inkscape の場合）
+> where rsvg-convert    （librsvg の場合）
 \end{verbatim}
 
 何らかのディレクトリ名が返ってきた場合は，正しくインストールできているはずです。
@@ -398,33 +404,54 @@ $ dvipdfmx test.dvi
 
 \subsubsection{English}
 
-By default, \textsf{chemobabel} converts chemical structures into PDF images.
-However, when you are using drivers which do not support PDF figures (such as dvips), it will be helpful if \textsf{chemobabel} converts them into EPS images.
+By default, \textsf{chemobabel} converts chemical structures into PDF images using Inkscape.
+However, you can switch the image format and the conversion program if you like.
+
+When you are using drivers which do not support PDF figures (such as dvips), it will be helpful if \textsf{chemobabel} converts them into EPS images.
 For this purpose, you can use:
 \begin{verbatim}
 \usepackage[eps]{chemobabel}
 \end{verbatim}
 The option \verb|eps| switches the image format (that is, output format from Inkscape) into EPS ($\ge$ \textsf{chemobabel} v0.9d [2016/02/28]).
-The default behavior is equivalent to the \verb|pdf| option:
+
+You can also change the image conversion program from ``Inkscape'' to ``rsvg-convert'' ($\ge$ \textsf{chemobabel} v0.9e [2016/03/07]).
+The program rsvg-convert is faster than inkscape, so it will be useful.
+For this purpose, use \verb|librsvg| option:
 \begin{verbatim}
-\usepackage[pdf]{chemobabel}
+\usepackage[librsvg]{chemobabel}
 \end{verbatim}
-Currently, only \verb|pdf| and \verb|eps| are supported.
+
+The default behavior is equivalent to the \verb|pdf| and \verb|inkscape| options:
+\begin{verbatim}
+\usepackage[pdf,inkscape]{chemobabel}
+\end{verbatim}
+
+\clearpage
 
 \subsubsection{日本語}
 
-\textsf{chemobabel} パッケージは，デフォルトでは化学構造式を PDF 形式の画像ファイルに変換して文書中に取り込みます。
-しかし，dvips などの PDF 非対応のドライバを使用する場合は EPS 形式の画像ファイルに変換したほうが便利でしょう。
+\textsf{chemobabel} パッケージは，デフォルトでは化学構造式を Inkscape によって PDF 形式の画像ファイルに変換して文書中に取り込みます。
+しかし，オプションで画像形式と変換プログラムを変更することができます。
+
+dvips などの PDF 非対応のドライバを使用する場合は EPS 形式の画像ファイルに変換したほうが便利でしょう。
 この場合
 \begin{verbatim}
 \usepackage[eps]{chemobabel}
 \end{verbatim}
 というように \verb|eps| オプションを指定すれば，内部で Inkscape から出力される画像形式を PDF ではなく EPS に変更します（\textsf{chemobabel} v0.9d [2016/02/28] 以降）。
-デフォルトは \verb|pdf| オプションを指定した場合と同じです。
+
+また，画像変換プログラムを Inkscape から rsvg-convert に変更することもできます（\textsf{chemobabel} v0.9e [2016/03/07] 以降）。
+rsvg-convert は Inkscape より高速ですから，便利かもしれません。
+この場合
 \begin{verbatim}
-\usepackage[pdf]{chemobabel}
+\usepackage[librsvg]{chemobabel}
 \end{verbatim}
-現時点では \verb|pdf| と \verb|eps| のみ指定可能です。
+のように \verb|librsvg| オプションを指定します。
+
+デフォルトは \verb|pdf| オプションと \verb|inkscape| オプションを指定した場合と等価です。
+\begin{verbatim}
+\usepackage[pdf,inkscape]{chemobabel}
+\end{verbatim}
 
 \clearpage
 
@@ -829,7 +856,8 @@ Version 0.9 & (August   28, 2015): & Improve \verb|\smilesobabel|: (Thanks: ZR) 
 Version 0.9a & (August   29, 2015): & Improve \verb|\chemobabel| a little. \\
 Version 0.9b & (January   6, 2016): & Support Lua\TeX-0.85.0 and later versions. \\
 Version 0.9c & (February  9, 2016): & Fix a bug; forgotten in Version 0.9b. \\
-Version 0.9d & (February 28, 2016): & Add \verb|eps| and \verb|pdf| options.
+Version 0.9d & (February 28, 2016): & Add \verb|eps| and \verb|pdf| options. \\
+Version 0.9e & (March     7, 2016): & Add \verb|librsvg| and \verb|inkscape| options.
 \end{tabular}
 \end{table}
 
