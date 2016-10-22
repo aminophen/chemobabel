@@ -48,6 +48,7 @@ See license.txt.
  - 2016-02-09 Version 0.9c (Fix a bug; forgotten in Version 0.9b)
  - 2016-02-28 Version 0.9d (Add `eps` and `pdf` options; now dvips supported)
  - 2016-03-07 Version 0.9e (Add `librsvg` and `inkscape` options)
+ - 2016-10-23 Version 0.9f (Incorporate `chemobabel-extract.tex` into main package)
 
 --------------------
 Hironobu YAMASHITA (aka. "Acetaminophen" or "@aminophen")
