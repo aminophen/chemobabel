@@ -1,23 +1,26 @@
-%%
-%% This is file `chemobabel.sty',
-%% for generating chemical structural formulas using Open Babel and Inkscape.
-%% 
-%% Copyright 2014-2016 Acetaminophen (Hironobu YAMASHITA)
-%%   Email   :  h.y.acetaminophen[a t]gmail.com
-%%   GitHub  :  https://github.com/aminophen
-%%   Blog    :  http://acetaminophen.hatenablog.com/
-%%   Twitter :  @aminophen
-%% 
-%% This work is based on a lot of resources published online.
-%%  - Noel O'Boyle http://baoilleach.blogspot.jp/
-%%  - Jakob Lykke Andersen http://imada.sdu.dk/~jlandersen/
-%%  - TeX Forum http://oku.edu.mie-u.ac.jp/tex/
-%%
+%
+% This is file `chemobabel.sty',
+% for generating chemical structural formulas using Open Babel and Inkscape.
+%
+% Copyright 2014-2016 Acetaminophen (Hironobu YAMASHITA)
+%   Email   :  h.y.acetaminophen[a t]gmail.com
+%   GitHub  :  https://github.com/aminophen
+%   Blog    :  http://acetaminophen.hatenablog.com/
+%   Twitter :  @aminophen
+%
+% This work is based on a lot of resources published online.
+%  - Noel O'Boyle http://baoilleach.blogspot.jp/
+%  - Jakob Lykke Andersen http://imada.sdu.dk/~jlandersen/
+%  - TeX Forum http://oku.edu.mie-u.ac.jp/tex/
+%
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{chemobabel}
-  [2016/03/07 v0.9e Chemical structures with Open Babel]
+  [2016/10/23 v0.9f Chemical structures with Open Babel]
 
-% Original source at http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
+%% Start of package main code
+%% Thanks: http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
+
 \RequirePackage{verbatim}
 \RequirePackage{graphicx}
 
@@ -144,10 +147,9 @@
 
 %% ----- Declaration of options -----
 % load macros for extracting \chemobabel and \smilesobabel commands
-\DeclareOption{extract}{%
-  \PackageWarningNoLine{chemobabel}{You are using [extract] option.\MessageBreak
-                                    No chemical structures will be printed}
-  \input{chemobabel-extract.tex}}
+\newif\ifchemob@bel@extract
+\chemob@bel@extract@false
+\DeclareOption{extract}{\chemob@bel@extracttrue}
 % define the image extension
 \DeclareOption{pdf}{\def\chemob@belimgExt{pdf}}
 \DeclareOption{eps}{\def\chemob@belimgExt{eps}}
@@ -158,6 +160,63 @@
 \ExecuteOptions{pdf,inkscape}
 \ProcessOptions
 %% ----- Declaration of options end -----
+
+%% ----- Exit this package now, if [extract] is not specified -----
+\ifchemob@bel@extract\else
+  \expandafter\endinput
+\fi
+
+%% Extracting all codes of Open Babel figures
+%% Thanks: http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=1411
+
+\PackageWarningNoLine{chemobabel}{%
+  You are using [extract] option.\MessageBreak
+  No chemical structures will be printed}
+
+%% ----- Define intermediate output file and load packages -----
+\newwrite\ChemFigFile
+\immediate\openout\ChemFigFile=ChemFigFile.tex\relax
+\immediate\write\ChemFigFile{\string\documentclass{article}}
+\immediate\write\ChemFigFile{\string\usepackage{graphicx}}
+\immediate\write\ChemFigFile{\string\usepackage{chemobabel}}
+
+%% ----- Read and write -----
+\immediate\write\ChemFigFile{\string\begin{document}}
+\AtEndDocument{%
+  \immediate\write\ChemFigFile{\string\end{document}}%
+  \immediate\closeout\ChemFigFile%
+}
+\renewcommand\smilesobabel{%
+  \begingroup
+  \let\do\@makeother
+  \dospecials
+  \catcode`\{=1
+  \catcode`\}=2
+  \@@smilesobabel
+}
+\newcommand\@@smilesobabel[3][scale=1]{%
+  \endgroup
+  \immediate\write\ChemFigFile{%
+    \string\smilesobabel[#1]{#2}{#3}%
+    \string\newpage}%
+  [\smilesob@belGetName.\chemob@belimgExt]%
+  \addtocounter{smilesob@belCounter}{1}}
+\renewcommand\chemobabel{%
+  \begingroup
+  \let\do\@makeother
+  \dospecials
+  \catcode`\{=1
+  \catcode`\}=2
+  \@@chemobabel
+}
+\newcommand\@@chemobabel[3][scale=1]{%
+  \endgroup
+  \immediate\write\ChemFigFile{%
+    \string\chemobabel[#1]{#2}{#3}%
+    \string\newpage}%
+  [\chemob@belGetName.\chemob@belimgExt]%
+  \addtocounter{chemob@belCounter}{1}}
+%% ----- Read and write end -----
 
 \endinput
 
