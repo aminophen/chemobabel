@@ -1,5 +1,5 @@
-chemobabel.sty
-==============
+chemobabel
+==========
 
 LaTeX package for generating chemical structural formula from ChemDraw files or SMILES notations using Open Babel
 
@@ -30,7 +30,7 @@ This work is based on a lot of resources published online:
 ### License
 
 This package is distributed under the BSD 2-Clause License.
-See license.txt.
+See [LICENSE](./LICENSE).
 
 ### Version History
 
