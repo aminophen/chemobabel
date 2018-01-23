@@ -25,13 +25,16 @@
 \RequirePackage{verbatim}
 \RequirePackage{graphicx}
 
+%% ----- External command execution -----
+\ifx\directlua\@undefined
+  \def\chemob@bel@exec#1{\immediate\write18{#1}}
+\else
+  \def\chemob@bel@exec#1{\directlua{os.execute[[#1]]}}
+\fi
+
 %% ----- Make a directory for images -----
 \newcommand\chemobabelimgdir{chemobabelimgdir}
-\@ifundefined{directlua}{%
-  \immediate\write18{mkdir \chemobabelimgdir}%
-}{%
-  \directlua{os.execute[[mkdir \chemobabelimgdir]]}%
-}
+\chemob@bel@exec{mkdir \chemobabelimgdir}
 
 %% ----- Definition of external commands -----
 \newcommand\smilesob@bel@obabelcmd[2]{obabel -:"#1" -O \smilesob@belGetName.svg #2}
@@ -77,17 +80,10 @@
 }
 \newcommand\@smilesobabel[2]{%
   \endgroup
-  \@ifundefined{directlua}{%
-    \immediate\write18{%
+  \chemob@bel@exec{%
     \smilesob@bel@obabelcmd{#1}{#2} 2>\smilesob@belGetName.log
     && \chemob@bel@svgtoimgcmd{\smilesob@belGetName}{\chemob@belimgExt} 2>>\smilesob@belGetName.log
     || rm -f \smilesob@belGetName.\chemob@belimgExt}%
-  }{%
-    \directlua{os.execute[[%
-    \smilesob@bel@obabelcmd{#1}{#2} 2>\smilesob@belGetName.log
-    && \chemob@bel@svgtoimgcmd{\smilesob@belGetName}{\chemob@belimgExt} 2>>\smilesob@belGetName.log
-    || rm -f \smilesob@belGetName.\chemob@belimgExt]]}%
-  }%
   \chemob@bel@common@maybeimg{\smilesobabel@next}{\smilesob@belGetName}{SMILES string}%
   \addtocounter{smilesob@belCounter}{1}% select next name
 }
@@ -113,17 +109,10 @@
   \IfFileExists{"#1"}{%
     % the file exists: start processing
     % (``#1'' can contain spaces, so ``"'' required)
-    \@ifundefined{directlua}{%
-      \immediate\write18{%
+    \chemob@bel@exec{%
       \chemob@bel@obabelcmd{#1}{#2} 2>\chemob@belGetName.log
       && \chemob@bel@svgtoimgcmd{\chemob@belGetName}{\chemob@belimgExt} 2>>\chemob@belGetName.log
       || rm -f \chemob@belGetName.\chemob@belimgExt}%
-    }{%
-      \directlua{os.execute[[%
-      \chemob@bel@obabelcmd{#1}{#2} 2>\chemob@belGetName.log
-      && \chemob@bel@svgtoimgcmd{\chemob@belGetName}{\chemob@belimgExt} 2>>\chemob@belGetName.log
-      || rm -f \chemob@belGetName.\chemob@belimgExt]]}%
-    }%
     \chemob@bel@common@maybeimg{\chemobabel@next}{\chemob@belGetName}{file ``#1''}%
   }{%
     % the file does not exist: show a std error
