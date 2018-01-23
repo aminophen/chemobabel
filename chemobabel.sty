@@ -1,8 +1,9 @@
 %
 % This is file `chemobabel.sty',
-% for generating chemical structural formulas using Open Babel and Inkscape.
+% for generating chemical structural formulas
+% using Open Babel and Inkscape.
 %
-% Copyright 2014-2016 Acetaminophen (Hironobu YAMASHITA)
+% Copyright 2014-2018 Acetaminophen (Hironobu YAMASHITA)
 %   Email   :  h.y.acetaminophen[a t]gmail.com
 %   GitHub  :  https://github.com/aminophen
 %   Blog    :  http://acetaminophen.hatenablog.com/
@@ -16,7 +17,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{chemobabel}
-  [2016/10/23 v0.9f Chemical structures with Open Babel]
+  [2018/01/23 v0.9g Chemical structures with Open Babel]
 
 %% Start of package main code
 %% Thanks: http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
@@ -38,6 +39,27 @@
 \newcommand\chemob@bel@inkscapecmd[2]{inkscape -f #1.svg --export-#2=#1.#2}
 \newcommand\chemob@bel@librsvgcmd[2]{rsvg-convert -f #2 -o #1.#2 #1.svg}
 
+%% ----- Common part of \smilesobabel and \chemobabel -----
+\def\chemob@bel@common@maybeimg#1#2#3{%
+  \IfFileExists{#2.\chemob@belimgExt}{% the image exists: include it
+    #1{#2.\chemob@belimgExt}%
+  }{% the image was not created - show a warning and a hint
+    \PackageWarning{chemobabel}{Processing of #3\space failed}%
+    \fbox{\begin{minipage}{0.9\textwidth}
+      Warning in chemobabel: #3\space was not processed.
+      Remember to run \texttt{latex} (\texttt{pdflatex}, \texttt{platex}, etc.)
+      with the \texttt{-shell-escape} option.\\
+      \IfFileExists{#2.log}{%
+        obabel log (might be empty):
+        \verbatiminput{#2.log}%
+      }{%
+        No log file.%
+      }%
+    \end{minipage}}%
+  }%
+}
+%% ----- Common part of \smilesobabel and \chemobabel end -----
+
 %% ----- Definition of \smilesobabel -----
 \newcounter{smilesob@belCounter}
 \setcounter{smilesob@belCounter}{1}
@@ -50,11 +72,8 @@
 \newcommand\smilesobabel[1][scale=1]{%
   \def\smilesobabel@next{\includegraphics[#1]}%
   \begingroup
-  \let\do\@makeother
-  \dospecials
-  \catcode`\{=1
-  \catcode`\}=2
-  \@smilesobabel
+    \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
+    \@smilesobabel
 }
 \newcommand\@smilesobabel[2]{%
   \endgroup
@@ -69,21 +88,7 @@
     && \chemob@bel@svgtoimgcmd{\smilesob@belGetName}{\chemob@belimgExt} 2>>\smilesob@belGetName.log
     || rm -f \smilesob@belGetName.\chemob@belimgExt]]}%
   }%
-  \IfFileExists{\smilesob@belGetName.\chemob@belimgExt}{% the image exists: include it
-    \smilesobabel@next{\smilesob@belGetName.\chemob@belimgExt}%
-  }{% the image was not created - show a warning and a hint
-    \PackageWarning{chemobabel}{Processing of SMILES string failed}%
-    \fbox{\begin{minipage}{0.9\textwidth}
-      Warning in chemobabel: SMILES string was not processed. Remember to run \texttt{latex}
-      (\texttt{pdflatex}, \texttt{platex}, etc.) with the \texttt{-shell-escape} option.\\
-      \IfFileExists{\smilesob@belGetName.log}{%
-        obabel log (might be empty):
-        \verbatiminput{\smilesob@belGetName.log}%
-      }{%
-        No log file.%
-      }%
-    \end{minipage}}%
-  }%
+  \chemob@bel@common@maybeimg{\smilesobabel@next}{\smilesob@belGetName}{SMILES string}%
   \addtocounter{smilesob@belCounter}{1}% select next name
 }
 %% ----- Definition of \smilesobabel end -----
@@ -100,15 +105,14 @@
 \newcommand\chemobabel[1][scale=1]{%
   \def\chemobabel@next{\includegraphics[#1]}%
   \begingroup
-  \let\do\@makeother
-  \dospecials
-  \catcode`\{=1
-  \catcode`\}=2
-  \@chemobabel
+    \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
+    \@chemobabel
 }
 \newcommand\@chemobabel[2]{%
   \endgroup
-  \IfFileExists{"#1"}{% the file exists: start processing (``#1'' can contain spaces, so ``"'' required)
+  \IfFileExists{"#1"}{%
+    % the file exists: start processing
+    % (``#1'' can contain spaces, so ``"'' required)
     \@ifundefined{directlua}{%
       \immediate\write18{%
       \chemob@bel@obabelcmd{#1}{#2} 2>\chemob@belGetName.log
@@ -120,22 +124,9 @@
       && \chemob@bel@svgtoimgcmd{\chemob@belGetName}{\chemob@belimgExt} 2>>\chemob@belGetName.log
       || rm -f \chemob@belGetName.\chemob@belimgExt]]}%
     }%
-    \IfFileExists{\chemob@belGetName.\chemob@belimgExt}{% the image exists: include it
-      \chemobabel@next{\chemob@belGetName.\chemob@belimgExt}%
-    }{% the image was not created - show a warning and a hint
-      \PackageWarning{chemobabel}{Processing of file ``#1'' failed}%
-      \fbox{\begin{minipage}{0.9\textwidth}
-        Warning in chemobabel: the file was not processed. Remember to run \texttt{latex}
-        (\texttt{pdflatex}, \texttt{platex}, etc.) with the \texttt{-shell-escape} option.\\
-        \IfFileExists{\chemob@belGetName.log}{%
-          obabel log (might be empty):
-          \verbatiminput{\chemob@belGetName.log}%
-        }{%
-          No log file.%
-        }%
-      \end{minipage}}%
-    }%
-  }{% the file does not exist: show a std error
+    \chemob@bel@common@maybeimg{\chemobabel@next}{\chemob@belGetName}{file ``#1''}%
+  }{%
+    % the file does not exist: show a std error
     \PackageError{chemobabel}{File ``#1'' not found}{}%
     \fbox{\begin{minipage}{0.9\textwidth}
       Error in chemobabel: the file ``#1'' does not exist.
