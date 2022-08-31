@@ -1,15 +1,12 @@
 %#! To typeset this document:
 % -----
-% First you should get ``pxjahyper.sty'' from CTAN (http://www.ctan.org/pkg/pxjahyper),
-% in order to prevent Japanese characters in bookmarks of PDF files from corruption.
-% Then typeset:
 %  $ platex -shell-escape chemobabel.tex (for three times: needed to get cross-references correct)
 %  $ dvipdfmx usage.tex
 % Some things to note:
 % - ``platex'' is NOT ``pdflatex''!
 %   (platex is an engine customized for typesetting Japanese LaTeX documents properly.)
 % - ``extractbb'' must be set as shell_escape_commands.
-%   (see http://oku.edu.mie-u.ac.jp/~okumura/texwiki/?PDF%E3%81%AE%E4%BD%9C%E3%82%8A%E6%96%B9#rf074b4b for detail)
+%   (default since TeX Live 2015)
 % -----
 % Other requirements (obabel and inkscape) are described in this document itself. See PDF version.
 %
@@ -17,21 +14,21 @@
 %% This document describes the usage of `chemobabel.sty',
 %% a LaTeX package for generating chemical structural formulas using Open Babel and Inkscape.
 %% 
-%% Copyright 2014-2016 Acetaminophen (Hironobu YAMASHITA)
+%% Copyright 2014-2022 Acetaminophen (Hironobu YAMASHITA)
 %%   Email   :  h.y.acetaminophen[a t]gmail.com
 %%   GitHub  :  https://github.com/aminophen
 %%   Blog    :  http://acetaminophen.hatenablog.com/
 %%   Twitter :  @aminophen
 %% 
 %
-\documentclass[12pt]{jsarticle}
+\documentclass[dvipdfmx,12pt]{jsarticle}
 \usepackage[deluxe,expert]{otf}
 \usepackage{newpxtext,newpxmath}
-\usepackage[dvipdfm,margin=20mm]{geometry}
+\usepackage[margin=20mm]{geometry}
 \usepackage[english]{babel}
-\usepackage[dvipdfmx]{graphicx}
-\usepackage{chemobabel}
-\usepackage[dvipdfmx,bookmarksnumbered=true,hidelinks,%
+\usepackage{graphicx}
+\usepackage[librsvg]{chemobabel}
+\usepackage[bookmarksnumbered=true,hidelinks,%
  pdftitle={User Manual for chemobabel.sty},pdfauthor={Hironobu Yamashita (Acetaminophen)},%
  pdfsubject={TeX \& LaTeX Advent Calendar 2014},%
  pdfkeywords={chemistry,open babel,chemdraw,smiles}]{hyperref}
