@@ -1,17 +1,20 @@
 chemobabel
 ==========
 
-LaTeX package for generating chemical structural formula from ChemDraw files or SMILES notations using Open Babel
+LaTeX package for generating chemical structural formula from
+ChemDraw files or SMILES notations using Open Babel.
 
-This package offers a new choice for chemists who need chemical structures in their LaTeX documents.
-With this package you can insert chemical structural formulas into your PDF files easily with the help of Open Babel and Inkscape.
+This package offers a new choice for chemists who need
+chemical structures in LaTeX documents.
+With this package you can insert chemical structural formulas
+into your PDF files easily with the help of Open Babel and Inkscape.
 
-Various chemical formats are allowed for input: for example, .cdx, .mol, .smi
+Various chemical formats are allowed for input,
+for example, `.cdx`, `.mol` and `.smi`.
 
 ### Package Contents
 
  - chemobabel.sty: Package itself
- - chemobabel-extract.tex: Macros for extracting \chemobabel and \smilesobabel commands
  - chemobabel.pdf: Basic usage (source: chemobabel.tex)
  - example-en.pdf: Examples in English (source: example-en.tex)
  - example-ja.pdf: Examples in Japanese (source: example-ja.tex)
@@ -20,7 +23,8 @@ Sample ChemDraw files and MDL Molfiles are also included.
 
 ### References
 
-See http://acetaminophen.hatenablog.com/entry/2014/12/08/053519 for detail. (Sorry in Japanese)
+See http://acetaminophen.hatenablog.com/entry/2014/12/08/053519
+for detail. (Sorry in Japanese)
 
 This work is based on a lot of resources published online:
   - Noel O'Boyle http://baoilleach.blogspot.jp/
@@ -34,21 +38,7 @@ See [LICENSE](./LICENSE).
 
 ### Version History
 
- - 2014-12-01 Version 0.1  (First commit)
- - 2014-12-02 Version 0.2  (Add a parameter to be passed to obabel; the number of parameters changed!)
- - 2014-12-07 Version 0.3  (Change name of package: chemobabel.sty; add \chemobabel command)
- - 2014-12-09 Version 0.4  (Fix a bug: extra blank spaces at the end of some lines are removed)
- - 2014-12-20 Version 0.5  (Add "extract" option)
- - 2015-06-29 Version 0.6  (Improve warning messages)
- - 2015-08-26 Version 0.7  (Solve `\catcode`-related problems)
- - 2015-08-27 Version 0.8  (Improve `\smilesobabel` a little)
- - 2015-08-28 Version 0.9  (Exclude e-TeX dependency in `\smilesobabel`)
- - 2015-08-29 Version 0.9a (Improve `\chemobabel` a little)
- - 2016-01-06 Version 0.9b (Support LuaTeX beta-0.85.0 or later)
- - 2016-02-09 Version 0.9c (Fix a bug; forgotten in Version 0.9b)
- - 2016-02-28 Version 0.9d (Add `eps` and `pdf` options; now dvips supported)
- - 2016-03-07 Version 0.9e (Add `librsvg` and `inkscape` options)
- - 2016-10-23 Version 0.9f (Incorporate `chemobabel-extract.tex` into main package)
+Please refer to the documentation.
 
 --------------------
 Hironobu YAMASHITA (aka. "Acetaminophen" or "@aminophen")
