@@ -17,7 +17,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{chemobabel}
-  [2022/09/11 v0.9h Chemical structures with Open Babel]
+  [2022/09/12 v0.9i Chemical structures with Open Babel]
 
 %% Start of package main code
 %% Thanks: http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
@@ -45,12 +45,19 @@
 % inkscape major version 1.0
 \newcommand\chemob@bel@inkscapecmd[2]{inkscape #1.svg --export-type=#2}
 %
+% librsvg
 \newcommand\chemob@bel@librsvgcmd[2]{rsvg-convert -f #2 -o #1.#2 #1.svg}
+%
+% crop PDF
+\newcommand\chemob@bel@pdfcropcmd[1]{pdfcrop #1.pdf}% -> #1-crop.pdf
+% crop EPS
+\newcommand\chemob@bel@epscropcmd[1]{ps2eps -f #1.eps}% -> #1.eps.eps
 
 %% ----- Common part of \smilesobabel and \chemobabel -----
 \def\chemob@bel@common@maybeimg#1#2#3{%
-  \IfFileExists{#2.\chemob@belimgExt}{% the image exists: include it
-    #1{#2.\chemob@belimgExt}%
+  \def\chemob@belImgName{#2\chemob@bel@maybecrop.\chemob@belimgExt}%
+  \IfFileExists{\chemob@belImgName}{% the image exists: include it
+    #1{\chemob@belImgName}%
   }{% the image was not created - show a warning and a hint
     \PackageWarning{chemobabel}{Processing of #3\space failed}%
     \fbox{\begin{minipage}{0.9\textwidth}
@@ -89,6 +96,7 @@
     \smilesob@bel@obabelcmd{#1}{#2} 2>\smilesob@belGetName.log
     && \chemob@bel@svgtoimgcmd{\smilesob@belGetName}{\chemob@belimgExt} 2>>\smilesob@belGetName.log
     || rm -f \smilesob@belGetName.\chemob@belimgExt}%
+  \chemob@bel@exec{\chemob@bel@cropcmd{\smilesob@belGetName}}%
   \chemob@bel@common@maybeimg{\smilesobabel@next}{\smilesob@belGetName}{SMILES string}%
   \addtocounter{smilesob@belCounter}{1}% select next name
 }
@@ -118,6 +126,7 @@
       \chemob@bel@obabelcmd{#1}{#2} 2>\chemob@belGetName.log
       && \chemob@bel@svgtoimgcmd{\chemob@belGetName}{\chemob@belimgExt} 2>>\chemob@belGetName.log
       || rm -f \chemob@belGetName.\chemob@belimgExt}%
+    \chemob@bel@exec{\chemob@bel@cropcmd{\chemob@belGetName}}%
     \chemob@bel@common@maybeimg{\chemobabel@next}{\chemob@belGetName}{file ``#1''}%
   }{%
     % the file does not exist: show a std error
@@ -136,8 +145,14 @@
 \chemob@bel@extractfalse
 \DeclareOption{extract}{\chemob@bel@extracttrue}
 % define the image extension
-\DeclareOption{pdf}{\def\chemob@belimgExt{pdf}}
-\DeclareOption{eps}{\def\chemob@belimgExt{eps}}
+\DeclareOption{pdf}{%
+  \def\chemob@belimgExt{pdf}%
+  \let\chemob@bel@cropcmd\chemob@bel@pdfcropcmd
+  \def\chemob@bel@maybecrop{-crop}}
+\DeclareOption{eps}{%
+  \def\chemob@belimgExt{eps}%
+  \let\chemob@bel@cropcmd\chemob@bel@epscropcmd
+  \def\chemob@bel@maybecrop{.eps}}
 % determine image conversion command
 \DeclareOption{inkscape-old}%
   {\def\chemob@bel@svgtoimgcmd{\chemob@bel@inkscapeoldcmd}}
@@ -145,6 +160,10 @@
   {\def\chemob@bel@svgtoimgcmd{\chemob@bel@inkscapecmd}}
 \DeclareOption{librsvg}%
   {\def\chemob@bel@svgtoimgcmd{\chemob@bel@librsvgcmd}}
+% crop image or not
+\DeclareOption{nocrop}{%
+  \let\chemob@bel@cropcmd\@gobble
+  \let\chemob@bel@maybecrop\@empty}
 % default settings
 \ExecuteOptions{pdf,inkscape}
 \ProcessOptions
