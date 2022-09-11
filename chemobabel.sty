@@ -3,7 +3,7 @@
 % for generating chemical structural formulas
 % using Open Babel and Inkscape.
 %
-% Copyright 2014-2018 Acetaminophen (Hironobu YAMASHITA)
+% Copyright 2014-2022 Acetaminophen (Hironobu YAMASHITA)
 %   Email   :  h.y.acetaminophen[a t]gmail.com
 %   GitHub  :  https://github.com/aminophen
 %   Blog    :  http://acetaminophen.hatenablog.com/
@@ -17,7 +17,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{chemobabel}
-  [2018/01/23 v0.9g Chemical structures with Open Babel]
+  [2022/09/11 v0.9h Chemical structures with Open Babel]
 
 %% Start of package main code
 %% Thanks: http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
@@ -39,7 +39,12 @@
 %% ----- Definition of external commands -----
 \newcommand\smilesob@bel@obabelcmd[2]{obabel -:"#1" -O \smilesob@belGetName.svg #2}
 \newcommand\chemob@bel@obabelcmd[2]{obabel "#1" -O \chemob@belGetName.svg #2}
-\newcommand\chemob@bel@inkscapecmd[2]{inkscape -f #1.svg --export-#2=#1.#2}
+%
+% inkscape 0.92 or earlier
+\newcommand\chemob@bel@inkscapeoldcmd[2]{inkscape -f #1.svg --export-#2=#1.#2}
+% inkscape major version 1.0
+\newcommand\chemob@bel@inkscapecmd[2]{inkscape #1.svg --export-type=#2}
+%
 \newcommand\chemob@bel@librsvgcmd[2]{rsvg-convert -f #2 -o #1.#2 #1.svg}
 
 %% ----- Common part of \smilesobabel and \chemobabel -----
@@ -134,8 +139,12 @@
 \DeclareOption{pdf}{\def\chemob@belimgExt{pdf}}
 \DeclareOption{eps}{\def\chemob@belimgExt{eps}}
 % determine image conversion command
-\DeclareOption{inkscape}{\def\chemob@bel@svgtoimgcmd{\chemob@bel@inkscapecmd}}
-\DeclareOption{librsvg}{\def\chemob@bel@svgtoimgcmd{\chemob@bel@librsvgcmd}}
+\DeclareOption{inkscape-old}%
+  {\def\chemob@bel@svgtoimgcmd{\chemob@bel@inkscapeoldcmd}}
+\DeclareOption{inkscape}%
+  {\def\chemob@bel@svgtoimgcmd{\chemob@bel@inkscapecmd}}
+\DeclareOption{librsvg}%
+  {\def\chemob@bel@svgtoimgcmd{\chemob@bel@librsvgcmd}}
 % default settings
 \ExecuteOptions{pdf,inkscape}
 \ProcessOptions
