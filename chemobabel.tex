@@ -1,17 +1,4 @@
-%#! To typeset this document:
-% -----
-%  $ platex -shell-escape chemobabel.tex
-%    (for three times: needed to get cross-references correct)
-%  $ dvipdfmx usage.tex
-% Some things to note:
-% - ``platex'' is NOT ``pdflatex''!
-%    (platex is a Japanese LaTeX; available since TeX Live 2010)
-% - ``extractbb'' must be set as shell_escape_commands.
-%    (default since TeX Live 2015)
-% -----
-% Other requirements (obabel and inkscape) are
-% described in this document itself. See PDF version.
-%
+%#!make chemobabel.pdf
 %% 
 %% This document describes the usage of `chemobabel.sty',
 %% a LaTeX package for generating chemical structural formulas
@@ -24,8 +11,7 @@
 %%   Twitter :  @aminophen
 %% 
 %
-\documentclass[dvipdfmx,12pt]{jsarticle}
-\usepackage[deluxe,expert]{otf}
+\documentclass[12pt]{ltjsarticle}
 \usepackage{newpxtext,newpxmath}
 \usepackage[margin=20mm]{geometry}
 \usepackage[english]{babel}
@@ -36,7 +22,6 @@
  pdfauthor={Hironobu Yamashita (Acetaminophen)},%
  pdfsubject={TeX \& LaTeX Advent Calendar 2014},%
  pdfkeywords={chemistry,open babel,chemdraw,smiles}]{hyperref}
-\usepackage{pxjahyper}
 \usepackage{footnotebackref}
 % --- Change the style of captions
 % --- (Japanese jsarticle style => English style)
