@@ -1,0 +1,35 @@
+%#!pdflatex
+\documentclass{article}
+\usepackage[margin=10mm]{geometry}
+\usepackage{graphicx}
+\begin{document}
+\centering
+
+\makeatletter
+\@tempcnta=0
+\loop\ifnum\@tempcnta<12\relax
+  \advance\@tempcnta\@ne
+  \texttt{[chemobabelimg\the\@tempcnta]}\par
+  ob231mac:\par
+  \includegraphics[height=8cm]{ob231mac+librsvg/chemobabelimg\the\@tempcnta.pdf}\par
+  ob232win:\par
+  \includegraphics[height=8cm]{ob232win+librsvg/chemobabelimg\the\@tempcnta.pdf}\par
+  ob311mac:\par
+  \includegraphics[height=8cm]{ob311mac+librsvg/chemobabelimg\the\@tempcnta.pdf}\par
+  \newpage
+\repeat
+\@tempcnta=0
+\loop\ifnum\@tempcnta<27\relax
+  \advance\@tempcnta\@ne
+  \texttt{[smilesobabelimg\the\@tempcnta]}\par
+  ob231mac:\par
+  \includegraphics[height=8cm]{ob231mac+librsvg/smilesobabelimg\the\@tempcnta.pdf}\par
+  ob232win:\par
+  \includegraphics[height=8cm]{ob232win+librsvg/smilesobabelimg\the\@tempcnta.pdf}\par
+  ob311mac:\par
+  \includegraphics[height=8cm]{ob311mac+librsvg/smilesobabelimg\the\@tempcnta.pdf}\par
+  \newpage
+\repeat
+\makeatother
+
+\end{document}

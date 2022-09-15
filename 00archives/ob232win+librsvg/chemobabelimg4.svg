@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cml="http://www.xml-cml.org/schema" width="200" height="253.205" x="0" y="0" font-family="sans-serif" stroke="rgb(0,0,0)" stroke-width="1"  stroke-linecap="round">
+<rect x="0%" y="0%" width="100%" height="100%" stroke-width="0" fill="rgb(255,255,255)"  />
+<line x1="146.5" y1="51.3" x2="160.0" y2="74.6" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="140.0" y1="109.3" x2="160.0" y2="74.6" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="140.0" y1="178.6" x2="153.5" y2="201.9" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="100.0" y1="178.6" x2="86.5" y2="201.9" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="80.0" y1="143.9" x2="53.0" y2="143.9" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="100.0" y1="109.3" x2="86.5" y2="85.9" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="140.0" y1="109.3" x2="153.5" y2="132.7" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="153.5" y1="155.2" x2="140.0" y2="178.6" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="140.0" y1="178.6" x2="100.0" y2="178.6" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="100.0" y1="178.6" x2="80.0" y2="143.9" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="80.0" y1="143.9" x2="100.0" y2="109.3" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<line x1="100.0" y1="109.3" x2="140.0" y2="109.3" stroke="rgb(0,0,0)"  stroke-width="1.0"/>
+<text x="121.999992" y="48.000000" fill="rgb(255,12,12)"  stroke="rgb(255,12,12)" stroke-width="1" font-size="16" >HO</text>
+<text x="153.999994" y="151.923068" fill="rgb(255,12,12)"  stroke="rgb(255,12,12)" stroke-width="1" font-size="16" >O</text>
+<text x="153.999994" y="221.205099" fill="rgb(255,12,12)"  stroke="rgb(255,12,12)" stroke-width="1" font-size="16" >OH</text>
+<text x="62.000005" y="221.205099" fill="rgb(255,12,12)"  stroke="rgb(255,12,12)" stroke-width="1" font-size="16" >HO</text>
+<text x="22.000000" y="151.923068" fill="rgb(255,12,12)"  stroke="rgb(255,12,12)" stroke-width="1" font-size="16" >HO</text>
+<text x="62.000005" y="82.641036" fill="rgb(255,12,12)"  stroke="rgb(255,12,12)" stroke-width="1" font-size="16" >HO</text>
+<text font-size="18.000000" fill ="black" font-family="sans-serif"
+x="10.000000" y="20.000000" >draw/Glucose.cdx</text>
+<title>draw/Glucose.cdx - OBDepict</title>
+</svg>
