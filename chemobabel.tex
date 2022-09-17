@@ -1,15 +1,15 @@
 %#!make chemobabel.pdf
-%% 
+%%
 %% This document describes the usage of `chemobabel.sty',
 %% a LaTeX package for generating chemical structural formulas
 %% using Open Babel and Inkscape.
-%% 
+%%
 %% Copyright 2014-2022 Acetaminophen (Hironobu YAMASHITA)
 %%   Email   :  h.y.acetaminophen[a t]gmail.com
 %%   GitHub  :  https://github.com/aminophen
 %%   Blog    :  http://acetaminophen.hatenablog.com/
 %%   Twitter :  @aminophen
-%% 
+%%
 %
 \documentclass[12pt]{ltjsarticle}
 \usepackage{newpxtext,newpxmath}
@@ -67,30 +67,30 @@ The formulas below are generated using this method. \\
 
 \begin{figure}[ht]
   \centering
-  \chemobabel[scale=0.5]{draw/Firefly luciferin.mol}{}
-  \chemobabel[scale=0.27]{draw/Brevetoxin A.mol}{}
+  \chemobabel[width=55mm]{draw/Firefly luciferin.mol}{}
+  \chemobabel[width=64mm]{draw/Brevetoxin A.mol}{}
   \caption{Firefly luciferin \& Brevetoxin A (from MDL Molfiles)}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \chemobabel[scale=0.5]{draw/ATP.cdx}{}
-  \chemobabel[scale=0.5]{draw/Glucose.cdx}{}
+  \chemobabel[width=70mm]{draw/ATP.cdx}{}
+  \chemobabel[width=25mm]{draw/Glucose.cdx}{}
   \caption{ATP (Adenosine triphosphate) \& Glucose (from ChemDraw files)}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[scale=0.6]{CCO}{}
-  \smilesobabel[scale=0.6]{CC(C(=O)O)N}{}
-  \smilesobabel[scale=0.5]{C1[C@H](C)C[C@@H](O)C1}{}
+  \smilesobabel[width=24mm]{CCO}{}
+  \smilesobabel[width=30mm]{CC(C(=O)O)N}{}
+  \smilesobabel[width=25mm]{C1[C@H](C)C[C@@H](O)C1}{}
   \caption{Ethanol, Alanine \& (1\textit{S},3\textit{S})-3-Methylcyclopentanol (from SMILES notations)}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[scale=0.5]{CC(=O)Nc1ccc(cc1)O}{}
-  \smilesobabel[scale=0.5]{C([C@@H]1[C@H]([C@@H]([C@H]([C@H](O1)O)O)O)O)O}{}
+  \smilesobabel[width=25mm]{CC(=O)Nc1ccc(cc1)O}{}
+  \smilesobabel[width=30mm]{C([C@@H]1[C@H]([C@@H]([C@H]([C@H](O1)O)O)O)O)O}{}
   \caption{Acetaminophen (Paracetamol) \& $\alpha$-\textsc{d}-Glucose (from SMILES notations)}
 \end{figure}
 
@@ -305,8 +305,8 @@ Use \verb|\chemobabel| command as follows\footnote{I put original files
 in a subdirectory \texttt{draw}, so added \texttt{draw/} before the actual
 filename. Of course you can put in the same directory with your \LaTeX\ file.}:
 \begin{verbatim}
-\chemobabel[scale=0.4]{draw/ATP.cdx}{}
-\chemobabel[scale=0.4]{draw/Brevetoxin A.mol}{}
+\chemobabel[width=56mm]{draw/ATP.cdx}{}
+\chemobabel[width=96mm]{draw/Brevetoxin A.mol}{}
 \end{verbatim}
 and typeset with \verb|-shell-escape| option:
 \begin{verbatim}
@@ -316,8 +316,8 @@ You will see in \verb|chemobabelimgdir| subdirectory ``chemobabelimg[NUM].pdf'',
 and output file test.pdf will be:
 \begin{figure}[h]
   \centering
-  \chemobabel[scale=0.4]{draw/ATP.cdx}{} \\
-  \chemobabel[scale=0.4]{draw/Brevetoxin A.mol}{}
+  \chemobabel[width=56mm]{draw/ATP.cdx}{} \\
+  \chemobabel[width=96mm]{draw/Brevetoxin A.mol}{}
 \end{figure}
 
 \verb|ATP.cdx| is the file with chemical structural formula of
@@ -347,7 +347,7 @@ converted into structural formulas.
 Use \verb|\smilesobabel| command as follows:
 \begin{verbatim}
 \smilesobabel{CCO}{}
-\smilesobabel[scale=0.7]{CC(=O)Nc1ccc(cc1)O}{}
+\smilesobabel[width=35mm]{CC(=O)Nc1ccc(cc1)O}{}
 \end{verbatim}
 and typeset with \verb|-shell-escape| option:
 \begin{verbatim}
@@ -355,7 +355,7 @@ $ pdflatex -shell-escape test.tex
 \end{verbatim}
 This time you will get ``smilesobabelimg[NUM].pdf'' and ``test.pdf'': \\
 \smilesobabel{CCO}{}
-\smilesobabel[scale=0.7]{CC(=O)Nc1ccc(cc1)O}{} \\
+\smilesobabel[width=35mm]{CC(=O)Nc1ccc(cc1)O}{} \\
 \verb|CCO| is the SMILES notation of ethanol, and
 \verb|CC(=O)Nc1ccc(cc1)O| is that of acetaminophen (paracetamol).
 
@@ -371,11 +371,11 @@ such as a backslash (\verb|\|) and a percent symbol (\verb|%|).
 Similarly, parameters of \verb|\chemobabel| can also contain
 these special characters.
 \begin{verbatim}
-\smilesobabel[scale=0.7]{Cl/C=C/Br}{}
-\smilesobabel[scale=0.7]{Cl/C=C\Br}{}
+\smilesobabel[width=28mm]{Cl/C=C/Br}{}
+\smilesobabel[width=28mm]{Cl/C=C\Br}{}
 \end{verbatim}
-\smilesobabel[scale=0.7]{Cl/C=C/Br}{}
-\smilesobabel[scale=0.7]{Cl/C=C\Br}{}
+\smilesobabel[width=28mm]{Cl/C=C/Br}{}
+\smilesobabel[width=28mm]{Cl/C=C\Br}{}
 
 \noindent \textbf{Notes for users of earlier versions} ($\le$ \textsf{chemobabel} v0.6 [2015/06/29])
 
@@ -404,8 +404,8 @@ Note that the undesirable workaround (like changing \verb|\catcode| inside
 と宣言して \textsf{chemobabel} パッケージを読み込みます。
 \verb|\chemobabel| コマンドは
 \begin{verbatim}
-\chemobabel[scale=0.4]{draw/ATP.cdx}{}
-\chemobabel[scale=0.4]{draw/Brevetoxin A.mol}{}
+\chemobabel[width=56mm]{draw/ATP.cdx}{}
+\chemobabel[width=96mm]{draw/Brevetoxin A.mol}{}
 \end{verbatim}
 のようにして使います\footnote{ここでは元のファイルを\texttt{draw}という
 サブディレクトリに置いたので，ファイル名の前に \texttt{draw/} を付けました。
@@ -422,8 +422,8 @@ $ dvipdfmx test.dvi
 と実行すると，出力される「test.pdf」は以下のようになります：
 \begin{figure}[h]
   \centering
-  \chemobabel[scale=0.4]{draw/ATP.cdx}{} \\
-  \chemobabel[scale=0.4]{draw/Brevetoxin A.mol}{}
+  \chemobabel[width=56mm]{draw/ATP.cdx}{} \\
+  \chemobabel[width=96mm]{draw/Brevetoxin A.mol}{}
 \end{figure}
 
 \verb|ATP.cdx| はATP（アデノシン三リン酸）の構造式を
@@ -452,7 +452,7 @@ ChemDrawで描画したファイル，\verb|Brevetoxin A.mol| は
 \verb|\smilesobabel| コマンドを以下のようにして使います：
 \begin{verbatim}
 \smilesobabel{CCO}{}
-\smilesobabel[scale=0.65]{CC(=O)Nc1ccc(cc1)O}{}
+\smilesobabel[width=35mm]{CC(=O)Nc1ccc(cc1)O}{}
 \end{verbatim}
 これを \verb|-shell-escape| オプションを付けてタイプセットします。
 \begin{verbatim}
@@ -462,7 +462,7 @@ $ dvipdfmx test.dvi
 すると今度は「smilesobabelimg[NUM].pdf」のようなファイルが生成し，
 出力される「test.pdf」は以下のようになります： \\
 \smilesobabel{CCO}{}
-\smilesobabel[scale=0.65]{CC(=O)Nc1ccc(cc1)O}{} \\
+\smilesobabel[width=35mm]{CC(=O)Nc1ccc(cc1)O}{} \\
 \verb|CCO| はエタノールのSMILES表記，
 \verb|CC(=O)Nc1ccc(cc1)O| はアセトアミノフェンのSMILES表記です。
 
@@ -478,11 +478,11 @@ $ dvipdfmx test.dvi
 なお，\verb|\chemobabel| の引数についても同様に，
 特別な文字を含むことができる設計になっています。
 \begin{verbatim}
-\smilesobabel[scale=0.7]{Cl/C=C/Br}{}
-\smilesobabel[scale=0.7]{Cl/C=C\Br}{}
+\smilesobabel[width=28mm]{Cl/C=C/Br}{}
+\smilesobabel[width=28mm]{Cl/C=C\Br}{}
 \end{verbatim}
-\smilesobabel[scale=0.7]{Cl/C=C/Br}{}
-\smilesobabel[scale=0.7]{Cl/C=C\Br}{}
+\smilesobabel[width=28mm]{Cl/C=C/Br}{}
+\smilesobabel[width=28mm]{Cl/C=C\Br}{}
 
 \noindent \textbf{旧バージョンのユーザに対する注意} ($\le$ \textsf{chemobabel} v0.6 [2015/06/29])
 
@@ -667,7 +667,7 @@ Here I will introduce some examples.
 \begin{itemize}
 \item
 \begin{verbatim}
-\smilesobabel[scale=0.6]{CC(=O)Nc1ccc(cc1)O}{-xa}
+\smilesobabel{CC(=O)Nc1ccc(cc1)O}{-xa}
 \end{verbatim}
 executes a command which gives a formula with all carbon atoms shown:
 \begin{verbatim}
@@ -675,7 +675,7 @@ $ obabel -:"CC(=O)Nc1ccc(cc1)O" -O smilesobabelimg[NUM].svg -xa
 \end{verbatim}
 \item
 \begin{verbatim}
-\smilesobabel[scale=0.6]{CC(=O)Nc1ccc(cc1)O}{-xu -xC}
+\smilesobabel{CC(=O)Nc1ccc(cc1)O}{-xu -xC}
 \end{verbatim}
 gives one without element-specific atom coloring or terminal carbon atoms:
 \begin{verbatim}
@@ -683,7 +683,7 @@ $ obabel -:"CC(=O)Nc1ccc(cc1)O" -O smilesobabelimg[NUM].svg -xu -xC
 \end{verbatim}
 \item
 \begin{verbatim}
-\chemobabel[scale=0.6]{ATP.cdx}{-xd}
+\chemobabel{ATP.cdx}{-xd}
 \end{verbatim}
 You can add \texttt{-xd} option to remove filenames from ChemDraw figures.
 \begin{verbatim}
@@ -699,7 +699,7 @@ $ obabel -:"ATP.cdx" -O chemobabelimg[NUM].svg -xd
 \begin{itemize}
 \item
 \begin{verbatim}
-\smilesobabel[scale=0.6]{CC(=O)Nc1ccc(cc1)O}{-xa}
+\smilesobabel{CC(=O)Nc1ccc(cc1)O}{-xa}
 \end{verbatim}
 構造式中の全ての炭素原子を省略せずに描画するコマンドを実行します：
 \begin{verbatim}
@@ -707,7 +707,7 @@ $ obabel -:"CC(=O)Nc1ccc(cc1)O" -O smilesobabelimg[NUM].svg -xa
 \end{verbatim}
 \item
 \begin{verbatim}
-\smilesobabel[scale=0.6]{CC(=O)Nc1ccc(cc1)O}{-xu -xC}
+\smilesobabel{CC(=O)Nc1ccc(cc1)O}{-xu -xC}
 \end{verbatim}
 元素の着色を行わず，末端の炭素原子を明示しない構造式を出力します：
 \begin{verbatim}
@@ -715,7 +715,7 @@ $ obabel -:"CC(=O)Nc1ccc(cc1)O" -O smilesobabelimg[NUM].svg -xu -xC
 \end{verbatim}
 \item
 \begin{verbatim}
-\chemobabel[scale=0.6]{ATP.cdx}{-xd}
+\chemobabel{ATP.cdx}{-xd}
 \end{verbatim}
 ChemDraw の図からファイル名を取り除くには，\texttt{-xd} オプションを付けます：
 \begin{verbatim}
@@ -725,50 +725,50 @@ $ obabel -:"ATP.cdx" -O chemobabelimg[NUM].svg -xd
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[scale=0.6]{CC(=O)Nc1ccc(cc1)O}{}
-  \smilesobabel[scale=0.6]{CC(=O)Nc1ccc(cc1)O}{-xa}
-  \smilesobabel[scale=0.6]{CC(=O)Nc1ccc(cc1)O}{-xu}
+  \smilesobabel[width=30mm]{CC(=O)Nc1ccc(cc1)O}{}
+  \smilesobabel[width=30mm]{CC(=O)Nc1ccc(cc1)O}{-xa}
+  \smilesobabel[width=30mm]{CC(=O)Nc1ccc(cc1)O}{-xu}
   \caption{Acetaminophen (Paracetamol): Nothing, \texttt{-xa}, \texttt{-xu}}
   SMILES: \verb|CC(=O)Nc1ccc(cc1)O|
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[scale=0.6]{C1[C@H](C)C[C@@H](O)C1}{}
-  \smilesobabel[scale=0.6]{C1[C@H](C)C[C@@H](O)C1}{-xC}
-  \smilesobabel[scale=0.6]{C1[C@H](C)C[C@@H](O)C1}{-xt}
+  \smilesobabel[width=30mm]{C1[C@H](C)C[C@@H](O)C1}{}
+  \smilesobabel[width=30mm]{C1[C@H](C)C[C@@H](O)C1}{-xC}
+  \smilesobabel[width=30mm]{C1[C@H](C)C[C@@H](O)C1}{-xt}
   \caption{(1\textit{S},3\textit{S})-3-Methylcyclopentanol: Nothing, \texttt{-xC}, \texttt{-xt}}
   SMILES: \verb|C1[C@H](C)C[C@@H](O)C1|
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[scale=0.5]{CCc1cccc(c1)C(=O)Cl}{}
-  \smilesobabel[scale=0.5]{CCc1cccc(c1)C(=O)Cl}{-xa -xu}
-  \smilesobabel[scale=0.5]{CCc1cccc(c1)C(=O)Cl}{-xu -xC}
+  \smilesobabel[width=35mm]{CCc1cccc(c1)C(=O)Cl}{}
+  \smilesobabel[width=35mm]{CCc1cccc(c1)C(=O)Cl}{-xa -xu}
+  \smilesobabel[width=35mm]{CCc1cccc(c1)C(=O)Cl}{-xu -xC}
   \caption{3-Ethylbenzoyl chloride: Nothing, \texttt{-xa -xu}, \texttt{-xu -xC}}
   SMILES: \verb|CCc1cccc(c1)C(=O)Cl|
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[scale=0.6]{CCc1cccc(c1)C(=O)Cl}{--highlight "cC=O blue"}
-  \smilesobabel[scale=0.6]{CCc1cccc(c1)C(=O)Cl}{-xA --genalias}
+  \smilesobabel[width=42mm]{CCc1cccc(c1)C(=O)Cl}{--highlight "cC=O blue"}
+  \smilesobabel[width=42mm]{CCc1cccc(c1)C(=O)Cl}{-xA --genalias}
   \caption{3-Ethylbenzoyl chloride: \texttt{--highlight "cC=O blue"}, \texttt{-xA --genalias}}
   SMILES: \verb|CCc1cccc(c1)C(=O)Cl|
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \chemobabel[scale=0.5]{draw/Firefly luciferin.mol}{}
-  \chemobabel[scale=0.5]{draw/Firefly luciferin.mol}{-xa}
+  \chemobabel[width=55mm]{draw/Firefly luciferin.mol}{}
+  \chemobabel[width=55mm]{draw/Firefly luciferin.mol}{-xa}
   \caption{Firefly luciferin (from MDL Molfiles): Nothing, \texttt{-xa}}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \chemobabel[scale=0.4]{draw/ATP.cdx}{}
-  \chemobabel[scale=0.4]{draw/ATP.cdx}{-xd}
+  \chemobabel[width=56mm]{draw/ATP.cdx}{}
+  \chemobabel[width=56mm]{draw/ATP.cdx}{-xd}
   \caption{ATP (from ChemDraw files): Nothing, \texttt{-xd}}
 \end{figure}
 
@@ -795,14 +795,14 @@ Open Babel can generate more complex structural formulas from SMILES notations.
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[scale=0.5]{CN1CC[C@]23c4c5ccc(c4O[C@H]2[C@H](C=C[C@H]3[C@H]1C5)O)O}{}
+  \smilesobabel[width=35mm]{CN1CC[C@]23c4c5ccc(c4O[C@H]2[C@H](C=C[C@H]3[C@H]1C5)O)O}{}
   \caption{($-$)-Morphine}
   SMILES: \verb|CN1CC[C@]23c4c5ccc(c4O[C@H]2[C@H](C=C[C@H]3[C@H]1C5)O)O|
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[scale=0.4]{C[C@@H]1C[C@H]2[C@@H](CC(=O)O2)O[C@H]3C[C@@H]4[C@H](C[C@@H]([C@@H]5[C@@H](O4)C/C=C\C[C@@H]6[C@@H](O5)C/C=C\[C@@H]7[C@@H](O6)CCC[C@@H]8[C@@](O7)(C[C@@H]9[C@@H](O8)C[C@@H]2[C@@H](O9)[C@H](C[C@H](O2)CC(=C)C=O)O)C)C)O[C@@]3(C1)C}{}
+  \smilesobabel[width=96mm]{C[C@@H]1C[C@H]2[C@@H](CC(=O)O2)O[C@H]3C[C@@H]4[C@H](C[C@@H]([C@@H]5[C@@H](O4)C/C=C\C[C@@H]6[C@@H](O5)C/C=C\[C@@H]7[C@@H](O6)CCC[C@@H]8[C@@](O7)(C[C@@H]9[C@@H](O8)C[C@@H]2[C@@H](O9)[C@H](C[C@H](O2)CC(=C)C=O)O)C)C)O[C@@]3(C1)C}{}
   \caption{Brevetoxin A}
   SMILES (Sorry but too long): \verb|C[C@@H]1C[C@H]2[C@@H](CC(=O)O2)O[C@H]3C[C@@H]4[C@H](C[C@@H]([C@@H]5[C@@H](O4)C/C=C\C[C@@H]6[C@@H](O5)C/C=C\[C@@H]7[C@@H](O6)CCC[C@@H]8[C@@](O7)(C[C@@H]9[C@@H](O8)C[C@@H]2[C@@H](O9)[C@H](C[C@H](O2)CC(=C)C=O)O)C)C)O[C@@]3(C1)C|
 \end{figure}
@@ -846,9 +846,10 @@ Here we can see the formula generated from a SMILES notation lacks one double bo
   \centering
   \includegraphics[scale=0.6]{figures/Exact-FireflyLuciferin.pdf}
   \caption{Firefly luciferin: exact structure from ChemSpider ID 4588411}
-  \smilesobabel[scale=0.6]{C1[C@@H](N/C(=c\2/nc3c(=CC(=O)C=C3)s2)/S1)C(=O)O}{}
-%  \includegraphics[scale=0.6]{Win232-FireflyLuciferin.pdf}
+  \includegraphics[scale=0.6]{figures/Win232-FireflyLuciferin.pdf}
   \caption{Firefly luciferin?: output from Open Babel for Win 2.3.2}
+  \smilesobabel[width=66mm]{C1[C@@H](N/C(=c\2/nc3c(=CC(=O)C=C3)s2)/S1)C(=O)O}{}
+  \caption{Firefly luciferin?: output from current Open Babel}
   SMILES: \verb|C1[C@@H](N/C(=c\2/nc3c(=CC(=O)C=C3)s2)/S1)C(=O)O|
 \end{figure}
 
