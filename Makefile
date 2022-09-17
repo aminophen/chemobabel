@@ -1,10 +1,12 @@
+DOCTARGET = chemobabel-doc-en chemobabel-doc-ja \
+	chemobabel-example-en chemobabel-example-ja
+PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
 KANJI = -kanji=utf8
 #FONTMAP = -f ipaex.map -f ptex-ipaex.map
 FONTMAP = -f haranoaji.map -f ptex-haranoaji.map
 TEXMF = $(shell kpsewhich -var-value=TEXMFHOME)
 
-all: chemobabel-doc-en.pdf chemobabel-doc-ja.pdf \
-	chemobabel-example-en.pdf chemobabel-example-ja.pdf
+all: $(PDFTARGET)
 
 chemobabel-doc-en.tex: chemobabel.dtx
 	lualatex chemobabel.ins
@@ -36,4 +38,5 @@ install:
 	mkdir -p ${TEXMF}/tex/latex/chemobabel
 	cp ./*.sty ${TEXMF}/tex/latex/chemobabel/
 clean:
-	rm -f *.dvi *.pdf
+	rm -f *.dvi $(PDFTARGET)
+	rm -rf chemobabelimgdir
