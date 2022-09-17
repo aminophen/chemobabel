@@ -12,16 +12,26 @@ into your PDF files easily with the help of Open Babel and Inkscape.
 Various chemical formats are allowed for input,
 for example, `.cdx`, `.mol` and `.smi`.
 
-### Package Contents
+## Package Contents
 
  - chemobabel.sty: Package itself
- - chemobabel.pdf: Basic usage (source: chemobabel.tex)
- - example-en.pdf: Examples in English (source: example-en.tex)
- - example-ja.pdf: Examples in Japanese (source: example-ja.tex)
+ - chemobabel-{en,ja}.pdf: Basic usage (source: chemobabel.dtx)
+ - chemobabel-example-en.{tex,pdf}: Examples in English
+ - chemobabel-example-ja.{tex,pdf}: Examples in Japanese
 
 Sample ChemDraw files and MDL Molfiles are also included.
 
-### References
+## License
+
+This package is distributed under the BSD 2-Clause License.
+See [LICENSE](./LICENSE).
+
+## Repository
+
+The bundle is maintained on GitHub:
+  https://github.com/aminophen/chemobabel
+
+## References
 
 See http://acetaminophen.hatenablog.com/entry/2014/12/08/053519
 for detail. (Sorry in Japanese)
@@ -31,14 +41,9 @@ This work is based on a lot of resources published online:
   - Jakob Lykke Andersen http://imada.sdu.dk/~jlandersen/
   - TeX Forum http://oku.edu.mie-u.ac.jp/tex/
 
-### License
+## Release Date
 
-This package is distributed under the BSD 2-Clause License.
-See [LICENSE](./LICENSE).
-
-### Version History
-
-Please refer to the documentation.
+$RELEASEDATE
 
 --------------------
 Hironobu YAMASHITA (aka. "Acetaminophen" or "@aminophen")
