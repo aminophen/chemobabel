@@ -167,3 +167,5 @@ tests/*.pdf
 
 # chemobabel specific
 chemobabelimgdir/*
+chemobabel-doc-en.tex
+chemobabel-doc-ja.tex

@@ -3,12 +3,21 @@ KANJI = -kanji=utf8
 FONTMAP = -f haranoaji.map -f ptex-haranoaji.map
 TEXMF = $(shell kpsewhich -var-value=TEXMFHOME)
 
-all: chemobabel.pdf chemobabel-example-en.pdf chemobabel-example-ja.pdf
+all: chemobabel-doc-en.pdf chemobabel-doc-ja.pdf \
+	chemobabel-example-en.pdf chemobabel-example-ja.pdf
 
-chemobabel.pdf: chemobabel.sty chemobabel.tex
-	lualatex -shell-escape chemobabel.tex
-	lualatex -shell-escape chemobabel.tex
-	lualatex -shell-escape chemobabel.tex
+chemobabel-doc-en.tex: chemobabel.dtx
+	lualatex chemobabel.ins
+chemobabel-doc-ja.tex: chemobabel.dtx
+	lualatex chemobabel.ins
+chemobabel-doc-en.pdf: chemobabel.sty chemobabel-doc-en.tex
+	lualatex -shell-escape chemobabel-doc-en.tex
+	lualatex -shell-escape chemobabel-doc-en.tex
+	lualatex -shell-escape chemobabel-doc-en.tex
+chemobabel-doc-ja.pdf: chemobabel.sty chemobabel-doc-ja.tex
+	lualatex -shell-escape chemobabel-doc-ja.tex
+	lualatex -shell-escape chemobabel-doc-ja.tex
+	lualatex -shell-escape chemobabel-doc-ja.tex
 chemobabel-example-en.pdf: chemobabel.sty chemobabel-example-en.tex
 	pdflatex -shell-escape chemobabel-example-en.tex
 	pdflatex -shell-escape chemobabel-example-en.tex
