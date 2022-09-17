@@ -624,6 +624,23 @@ The default behavior is equivalent to the \verb|pdf| and \verb|inkscape| options
 \usepackage[pdf,inkscape]{chemobabel}
 \end{verbatim}
 
+%<*en>
+Moreover, Open Babel v2.4.0 or later versions generate images with
+a rather large margin. To avoid this, the images are cropped
+using \verb|pdfcrop| for PDF or \verb|ps2eps| for EPS
+($\ge$ \textsf{chemobabel} v0.9i [2022/09/12]).
+If you want to disable this cropping, please add \verb|nocrop| option:
+%</en>
+%<*ja>
+さらに，Open Babel v2.4.0以降で生成される画像はデフォルトで余白が大きいため，
+\verb|pdfcrop|（PDFの場合）あるいは\verb|ps2eps|（EPSの場合）で
+クロップしています（\textsf{chemobabel} v0.9i [2022/09/12] 以降）。
+これをやめたい場合は \verb|nocrop| オプションを指定してください。
+%</ja>
+\begin{verbatim}
+\usepackage[nocrop]{chemobabel}
+\end{verbatim}
+
 \clearpage
 
 %<*en>
@@ -1142,6 +1159,7 @@ installed or not, before running programs.
 2016/10/23 v0.9f & Incorporate \verb|extract| option into main package. \\
 2018/01/23 v0.9g & Minor refactor of code. \\
 2022/09/11 v0.9h & Support Inkscape version 1.0 command line syntax. \\
+2022/09/12 v0.9i & Crop images before inclusion, add \verb|nocrop| option. \\
 \end{tabular}
 \end{table}
 
