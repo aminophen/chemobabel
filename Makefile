@@ -1,5 +1,5 @@
-DOCTARGET = chemobabel-doc-en chemobabel-doc-ja \
-	chemobabel-example-en chemobabel-example-ja
+DOCTARGET = chemobabel-en chemobabel-ja \
+	example-en example-ja
 PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
 KANJI = -kanji=utf8
 #FONTMAP = -f ipaex.map -f ptex-ipaex.map
@@ -8,25 +8,25 @@ TEXMF = $(shell kpsewhich -var-value=TEXMFHOME)
 
 all: $(PDFTARGET)
 
-chemobabel-doc-en.tex: chemobabel.dtx
+chemobabel-en.tex: chemobabel.dtx
 	lualatex chemobabel.ins
-chemobabel-doc-ja.tex: chemobabel.dtx
+chemobabel-ja.tex: chemobabel.dtx
 	lualatex chemobabel.ins
-chemobabel-doc-en.pdf: chemobabel.sty chemobabel-doc-en.tex
-	lualatex -shell-escape chemobabel-doc-en.tex
-	lualatex chemobabel-doc-en.tex
-	lualatex chemobabel-doc-en.tex
-chemobabel-doc-ja.pdf: chemobabel.sty chemobabel-doc-ja.tex
-	lualatex -shell-escape chemobabel-doc-ja.tex
-	lualatex chemobabel-doc-ja.tex
-	lualatex chemobabel-doc-ja.tex
-chemobabel-example-en.pdf: chemobabel.sty chemobabel-example-en.tex
-	pdflatex -shell-escape chemobabel-example-en.tex
-	pdflatex chemobabel-example-en.tex
-chemobabel-example-ja.pdf: chemobabel.sty chemobabel-example-ja.tex
-	platex -shell-escape chemobabel-example-ja.tex
-	platex chemobabel-example-ja.tex
-	dvipdfmx chemobabel-example-ja.dvi
+chemobabel-en.pdf: chemobabel.sty chemobabel-en.tex
+	lualatex -shell-escape chemobabel-en.tex
+	lualatex chemobabel-en.tex
+	lualatex chemobabel-en.tex
+chemobabel-ja.pdf: chemobabel.sty chemobabel-ja.tex
+	lualatex -shell-escape chemobabel-ja.tex
+	lualatex chemobabel-ja.tex
+	lualatex chemobabel-ja.tex
+example-en.pdf: chemobabel.sty example-en.tex
+	pdflatex -shell-escape example-en.tex
+	pdflatex example-en.tex
+example-ja.pdf: chemobabel.sty example-ja.tex
+	platex -shell-escape example-ja.tex
+	platex example-ja.tex
+	dvipdfmx example-ja.dvi
 
 .PHONY: install clean
 install:

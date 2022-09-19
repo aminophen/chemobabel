@@ -16,8 +16,8 @@ for example, `.cdx`, `.mol` and `.smi`.
 
  - chemobabel.sty: Package itself
  - chemobabel-{en,ja}.pdf: Basic usage (source: chemobabel.dtx)
- - chemobabel-example-en.{tex,pdf}: Examples in English
- - chemobabel-example-ja.{tex,pdf}: Examples in Japanese
+ - example-en.{tex,pdf}: Examples in English
+ - example-ja.{tex,pdf}: Examples in Japanese
 
 Sample ChemDraw files and MDL Molfiles are also included.
 
