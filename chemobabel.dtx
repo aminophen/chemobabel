@@ -86,6 +86,10 @@ For English documentation, please refer to chemobabel-en.pdf.
   \chemobabel[width=35mm]{draw/Glucose.cdx}{}
   \caption{ATP (Adenosine triphosphate) \& Glucose (from ChemDraw files)}
 \end{figure}
+\begin{center}\small
+Note: with Open Babel 3.1.1 the chemical structure of ATP from the .cdx file
+becomes wrong.\\ See \url{https://github.com/openbabel/openbabel/issues/338}
+\end{center}
 
 \begin{figure}[ht]
   \centering
@@ -100,6 +104,15 @@ For English documentation, please refer to chemobabel-en.pdf.
   \smilesobabel[width=30mm]{CC(=O)Nc1ccc(cc1)O}{} \hspace{1cm}
   \smilesobabel[width=40mm]{C([C@@H]1[C@H]([C@@H]([C@H]([C@H](O1)O)O)O)O)O}{}
   \caption{Acetaminophen (Paracetamol) \& $\alpha$-\textsc{d}-Glucose (from SMILES notations)}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+%<en>This package is maintained on GitHub:\par
+%<ja>このパッケージはGitHubで管理しています。\par
+\url{https://github.com/aminophen/chemobabel}\par
+%<en>If you have questions, please let me know.
+%<ja>問い合わせや改善案などはGitHubのIssuesへお願いします。
 \end{figure}
 
 \clearpage
@@ -201,7 +214,7 @@ SVG形式の構造式画像を生成し，
 %</ja>
 
 %<*en>
-\noindent \textbf{About Open Babel}:
+\paragraph{About Open Babel}
 
 Open Babel is a toolbox specially designed to handle many kinds of
 chemical data. It is an open, collaborative project allowing anyone to search,
@@ -210,9 +223,9 @@ solid-state materials, biochemistry, or related areas.
 See \href{http://openbabel.org/}{Official Website} for detail.
 %</en>
 %<*ja>
-\noindent \textbf{Open Babelについて}
+\paragraph{Open Babelについて}
 
-Open Babel はさまざまな化学データを扱うために特別に設計されたツールです。
+Open Babelはさまざまな化学データを扱うために特別に設計されたツールです。
 オープンな共同プロジェクトで，分子モデリング・化学・固体物性・生化学や
 関連分野のデータを誰もが検索・変換・分析・保存できることを目指しています。
 詳細は\href{http://openbabel.org/}{公式サイト}を参照してください。
@@ -400,7 +413,7 @@ call any external command-line programs, such as obabel and inkscape!
 $ pdflatex -shell-escape test.tex
 \end{verbatim}
 You will see in \verb|chemobabelimgdir| subdirectory ``chemobabelimg[NUM].pdf'',
-and output file test.pdf will be:
+and output file test.pdf will be Figure~\ref{fig:chem1}:
 %</en>
 %<*ja>
 \LaTeX ファイル名がtest.texだとすると，以下のように
@@ -415,13 +428,14 @@ $ platex -shell-escape test.tex
 \begin{verbatim}
 $ dvipdfmx test.dvi
 \end{verbatim}
-と実行すると，出力される「test.pdf」は以下のようになります：
+と実行すると，出力される「test.pdf」は図\ref{fig:chem1}のようになります。
 %</ja>
 
 \begin{figure}[h]
   \centering
   \chemobabel[width=90mm]{draw/ATP.cdx}{} \\ \vspace{1cm}
   \chemobabel[width=120mm]{draw/Brevetoxin A.mol}{}
+  \caption{Conversion from ATP.cdx and Brevetoxin A.mol}\label{fig:chem1}
 \end{figure}
 
 %<en>The syntax is:
@@ -482,7 +496,8 @@ Again typeset with \verb|-shell-escape| option:
 \begin{verbatim}
 $ pdflatex -shell-escape test.tex
 \end{verbatim}
-This time you will get ``smilesobabelimg[NUM].pdf'' and ``test.pdf'':
+This time you will get ``smilesobabelimg[NUM].pdf'' and ``test.pdf''
+as Figure~\ref{fig:smi1}.
 %</en>
 %<*ja>
 やはり \verb|-shell-escape| オプションを付けてタイプセットします。
@@ -491,12 +506,13 @@ $ platex -shell-escape test.tex
 $ dvipdfmx test.dvi
 \end{verbatim}
 すると今度は「smilesobabelimg[NUM].pdf」のようなファイルが生成し，
-出力される「test.pdf」は以下のようになります：
+出力される「test.pdf」は図\ref{fig:smi1}のようになります。
 %</ja>
 \begin{figure}[h]
   \centering
   \smilesobabel{CCO}{} \quad
   \smilesobabel[width=25mm]{CC(=O)Nc1ccc(cc1)O}{}
+  \caption{Conversion from SMILES notation}\label{fig:smi1}
 \end{figure}
 
 %<en>The syntax is:
