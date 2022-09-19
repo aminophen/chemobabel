@@ -17,7 +17,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{chemobabel}
-  [2022/09/12 v0.9i Chemical structures with Open Babel]
+  [2022/09/19 v0.9j Chemical structures with Open Babel]
 
 %% Start of package main code
 %% Thanks: http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
@@ -28,8 +28,8 @@
 %% ----- External command execution -----
 \ifx\directlua\@undefined
   \def\chemob@bel@exec#1{\immediate\write18{#1}}
-  \ifx\pdfshellescape\undefined
-    \ifx\shellescape\undefined
+  \ifx\pdfshellescape\@undefined
+    \ifx\shellescape\@undefined
       \chardef\chemob@bel@shellescape \@ne % fallback no warning
     \else
       % xelatex, hilatex
