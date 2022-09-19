@@ -139,11 +139,24 @@
 }
 %% ----- Definition of \chemobabel end -----
 
+%% ----- Check if no chemical structures -----
+\def\chemob@bel@ifnochem{%
+  \let\chemob@bel@nochem\relax
+  \ifnum\value{smilesob@belCounter}=\@ne
+  \ifnum\value{chemob@belCounter}=\@ne
+    \let\chemob@bel@nochem\@empty
+  \fi\fi
+  \ifx\chemob@bel@nochem\@empty
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+}
+
 %% ----- Declaration of options -----
 % load macros for extracting \chemobabel and \smilesobabel commands
-\newif\ifchemob@bel@extract
-\chemob@bel@extractfalse
-\DeclareOption{extract}{\chemob@bel@extracttrue}
+\let\chemob@bel@extract\relax
+\DeclareOption{extract}{\let\chemob@bel@extract\@empty}
 % define the image extension
 \DeclareOption{pdf}{%
   \def\chemob@belimgExt{pdf}%
@@ -166,13 +179,11 @@
   \let\chemob@bel@maybecrop\@empty}
 % default settings
 \ExecuteOptions{pdf,inkscape}
-\ProcessOptions
+\ProcessOptions\relax
 %% ----- Declaration of options end -----
 
 %% ----- Exit this package now, if [extract] is not specified -----
-\ifchemob@bel@extract\else
-  \expandafter\endinput
-\fi
+\ifx\chemob@bel@extract\relax \endinput \fi
 
 %% Extracting all codes of Open Babel figures
 %% Thanks: http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=1411
@@ -192,7 +203,11 @@
 \immediate\write\ChemFigFile{\string\begin{document}}
 \AtEndDocument{%
   \immediate\write\ChemFigFile{\string\end{document}}%
-  \immediate\closeout\ChemFigFile%
+  \immediate\closeout\ChemFigFile
+  \chemob@bel@ifnochem{}{%
+    \PackageWarningNoLine{chemobabel}{%
+      Some chemical structures are extracted.\MessageBreak
+      Run 'pdflatex -shell-escape ChemFigFile.tex'}}%
 }
 \renewcommand\smilesobabel{%
   \begingroup

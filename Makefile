@@ -14,18 +14,18 @@ chemobabel-doc-ja.tex: chemobabel.dtx
 	lualatex chemobabel.ins
 chemobabel-doc-en.pdf: chemobabel.sty chemobabel-doc-en.tex
 	lualatex -shell-escape chemobabel-doc-en.tex
-	lualatex -shell-escape chemobabel-doc-en.tex
-	lualatex -shell-escape chemobabel-doc-en.tex
+	lualatex chemobabel-doc-en.tex
+	lualatex chemobabel-doc-en.tex
 chemobabel-doc-ja.pdf: chemobabel.sty chemobabel-doc-ja.tex
 	lualatex -shell-escape chemobabel-doc-ja.tex
-	lualatex -shell-escape chemobabel-doc-ja.tex
-	lualatex -shell-escape chemobabel-doc-ja.tex
+	lualatex chemobabel-doc-ja.tex
+	lualatex chemobabel-doc-ja.tex
 chemobabel-example-en.pdf: chemobabel.sty chemobabel-example-en.tex
 	pdflatex -shell-escape chemobabel-example-en.tex
-	pdflatex -shell-escape chemobabel-example-en.tex
+	pdflatex chemobabel-example-en.tex
 chemobabel-example-ja.pdf: chemobabel.sty chemobabel-example-ja.tex
 	platex -shell-escape chemobabel-example-ja.tex
-	platex -shell-escape chemobabel-example-ja.tex
+	platex chemobabel-example-ja.tex
 	dvipdfmx chemobabel-example-ja.dvi
 
 .PHONY: install clean
