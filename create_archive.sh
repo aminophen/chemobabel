@@ -23,6 +23,11 @@ rm -f $TMP/$PROJECT/README.md.bak
 rm -rf $TMP/$PROJECT/00archives
 rm -f $TMP/$PROJECT/chemobabel-161023.pdf
 
+# make CTAN happy (filename with spaces, CRLF in MDL Molfiles)
+cd $TMP/$PROJECT && tar zcf images-for-doc.tar.gz draw figures
+rm -rf $TMP/$PROJECT/draw
+rm -rf $TMP/$PROJECT/figures
+
 cd $TMP && zip -r $PWDF/$PROJECT.zip $PROJECT
 rm -rf $TMP/$PROJECT
 echo
