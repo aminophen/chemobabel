@@ -25,6 +25,9 @@
 \RequirePackage{verbatim}
 \RequirePackage{graphicx}
 
+%% ----- Check status -----
+\chardef\chemob@bel@status\z@
+
 %% ----- External command execution -----
 \ifx\directlua\@undefined
   \def\chemob@bel@exec#1{\immediate\write18{#1}}
@@ -98,6 +101,7 @@
         No log file.%
       }%
     \end{minipage}}%
+    \global\chardef\chemob@bel@status\@ne
   }%
 }
 %% ----- Common part of \smilesobabel and \chemobabel end -----
@@ -209,6 +213,56 @@
 \ProcessOptions\relax
 %% ----- Declaration of options end -----
 
+%% ----- Warn if something went wrong -----
+% e.g.) \chemob@bel@common@maybeimg is not an image
+%   --- when current processing failed
+%        AND previous shell-escape run not found
+% e.g.) \chemob@bel@common@maybeimg is definitely a wrong image
+%   --- when current processing failed
+%        BUT previous shell-escape run with different total number found
+% --- note that re-run after removing [extract] should avoid the warning
+% --- as it will include all the correct images from previous shell-escape run
+\def\chemob@bel@atenddocument{%
+  \ifnum\chemob@bel@status>\z@ % at least one is not an image
+      \PackageWarningNoLine{chemobabel}{%
+        Some processing failed.\MessageBreak
+        Please rerun}%
+  \else % all images
+    \ifnum\chemob@bel@shellescape=\@ne % current run is shell-escape
+      % record number of images of the current run
+      \if@filesw
+        \immediate\write\@mainaux{\gdef\string
+          \smilesob@bel@imgNum{\number\value{smilesob@belCounter}}}%
+        \immediate\write\@mainaux{\gdef\string
+          \chemob@bel@imgNum{\number\value{chemob@belCounter}}}%
+      \fi
+    \else
+      % compare number of images with the previous shell-escape run
+      \ifx\smilesob@bel@imgNum\@undefined\def\smilesob@bel@imgNum{0}\fi
+      \ifnum\value{smilesob@belCounter}=\smilesob@bel@imgNum\relax\else
+        \PackageWarningNoLine{chemobabel}{%
+          Number of \noexpand\smilesobabel changed.\MessageBreak
+          Please rerun}%
+      \fi
+      \ifx\chemob@bel@imgNum\@undefined\def\chemob@bel@imgNum{0}\fi
+      \ifnum\value{chemob@belCounter}=\chemob@bel@imgNum\relax\else
+        \PackageWarningNoLine{chemobabel}{%
+          Number of \noexpand\chemobabel changed.\MessageBreak
+          Please rerun}%
+      \fi
+      % record number of images of the previous shell-escape run
+      \if@filesw
+        \immediate\write\@mainaux{\gdef\string
+          \smilesob@bel@imgNum{\smilesob@bel@imgNum}}%
+        \immediate\write\@mainaux{\gdef\string
+          \chemob@bel@imgNum{\chemob@bel@imgNum}}%
+      \fi
+    \fi
+  \fi
+}
+\AtEndDocument{\chemob@bel@atenddocument}
+%% ----- Warn if something went wrong end -----
+
 %% ----- Exit this package now, if [extract] is not specified -----
 \ifx\chemob@bel@extract\relax \endinput \fi
 
@@ -228,7 +282,7 @@
 
 %% ----- Read and write -----
 \immediate\write\ChemFigFile{\string\begin{document}}
-\AtEndDocument{%
+\def\chemob@bel@atenddocument{%
   \immediate\write\ChemFigFile{\string\end{document}}%
   \immediate\closeout\ChemFigFile
   \chemob@bel@ifnochem{}{%
