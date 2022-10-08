@@ -47,6 +47,17 @@
   \chardef\chemob@bel@shellescape =\directlua{tex.sprint(status.shell_escape)}
 \fi
 
+%% ----- Ensure -shell-escape when processing ChemFigFile.tex
+\edef\chemob@bel@jobname{\jobname}
+{\escapechar=-1 \xdef\chemob@bel@outname{\string\ChemFigFile}}
+\ifx\chemob@bel@jobname\chemob@bel@outname
+  \ifnum\chemob@bel@shellescape=\@ne\else
+    \PackageError{chemobabel}{%
+      Processing \chemob@bel@outname.tex needs -shell-escape.\MessageBreak
+      Run 'pdflatex -shell-escape \chemob@bel@outname.tex'}\@ehc
+  \fi
+\fi
+
 %% ----- Make a directory for images -----
 \newcommand\chemobabelimgdir{chemobabelimgdir}
 \chemob@bel@exec{mkdir \chemobabelimgdir}
@@ -161,7 +172,7 @@
     \chemob@bel@common@maybeimg{\chemobabel@next}{\chemob@belGetName}{file ``#1''}%
   }{%
     % the file does not exist: show a std error
-    \PackageError{chemobabel}{File ``#1'' not found}{}%
+    \PackageError{chemobabel}{File ``#1'' not found}\@ehc
     \fbox{\begin{minipage}{0.9\textwidth}
       Error in chemobabel: the file ``#1'' does not exist.
     \end{minipage}}%
@@ -274,8 +285,6 @@
 %% Thanks: http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=1411
 
 %% ----- Safety check before opening output file -----
-\edef\chemob@bel@jobname{\jobname}
-{\escapechar=-1 \xdef\chemob@bel@outname{\string\ChemFigFile}}
 \ifx\chemob@bel@jobname\chemob@bel@outname
   \PackageWarningNoLine{chemobabel}{%
     Wow! Your file name is `\chemob@bel@outname'!\MessageBreak
