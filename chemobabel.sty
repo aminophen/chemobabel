@@ -205,12 +205,16 @@
 \DeclareOption{librsvg}%
   {\let\chemob@bel@svgtoimgcmd\chemob@bel@librsvgcmd}
 % crop image or not
-\DeclareOption{nocrop}{%
-  \let\chemob@bel@cropcmd\@gobble
-  \let\chemob@bel@maybecrop\@empty}
+\let\chemob@bel@nocrop\relax
+\DeclareOption{nocrop}{\let\chemob@bel@nocrop\@empty}
 % default settings
 \ExecuteOptions{pdf,inkscape}
+% handle user settings - arbitrary order allowed
 \ProcessOptions\relax
+\ifx\chemob@bel@nocrop\relax \else
+  \let\chemob@bel@cropcmd\@gobble
+  \let\chemob@bel@maybecrop\@empty
+\fi
 %% ----- Declaration of options end -----
 
 %% ----- Warn if something went wrong -----
