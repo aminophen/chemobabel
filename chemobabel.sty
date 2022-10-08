@@ -237,6 +237,18 @@
 %        BUT previous shell-escape run with different total number found
 % --- note that re-run after removing [extract] should avoid the warning
 % --- as it will include all the correct images from previous shell-escape run
+\def\chemob@bel@record@imgnum#1{%
+  \immediate\write#1{\gdef\string
+    \smilesob@bel@imgNum{\number\value{smilesob@belCounter}}}%
+  \immediate\write#1{\gdef\string
+    \chemob@bel@imgNum{\number\value{chemob@belCounter}}}%
+}
+\def\chemob@bel@preserve@imgnum#1{%
+  \immediate\write#1{\gdef\string
+    \smilesob@bel@imgNum{\smilesob@bel@imgNum}}%
+  \immediate\write#1{\gdef\string
+    \chemob@bel@imgNum{\chemob@bel@imgNum}}%
+}
 \def\chemob@bel@atenddocument{%
   \ifnum\chemob@bel@status>\z@ % at least one is not an image
       \PackageWarningNoLine{chemobabel}{%
@@ -246,10 +258,18 @@
     \ifnum\chemob@bel@shellescape=\@ne % current run is shell-escape
       % record number of images of the current run
       \if@filesw
-        \immediate\write\@mainaux{\gdef\string
-          \smilesob@bel@imgNum{\number\value{smilesob@belCounter}}}%
-        \immediate\write\@mainaux{\gdef\string
-          \chemob@bel@imgNum{\number\value{chemob@belCounter}}}%
+        \chemob@bel@record@imgnum{\@mainaux}%
+      \fi
+      % when processing ChemFigFile.tex, also write to the original .aux
+      \ifx\chemob@bel@jobname\chemob@bel@outname
+        \IfFileExists{\chemobabelfile.tex}{%
+          \if@filesw
+            \newwrite\chemob@bel@origaux
+            \immediate\openout\chemob@bel@origaux=\chemobabelfile.aux\relax
+            \chemob@bel@record@imgnum{\chemob@bel@origaux}%
+            \immediate\closeout\chemob@bel@origaux
+          \fi
+        }{}%
       \fi
     \else
       % compare number of images with the previous shell-escape run
@@ -267,10 +287,7 @@
       \fi
       % record number of images of the previous shell-escape run
       \if@filesw
-        \immediate\write\@mainaux{\gdef\string
-          \smilesob@bel@imgNum{\smilesob@bel@imgNum}}%
-        \immediate\write\@mainaux{\gdef\string
-          \chemob@bel@imgNum{\chemob@bel@imgNum}}%
+        \chemob@bel@preserve@imgnum{\@mainaux}%
       \fi
     \fi
   \fi
