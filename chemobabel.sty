@@ -269,22 +269,31 @@
 %% Extracting all codes of Open Babel figures
 %% Thanks: http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=1411
 
+%% ----- Safety check before opening output file -----
+\edef\chemob@bel@jobname{\jobname}
+{\escapechar=-1 \xdef\chemob@bel@outname{\string\ChemFigFile}}
+\ifx\chemob@bel@jobname\chemob@bel@outname
+  \PackageWarningNoLine{chemobabel}{%
+    Wow! Your file name is `\chemob@bel@outname'!\MessageBreak
+    Option [extract] ignored to avoid overwriting}
+  \expandafter\endinput
+\fi
+
 \PackageWarningNoLine{chemobabel}{%
   You are using [extract] option.\MessageBreak
   No chemical structures will be printed}
 
 %% ----- Define intermediate output file and load packages -----
-\newwrite\ChemFigFile
-\immediate\openout\ChemFigFile=ChemFigFile.tex\relax
-\immediate\write\ChemFigFile{\string\documentclass{article}}
-\immediate\write\ChemFigFile{\string\usepackage{graphicx}}
-\immediate\write\ChemFigFile{\string\usepackage{chemobabel}}
+\newwrite\chemob@bel@outfile
+\immediate\openout\chemob@bel@outfile=\chemob@bel@outname.tex\relax
+\immediate\write\chemob@bel@outfile{\string\documentclass{article}}
+\immediate\write\chemob@bel@outfile{\string\usepackage{chemobabel}}
 
 %% ----- Read and write -----
-\immediate\write\ChemFigFile{\string\begin{document}}
+\immediate\write\chemob@bel@outfile{\string\begin{document}}
 \def\chemob@bel@atenddocument{%
-  \immediate\write\ChemFigFile{\string\end{document}}%
-  \immediate\closeout\ChemFigFile
+  \immediate\write\chemob@bel@outfile{\string\end{document}}%
+  \immediate\closeout\chemob@bel@outfile
   \chemob@bel@ifnochem{}{%
     \PackageWarningNoLine{chemobabel}{%
       Some chemical structures are extracted.\MessageBreak
@@ -300,7 +309,7 @@
 }
 \newcommand\@@smilesobabel[3][scale=1]{%
   \endgroup
-  \immediate\write\ChemFigFile{%
+  \immediate\write\chemob@bel@outfile{%
     \string\smilesobabel[#1]{#2}{#3}%
     \string\newpage}%
   [\smilesob@belGetName.\chemob@belimgExt]%
@@ -315,7 +324,7 @@
 }
 \newcommand\@@chemobabel[3][scale=1]{%
   \endgroup
-  \immediate\write\ChemFigFile{%
+  \immediate\write\chemob@bel@outfile{%
     \string\chemobabel[#1]{#2}{#3}%
     \string\newpage}%
   [\chemob@belGetName.\chemob@belimgExt]%
