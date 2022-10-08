@@ -210,7 +210,7 @@
 % default settings
 \ExecuteOptions{pdf,inkscape}
 % handle user settings - arbitrary order allowed
-\ProcessOptions\relax
+\ProcessOptions*\relax
 \ifx\chemob@bel@nocrop\relax \else
   \let\chemob@bel@cropcmd\@gobble
   \let\chemob@bel@maybecrop\@empty
