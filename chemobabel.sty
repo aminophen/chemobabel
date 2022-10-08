@@ -287,11 +287,25 @@
   You are using [extract] option.\MessageBreak
   No chemical structures will be printed}
 
+%% ----- Accumulate user-given options to be passed -----
+% the image extension (non-empty)
+\edef\chemob@bel@options{\chemob@belimgExt}
+% image conversion command (except default=inkscape)
+\ifx\chemob@bel@svgtoimgcmd\chemob@bel@inkscapeoldcmd
+  \edef\chemob@bel@options{\chemob@bel@options,inkscape-old}
+\else\ifx\chemob@bel@svgtoimgcmd\chemob@bel@librsvgcmd
+  \edef\chemob@bel@options{\chemob@bel@options,librsvg}
+\fi\fi
+% crop image or not
+\ifx\chemob@bel@nocrop\relax \else
+  \edef\chemob@bel@options{\chemob@bel@options,nocrop}
+\fi
+
 %% ----- Define intermediate output file and load packages -----
 \newwrite\chemob@bel@outfile
 \immediate\openout\chemob@bel@outfile=\chemob@bel@outname.tex\relax
 \immediate\write\chemob@bel@outfile{\string\documentclass{article}}
-\immediate\write\chemob@bel@outfile{\string\usepackage{chemobabel}}
+\immediate\write\chemob@bel@outfile{\string\usepackage[\chemob@bel@options]{chemobabel}}
 
 %% ----- Read and write -----
 \immediate\write\chemob@bel@outfile{\string\begin{document}}
