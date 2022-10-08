@@ -167,6 +167,6 @@ tests/*.pdf
 
 # chemobabel specific
 chemobabelimgdir/*
-ChemFigFile.tex
+ChemFigFile.*
 chemobabel-en.tex
 chemobabel-ja.tex
