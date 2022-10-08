@@ -304,6 +304,7 @@
 %% ----- Define intermediate output file and load packages -----
 \newwrite\chemob@bel@outfile
 \immediate\openout\chemob@bel@outfile=\chemob@bel@outname.tex\relax
+\immediate\write\chemob@bel@outfile{\string\def\string\chemobabelfile{\chemob@bel@jobname}}
 \immediate\write\chemob@bel@outfile{\string\documentclass{article}}
 \immediate\write\chemob@bel@outfile{\string\usepackage[\chemob@bel@options]{chemobabel}}
 
