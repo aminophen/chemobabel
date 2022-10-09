@@ -28,20 +28,26 @@
 % --- (Japanese jsarticle style => English style)
 \makeatletter
 \long\def\@makecaption#1#2{%
-\vskip\abovecaptionskip
-\sbox\@tempboxa{#1: #2}
-\global\@minipagefalse
-\hbox to\hsize{\hfil\box\@tempboxa\hfil}
-\vskip\belowcaptionskip}
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1: #2}%
+  \global\@minipagefalse
+  \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \vskip\belowcaptionskip}
 \makeatother
 % --- XyMTeX logo definition
 \newcount\TestCount
-\def\XyM{\ifnum\fam=-1\relax\fam=0\relax\fi\TestCount=\fam%
-X\kern-.30em\smash{\raise.50ex\hbox{$\fam\TestCount\Upsilon$}}%
-\kern-.30em{M}}
+\def\XyM{\ifnum\fam=-1\relax\fam=0\relax\fi\TestCount=\fam
+  X\kern-.30em\smash{\raise.50ex\hbox{$\fam\TestCount\Upsilon$}}%
+  \kern-.30em{M}}
 \def\XyMTeX{\XyM\kern-.1em\TeX}
+% --- misc
+\def\Lpack#1{\textsf{#1}}
+\def\Lcode#1{\texttt{#1}}
+\def\Lmeta#1{\textit{#1}}
+\def\Lver#1{\Lpack{chemobabel} #1}
+\def\TikZ{Ti\textit{k}Z}
 % ------
-\title{\textsf{chemobabel} \\[1ex]
+\title{\Lpack{chemobabel} \\[1ex]
   \normalsize --- Chemical Structures from MDL Molfiles,
   ChemDraw Files or SMILES Notations --- \\
 %<ja>  化学構造式をMOLファイルやChemDrawファイル，SMILES表記法から自動生成
@@ -53,7 +59,7 @@ X\kern-.30em\smash{\raise.50ex\hbox{$\fam\TestCount\Upsilon$}}%
 \maketitle
 
 %<*en>
-This document (\jobname.pdf) describes the usage of \textsf{chemobabel.sty},
+This document (\jobname.pdf) describes the usage of \Lpack{chemobabel.sty},
 a \LaTeX\ package for \textbf{generating chemical structural formulas}
 to be inserted in your documents.
 The formulas can be generated \textbf{from many kinds of chemical data
@@ -65,7 +71,7 @@ The formulas below are generated using this method.
 %</en>
 %<*ja>
 この文書では，\textbf{化学構造式を生成}して\LaTeX の文書中に挿入するための
-パッケージである\textsf{chemobabel.sty}と同梱リソースの使い方を説明します。
+パッケージである\Lpack{chemobabel.sty}と同梱リソースの使い方を説明します。
 構造式はOpen Babelの機能を利用することにより，MDL Molfile, ChemDrawファイル，
 さらにはSMILES表記法を含む\textbf{さまざまな化学データ形式から生成}できます。
 以下の構造式はこの方法によって出力されたものです。
@@ -158,8 +164,8 @@ Some \TeX/\LaTeX\ macros and packages are already available from
 \begin{itemize}
   \item \href{http://www.ctan.org/pkg/xymtex}{\XyMTeX}:
     a set of packages for drawing chemical structural formulas
-\item \href{http://www.ctan.org/pkg/chemfig}{\textsf{chemfig}}:
-    a package which draws molecules using Ti\textit{k}Z
+\item \href{http://www.ctan.org/pkg/chemfig}{\Lpack{chemfig}}:
+    a package which draws molecules using \TikZ
 \end{itemize}
 These packages are reliable and almost all kinds of structural formulas
 can be drawn in a consistent way. However, a lot of practice will be
@@ -170,8 +176,8 @@ required before one can come to make full use of them.
 \begin{itemize}
   \item \href{http://www.ctan.org/pkg/xymtex}{\XyMTeX}:
     化学構造式を描くためのパッケージ集
-  \item \href{http://www.ctan.org/pkg/chemfig}{\textsf{chemfig}}:
-    Ti\textit{k}Zを利用して構造式を描画するパッケージ
+  \item \href{http://www.ctan.org/pkg/chemfig}{\Lpack{chemfig}}:
+    \TikZ を利用して構造式を描画するパッケージ
 \end{itemize}
 これらのパッケージは確実で，あらゆる構造式を一貫性をもって描画することができます。
 しかし，十分にその機能を活用できるようになるには相当の熟練を要します。
@@ -196,7 +202,7 @@ In this case, you have to save files in both chemical formats
 %</ja>
 
 %<*en>
-This new package, \textsf{chemobabel.sty}, will offer a new choice for
+This new package, \Lpack{chemobabel.sty}, will offer a new choice for
 chemists who need chemical structures inserted in their \LaTeX\ documents.
 In this method, we use \href{http://openbabel.org/}{Open Babel} for
 generating chemical structural formulas in SVG format,
@@ -204,7 +210,7 @@ and \href{https://inkscape.org/en/}{Inkscape} for converting SVG to PDF.
 Both programs are open source and cross-platform, and being actively maintained.
 %</en>
 %<*ja>
-新しいパッケージ \textsf{chemobabel.sty} は，\LaTeX 文書中に化学構造式を
+新しいパッケージ \Lpack{chemobabel.sty} は，\LaTeX 文書中に化学構造式を
 挿入する必要がある化学者に新たな選択肢を提供することでしょう。
 この方法では，\href{http://openbabel.org/}{Open Babel}によって
 SVG形式の構造式画像を生成し，
@@ -300,15 +306,15 @@ First, you have to install \href{http://openbabel.org/}{Open Babel} and
 \href{https://inkscape.org/en/}{Inkscape}
 (or \href{http://librsvg.sourceforge.net/download/}{librsvg}) on your
 computer, and export PATH to the command-line binary of both programs,
-\verb+obabel+ and \verb+inkscape+ (or \verb+rsvg-convert+).
+\Lcode{obabel} and \Lcode{inkscape} (or \Lcode{rsvg-convert}).
 You can confirm by executing following commands:
 %</en>
 %<*ja>
 初めにコンピュータに\href{http://openbabel.org/}{Open Babel}と
 \href{https://inkscape.org/ja/}{Inkscape}（または
 \href{http://librsvg.sourceforge.net/download/}{librsvg}）をインストールし，
-コマンドライン実行ファイルである\verb+obabel+と\verb+inkscape+
-（または\verb+rsvg-convert+）にPATHを通します。
+コマンドライン実行ファイルである
+\Lcode{obabel}と\Lcode{inkscape}（または\Lcode{rsvg-convert}）にPATHを通します。
 正しくPATHが通っているかどうかは以下のコマンドによって確認できます：
 %</ja>
 %<en>In UNIX operating system:
@@ -346,17 +352,17 @@ In the preamble of your document, declare
 \begin{verbatim}
 \usepackage{chemobabel}
 \end{verbatim}
-to load \textsf{chemobabel} package.
-The package depends on \textsf{graphicx}.
+to load \Lpack{chemobabel} package.
+The package depends on \Lpack{graphicx}.
 %</en>
 %<*ja>
 プリアンブルに
 \begin{verbatim}
 \usepackage{chemobabel}
 \end{verbatim}
-と宣言して\textsf{chemobabel}パッケージを読み込みます。
-これは\textsf{graphicx}パッケージに依存しますので，
-もし(u)p\LaTeX を使っていてDVIドライバに\texttt{dvipdfmx}を使用する場合は
+と宣言して\Lpack{chemobabel}パッケージを読み込みます。
+これは\Lpack{graphicx}パッケージに依存しますので，
+もし(u)p\LaTeX を使っていてDVIドライバに\Lcode{dvipdfmx}を使用する場合は
 ドライバオプション \verb+[dvipdfmx]+ をクラスオプション（グローバル）に
 付けるのを忘れないようにしてください。
 %</ja>
@@ -385,7 +391,7 @@ of ATP (Adenosine triphosphate) drawn in ChemDraw, and
 \href{http://www.chemspider.com/}{ChemSpider} (originally \verb|9041092.mol|).
 
 Use \verb|\chemobabel| command as follows. I put original files in a
-subdirectory \texttt{draw}, so added \texttt{draw/} before the actual filename.
+subdirectory \Lcode{draw}, so added \Lcode{draw/} before the actual filename.
 Of course you can put in the same directory with your \LaTeX\ file.
 %</en>
 %<*ja>
@@ -395,8 +401,8 @@ ChemDrawで描画したファイル，\verb|Brevetoxin A.mol| は
 （もとのファイル名は \verb|9041092.mol| となっています）。
 
 \verb|\chemobabel| コマンドは本文中で以下のようにして使います。
-ここでは元のファイルを\texttt{draw}というサブディレクトリに置いたので，
-ファイル名の前に \texttt{draw/} を付けました。
+ここでは元のファイルを\Lcode{draw}というサブディレクトリに置いたので，
+ファイル名の前に \Lcode{draw/} を付けました。
 もちろん \LaTeX ソースと同一ディレクトリに置くこともできます。
 %</ja>
 
@@ -441,24 +447,24 @@ $ dvipdfmx test.dvi
 %<en>The syntax is:
 %<ja>構文は以下のとおりです。
 \begin{center}
-\verb|\chemobabel[|\textit{options}\verb|]{|\textit{filename}\verb|}{|\textit{obabel options}\verb|}|
-\verb|\chemobabel*[|\textit{options}\verb|]{|\textit{filename}\verb|}|
+\verb|\chemobabel[|\Lmeta{options}\verb|]{|\Lmeta{filename}\verb|}{|\Lmeta{obabel options}\verb|}| \\
+\verb|\chemobabel*[|\Lmeta{options}\verb|]{|\Lmeta{filename}\verb|}|
 \end{center}
 %<*en>
 \verb|\chemobabel| takes one optional parameter and two mandatory parameters.
 \begin{itemize}
- \item The optional parameter \textit{options} in the box brackets
+ \item The optional parameter \Lmeta{options} in the box brackets
    is passed to \verb|\includegraphics|.
    If omitted, the default ``scale=1' is assumed.
- \item The first mandatory parameter \textit{filename} is the file name
+ \item The first mandatory parameter \Lmeta{filename} is the file name
    which contains chemical structural formula.
- \item The second mandatory parameter \textit{obabel options}
+ \item The second mandatory parameter \Lmeta{obabel options}
    is passed to \verb|obabel| command
    (see Section \ref{depict} for some examples).
 \end{itemize}
 If you want to leave the second parameter empty,
 a shorthand form \verb|\chemobabel*| is also available
-(since \textsf{chemobabel} v0.9k [2022/10/09]).
+(since \Lver{v0.9k [2022/10/09]}).
 %</en>
 %<*ja>
 \verb|\chemobabel| は1つのオプション引数と2つの必須引数をとります。
@@ -471,7 +477,7 @@ a shorthand form \verb|\chemobabel*| is also available
 \end{itemize}
 必須引数の2つめを空にしたい場合は，
 短縮形として \verb|\chemobabel*| を使用することもできます
-（\textsf{chemobabel} v0.9k [2022/10/09] 以降）。
+（\Lver{v0.9k [2022/10/09]}以降）。
 %</ja>
 
 %<*en>
@@ -528,11 +534,12 @@ $ dvipdfmx test.dvi
 %<en>The syntax is:
 %<ja>構文は以下のとおりです。
 \begin{center}
-\verb|\smilesobabel[|\textit{options}\verb|]{|\textit{SMILES notation}\verb|}{|\textit{obabel options}\verb|}|
+\verb|\smilesobabel[|\Lmeta{options}\verb|]{|\Lmeta{SMILES notation}\verb|}{|\Lmeta{obabel options}\verb|}| \\
+\verb|\smilesobabel*[|\Lmeta{options}\verb|]{|\Lmeta{SMILES notation}\verb|}|
 \end{center}
 %<*en>
 The only difference from \verb|\chemobabel| is that
-\textit{SMILES notation} should be placed in the first braces.
+\Lmeta{SMILES notation} should be placed in the first braces.
 You can put any kinds of SMILES notations in parameters of
 \verb|\smilesobabel|, even when they contain some special characters
 such as a backslash (\verb|\|) and a percent symbol (\verb|%|).
@@ -559,16 +566,15 @@ these special characters.
 \end{figure}
 
 %<*en>
-\noindent \textbf{Notes for users of earlier versions} ($\le$ \textsf{chemobabel} v0.6 [2015/06/29])
+\noindent \textbf{Notes for users of earlier versions \Lver{v0.6 [2015/06/29]} or older}
 
-In earlier versions of \textsf{chemobabel}, it was necessary for users
+In earlier versions of \Lpack{chemobabel}, it was necessary for users
 to pay another attention when using these \LaTeX\ special characters.
 However, the workaround I had suggested before was far from desirable
 because ``casual \LaTeX\ users'' were forced to change category codes
 of these characters manually.
 
-To solve this problem, I prepared supporting macros inside the package
-itself ($\ge$ \textsf{chemobabel} v0.7 [2015/08/26]).
+To solve this problem, I improved the internal macros since \Lver{v0.7 [2015/08/26]}.
 Now you can put any kinds of SMILES notations directly without worrying
 about special characters (\verb|\|, \verb|%|, etc).
 Note that the undesirable workaround (like changing \verb|\catcode| inside
@@ -576,15 +582,15 @@ Note that the undesirable workaround (like changing \verb|\catcode| inside
 %</en>
 
 %<*ja>
-\noindent \textbf{旧バージョンのユーザに対する注意} ($\le$ \textsf{chemobabel} v0.6 [2015/06/29])
+\noindent \textbf{\Lver{v0.6 [2015/06/29]}以前の旧バージョンのユーザに対する注意}
 
-古いバージョンの\textsf{chemobabel}では，
+古いバージョンの\Lpack{chemobabel}では，
 これらの\LaTeX で特別な意味を持つ文字に注意を払う必要がありました。
 従来私が紹介してきた回避策は“カジュアルな \LaTeX ユーザ”に
 カテゴリーコードを手動で変更させていたため，好ましいものではありませんでした。
 
-この問題を解決するため，パッケージ本体の側でこれらの文字をサポートする
-マクロを組み込みました（\textsf{chemobabel} v0.7 [2015/08/26] 以降）。
+この問題を解決するため，\Lver{v0.7 [2015/08/26]}以降では
+パッケージ本体の側でこれらの文字をサポートするように改良を施しました。
 これにより，\verb|\| や \verb|%| といった特別な文字を心配することなく，
 任意のSMILES表記を直接引数に渡すことができるようになっています。
 従来の回避策（\verb|\begingroup| ... \verb|\endgroup| 内で \verb|\catcode| を
@@ -601,16 +607,16 @@ Note that the undesirable workaround (like changing \verb|\catcode| inside
 %</ja>
 
 %<*en>
-By default, \textsf{chemobabel} converts chemical structures into
+By default, \Lpack{chemobabel} converts chemical structures into
 PDF images using Inkscape. However, you can switch the image format
 and the conversion program if you like.
 
 When you are using drivers which do not support PDF figures (such as dvips),
-it will be helpful if \textsf{chemobabel} converts them into EPS images.
+it will be helpful if \Lpack{chemobabel} converts them into EPS images.
 For this purpose, you can use:
 %</en>
 %<*ja>
-\textsf{chemobabel} パッケージは，デフォルトでは化学構造式をInkscapeによって
+\Lpack{chemobabel} パッケージは，デフォルトでは化学構造式をInkscapeによって
 PDF形式の画像ファイルに変換して文書中に取り込みます。
 しかし，オプションで画像形式と変換プログラムを変更することができます。
 
@@ -622,19 +628,19 @@ dvipsなどのPDF非対応のドライバを使用する場合は，EPS形式の
 \end{verbatim}
 %<*en>
 The option \verb|eps| switches the image format (that is, output format
-from Inkscape) into EPS ($\ge$ \textsf{chemobabel} v0.9d [2016/02/28]).
+from Inkscape) into EPS (since \Lver{v0.9d [2016/02/28]}).
 
 You can also change the image conversion program from ``Inkscape'' to
-``rsvg-convert'' ($\ge$ \textsf{chemobabel} v0.9e [2016/03/07]).
+``rsvg-convert'' (since \Lver{v0.9e [2016/03/07]}).
 The program rsvg-convert is faster than inkscape, so it will be useful.
 For this purpose, use \verb|librsvg| option:
 %</en>
 %<*ja>
 というように \verb|eps| オプションを指定すれば，内部でInkscapeから出力される
-画像形式をPDFではなくEPSに変更します（\textsf{chemobabel} v0.9d [2016/02/28] 以降）。
+画像形式をPDFではなくEPSに変更します（\Lver{v0.9d [2016/02/28]}以降）。
 
 また，画像変換プログラムを Inkscape から rsvg-convert に変更することもできます
-（\textsf{chemobabel} v0.9e [2016/03/07] 以降）。
+（\Lver{v0.9e [2016/03/07]}以降）。
 rsvg-convertはInkscapeより高速ですから，便利かもしれません。
 この場合は，以下のように \verb|librsvg| オプションを指定します。
 %</ja>
@@ -656,13 +662,13 @@ The default behavior is equivalent to the \verb|pdf| and \verb|inkscape| options
 Moreover, Open Babel v2.4.0 or later versions generate images with
 a rather large margin. To avoid this, the images are cropped
 using \verb|pdfcrop| for PDF or \verb|ps2eps| for EPS
-($\ge$ \textsf{chemobabel} v0.9i [2022/09/12]).
+(since \Lver{v0.9i [2022/09/12]}).
 If you want to disable this cropping, please add \verb|nocrop| option:
 %</en>
 %<*ja>
 さらに，Open Babel v2.4.0以降で生成される画像はデフォルトで余白が大きいため，
 \verb|pdfcrop|（PDFの場合）あるいは\verb|ps2eps|（EPSの場合）で
-クロップしています（\textsf{chemobabel} v0.9i [2022/09/12] 以降）。
+クロップしています（\Lver{v0.9i [2022/09/12]}以降）。
 これをやめたい場合は \verb|nocrop| オプションを指定してください。
 %</ja>
 \begin{verbatim}
@@ -714,7 +720,7 @@ When typesetting, usual command
 $ pdflatex test.tex
 \end{verbatim}
 can be used. 
-With \verb|extract| option, all \textsf{chemobabel} does is extracting
+With \verb|extract| option, all \Lpack{chemobabel} does is extracting
 all \verb|\chemobabel| and \verb|\smilesobabel| commands from the
 original \LaTeX\ file.
 You will get ``ChemFigFile.tex'' in the same directory, a minimal
@@ -728,7 +734,7 @@ You can simply typeset it by
 $ platex test.tex
 \end{verbatim}
 というコマンドを使います。
-\verb|extract| オプションを付けると，\textsf{chemobabel}パッケージは
+\verb|extract| オプションを付けると，\Lpack{chemobabel}パッケージは
 単に元の\LaTeX ソースから \verb|\chemobabel| と \verb|\smilesobabel| コマンド
 だけを抽出するはたらきをします。
 その結果，同じディレクトリに「ChemFigFile.tex」というファイルが生成します。
@@ -740,9 +746,9 @@ $ pdflatex -shell-escape ChemFigFile.tex
 \end{verbatim}
 %<*ja>
 欧文と同じ仕様に統一したため，抽出される「ChemFigFile.tex」では
-\textsf{graphicx}パッケージに \texttt{[dvipdfmx]} オプション
+\Lpack{graphicx}パッケージに \verb+[dvipdfmx]+ オプション
 を与えずに読み込んでいます。したがって，
-このタイプセットだけは\texttt{pdflatex}を用いてください。
+このタイプセットだけは\Lcode{pdflatex}を用いてください。
 %</ja>
 %<*en>
 and you will get PDF figures in the same way
@@ -786,12 +792,12 @@ $ dvipdfmx test.dvi
 
 %<*en>
 As I have already mentioned, in both \verb|\chemobabel| and \verb|\smilesobabel|,
-you can give some \textit{obabel options} in the second braces.
+you can give some \Lmeta{obabel options} in the second braces.
 Here I will introduce some examples.
 %</en>
 %<*ja>
 既に述べたとおり，\verb|\chemobabel| と \verb|\smilesobabel| の両方について，
-2つめの中括弧に \textit{obabel options} を与えることができます。
+2つめの中括弧に \Lmeta{obabel options} を与えることができます。
 ここで，いくつかの有用な例を挙げておきます。
 %</ja>
 \begin{itemize}
@@ -817,8 +823,8 @@ $ obabel -:"CC(=O)Nc1ccc(cc1)O" -O smilesobabelimg[NUM].svg -xu -xC
 \begin{verbatim}
 \chemobabel{ATP.cdx}{-xd}
 \end{verbatim}
-%<en>You can add \texttt{-xd} option to remove filenames from ChemDraw figures with Open Babel 2.x.
-%<ja>Open Babel 2.x系列でChemDrawの図からファイル名を取り除くには，\texttt{-xd} オプションを付けます：
+%<en>You can add \Lcode{-xd} option to remove filenames from ChemDraw figures with Open Babel 2.x.
+%<ja>Open Babel 2.x系列でChemDrawの図からファイル名を取り除くには，\Lcode{-xd} オプションを付けます：
 \begin{verbatim}
 $ obabel -:"ATP.cdx" -O chemobabelimg[NUM].svg -xd
 \end{verbatim}
@@ -829,7 +835,7 @@ $ obabel -:"ATP.cdx" -O chemobabelimg[NUM].svg -xd
   \smilesobabel[width=21mm]{CC(=O)Nc1ccc(cc1)O}{} \hspace{1cm}
   \smilesobabel[width=25mm]{CC(=O)Nc1ccc(cc1)O}{-xa} \hspace{1cm}
   \smilesobabel[width=21mm]{CC(=O)Nc1ccc(cc1)O}{-xu}
-  \caption{Acetaminophen (Paracetamol): Nothing, \texttt{-xa}, \texttt{-xu}}
+  \caption{Acetaminophen (Paracetamol): Nothing, \Lcode{-xa}, \Lcode{-xu}}
   SMILES: \verb|CC(=O)Nc1ccc(cc1)O|
 \end{figure}
 
@@ -838,7 +844,7 @@ $ obabel -:"ATP.cdx" -O chemobabelimg[NUM].svg -xd
   \smilesobabel[width=25mm]{C1[C@H](C)C[C@@H](O)C1}{} \hspace{1cm}
   \smilesobabel[width=25mm]{C1[C@H](C)C[C@@H](O)C1}{-xC} \hspace{1cm}
   \smilesobabel[width=25mm]{C1[C@H](C)C[C@@H](O)C1}{-xt}
-  \caption{(1\textit{S},3\textit{S})-3-Methylcyclopentanol: Nothing, \texttt{-xC}, \texttt{-xt}}
+  \caption{(1\textit{S},3\textit{S})-3-Methylcyclopentanol: Nothing, \Lcode{-xC}, \Lcode{-xt}}
   SMILES: \verb|C1[C@H](C)C[C@@H](O)C1|
 \end{figure}
 
@@ -847,7 +853,7 @@ $ obabel -:"ATP.cdx" -O chemobabelimg[NUM].svg -xd
   \smilesobabel[width=42mm]{CCc1cccc(c1)C(=O)Cl}{} \hspace{1cm}
   \smilesobabel[width=42mm]{CCc1cccc(c1)C(=O)Cl}{-xa -xu} \hspace{1cm}
   \smilesobabel[width=42mm]{CCc1cccc(c1)C(=O)Cl}{-xu -xC}
-  \caption{3-Ethylbenzoyl chloride: Nothing, \texttt{-xa -xu}, \texttt{-xu -xC}}
+  \caption{3-Ethylbenzoyl chloride: Nothing, \Lcode{-xa -xu}, \Lcode{-xu -xC}}
   SMILES: \verb|CCc1cccc(c1)C(=O)Cl|
 \end{figure}
 
@@ -855,7 +861,7 @@ $ obabel -:"ATP.cdx" -O chemobabelimg[NUM].svg -xd
   \centering
   \smilesobabel[width=42mm]{CCc1cccc(c1)C(=O)Cl}{--highlight "cC=O blue"} \hspace{1cm}
   \smilesobabel[width=42mm]{CCc1cccc(c1)C(=O)Cl}{-xA --genalias}
-  \caption{3-Ethylbenzoyl chloride: \texttt{--highlight "cC=O blue"}, \texttt{-xA --genalias}}
+  \caption{3-Ethylbenzoyl chloride: \Lcode{--highlight "cC=O blue"}, \Lcode{-xA --genalias}}
   SMILES: \verb|CCc1cccc(c1)C(=O)Cl|
 \end{figure}
 
@@ -863,14 +869,14 @@ $ obabel -:"ATP.cdx" -O chemobabelimg[NUM].svg -xd
   \centering
   \chemobabel[width=65mm]{draw/Firefly luciferin.mol}{} \hspace{1cm}
   \chemobabel[width=65mm]{draw/Firefly luciferin.mol}{-xa}
-  \caption{Firefly luciferin (from MDL Molfiles): Nothing, \texttt{-xa}}
+  \caption{Firefly luciferin (from MDL Molfiles): Nothing, \Lcode{-xa}}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
   \chemobabel[width=70mm]{draw/ATP.cdx}{} \hspace{1cm}
   \chemobabel[width=70mm]{draw/ATP.cdx}{-xd}
-  \caption{ATP (from ChemDraw files): Nothing, \texttt{-xd}}
+  \caption{ATP (from ChemDraw files): Nothing, \Lcode{-xd}}
 \end{figure}
 
 \begin{figure}[ht]
@@ -949,10 +955,10 @@ Sesamin: \verb|c1cc2c(cc1C3C4COC(C4CO3)c5ccc6c(c5)OCO6)OCO2|
   \centering
   \includegraphics[scale=0.5]{figures/Mac231-sesamin-normal.pdf}
   \includegraphics[scale=0.5]{figures/Mac231-sesamin-gen2d.pdf}
-  \caption{Sesamin (figures from Open Babel for Mac 2.3.1; Normal and \texttt{--gen2d})}
+  \caption{Sesamin (figures from Open Babel for Mac 2.3.1; Normal and \Lcode{--gen2d})}
   \includegraphics[scale=0.5]{figures/Win232-sesamin-normal.pdf}
   \includegraphics[scale=0.5]{figures/Win232-sesamin-gen2d.pdf}
-  \caption{Sesamin (figures from Open Babel for Win 2.3.2; Normal and \texttt{--gen2d})}
+  \caption{Sesamin (figures from Open Babel for Win 2.3.2; Normal and \Lcode{--gen2d})}
 \end{center}
 \end{figure}
 
@@ -1001,20 +1007,20 @@ only one character string is very interesting, isn't it?
 %</ja>
 
 %<*en>
-\subsection{Advantages of \textsf{chemobabel}}
+\subsection{Advantages of \Lpack{chemobabel}}
 %</en>
 %<*ja>
-\subsection{\textsf{chemobabel}パッケージの有利な点}
+\subsection{\Lpack{chemobabel}パッケージの有利な点}
 %</ja>
 
 %<*en>
 The macros \verb|\smiles| (written by Noel O'Boyle \cite{NOB1}) and
-\verb|\obabel| (depends on \textsf{graphvizObabel.sty} by
+\verb|\obabel| (depends on \Lpack{graphvizObabel.sty} by
 Jakob Lykke Andersen's \cite{JLA}) can be used as follows:
 %</en>
 %<*ja>
 Noel O'Boyleさんによる \verb|\smiles| \cite{NOB1} あるいは
-Jakob Lykke Andersenさんによる\textsf{graphvizObabel.sty}が
+Jakob Lykke Andersenさんによる\Lpack{graphvizObabel.sty}が
 提供する \verb+\obabel+ \cite{JLA} は以下のようにして使うことになっています：
 %</ja>
 \begin{verbatim}
@@ -1065,7 +1071,7 @@ Also, computer-generated formulas may sometimes be unnatural and undesirable.
 Therefore this method will be useful only when you need a simple method
 for inserting structural formulas with minimal modification.
 If you are not satisfied with the output, consider using {\XyMTeX} or
-\textsf{chemfig} packages instead.
+\Lpack{chemfig} packages instead.
 
 I also found following packages which can be used for similar purpose:
 %</en>
@@ -1078,16 +1084,16 @@ I also found following packages which can be used for similar purpose:
 好ましくない場合もあるかもしれません。
 したがって，この方法は構造式の出力を完全に制御したいという意図がなく，
 構造式を簡便に挿入したい場合にのみ役に立つでしょう。
-出力に満足できない場合は，\XyMTeX や\textsf{chemfig}のようなパッケージを
+出力に満足できない場合は，\XyMTeX や\Lpack{chemfig}のようなパッケージを
 代わりに使うことをご検討ください。
 
 同様の目的を達成するために使えそうなパッケージとして，
 以下のようなものもあります：
 %</ja>
 \begin{itemize}
-  \item \href{http://www.ctan.org/pkg/mol2chemfig}{\textsf{mol2chemfig}}:
+  \item \href{http://www.ctan.org/pkg/mol2chemfig}{\Lpack{mol2chemfig}}:
     convert chemical structures from MDL molfile format
-    to \textsf{chemfig} source code
+    to \Lpack{chemfig} source code
 \end{itemize}
 
 \clearpage
@@ -1136,7 +1142,7 @@ It is important to prevent these characters from being translated as
 \LaTeX\ special characters.
 However, a backslash (\verb|\|) is a default escape character in \LaTeX,
 and a percent symbol (\verb|%|) also has a special meaning as a comment character.
-In \textsf{chemobabel} (higher than v0.7), all these characters are
+In \Lpack{chemobabel} (higher than v0.7), all these characters are
 handled properly by changing category codes temporarily (like \verb+\verb+). \\
 %</en>
 %<*ja>
@@ -1144,17 +1150,11 @@ handled properly by changing category codes temporarily (like \verb+\verb+). \\
 必要がありますが，バックスラッシュ \verb|\| はデフォルトの
 エスケープ文字であり，またパーセント記号 \verb|%| もコメント文字と
 しての特殊な意味を持っています。
-\textsf{chemobabel} v0.7以上では，カテゴリーコードを一時的に変更することで
+\Lpack{chemobabel} v0.7以上では，カテゴリーコードを一時的に変更することで
 これらすべての文字を適切に扱うようになっています（\verb+\verb+と同様の手法）。
 %</ja>
 
 \clearpage
-
-To do (if possible):
-\begin{itemize}
-\item Check whether \texttt{obabel} and \texttt{inkscape} are successfully
-installed or not, before running programs.
-\end{itemize}
 
 %<*en>
 \section{Version History}
@@ -1166,10 +1166,10 @@ installed or not, before running programs.
 \begin{table}[h]
 \centering
 \begin{tabular}{ll}
-2014/12/01 v0.1  & Made public as \textsf{smilesobabel.sty} \\
+2014/12/01 v0.1  & Made public as \Lpack{smilesobabel.sty} \\
 2014/12/02 v0.2  & Add options which can be passed to obabel. \\
-2014/12/07 v0.3  & Change name of package: \textsf{chemobabel.sty} \\
-                 & Images are stored in \texttt{chemobabelimgdir}. \\
+2014/12/07 v0.3  & Change name of package: \Lpack{chemobabel.sty} \\
+                 & Images are stored in \Lcode{chemobabelimgdir}. \\
                  & Add \verb|\chemobabel| command. \\
 2014/12/09 v0.4  & Fix a bug: (Thanks: Yusuke Terada) \\
                  & Extra spaces at the end of lines are removed. \\
@@ -1198,7 +1198,7 @@ installed or not, before running programs.
 \textbf{Important!}
 \begin{itemize}
 \item In Version 0.2, the number of parameters set in \verb|\smilesobabel| is changed!
-\item From Version 0.3, the package name is changed to \textsf{chemobabel.sty}.
+\item From Version 0.3, the package name is changed to \Lpack{chemobabel.sty}.
 \item From Version 0.7, the \verb|\catcode|-related workaround is rather harmful.
 \end{itemize}
 
