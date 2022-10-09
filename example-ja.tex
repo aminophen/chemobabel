@@ -9,7 +9,7 @@
 %    $ dvipdfmx example-ja.dvi
 
 \documentclass[dvipdfmx]{jsarticle}
-\usepackage[librsvg]{chemobabel}
+\usepackage[librsvg,extract]{chemobabel}
 
 \title{\textsf{chemobabel.sty} の使用例}
 \author{アセトアミノフェン}
@@ -19,7 +19,7 @@
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel{CCO}{}
+  \smilesobabel*{CCO}
   \caption{エタノール}
 \end{figure}
 
@@ -31,8 +31,8 @@
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[scale=0.7]{Cl/C=C/Br}{}
-  \smilesobabel[scale=0.7]{Cl/C=C\Br}{}
+  \smilesobabel*[scale=0.7]{Cl/C=C/Br}
+  \smilesobabel*[scale=0.7]{Cl/C=C\Br}
   \caption{(\textit{E})-1-ブロモ-2-クロロエテンと(\textit{Z})-1-ブロモ-2-クロロエテン}
 \end{figure}
 
@@ -44,7 +44,7 @@
 
 \begin{figure}[ht]
   \centering
-  \chemobabel[scale=0.4]{draw/Brevetoxin A.mol}{}
+  \chemobabel*[scale=0.4]{draw/Brevetoxin A.mol}
   \caption{ブレベトキシンA}
 \end{figure}
 

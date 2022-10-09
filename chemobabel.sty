@@ -126,14 +126,28 @@
 % 1: (optional) options for includegraphics
 % 2: SMILES notation
 % 3: options for obabel
-\newcommand\smilesobabel[1][scale=1]{%
+\newcommand\smilesobabel{\@ifstar{\smilesobabel@i}{\smilesobabel@ii}}
+\newcommand\smilesobabel@i[1][scale=1]{%
   \def\smilesobabel@next{\includegraphics[#1]}%
   \begingroup
     \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
-    \@smilesobabel
+    \@smilesobabel@i
 }
-\newcommand\@smilesobabel[2]{%
+\newcommand\smilesobabel@ii[1][scale=1]{%
+  \def\smilesobabel@next{\includegraphics[#1]}%
+  \begingroup
+    \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
+    \@smilesobabel@ii
+}
+\def\@smilesobabel@i#1{%
   \endgroup
+  \@smilesobabel@main{#1}{}%
+}
+\def\@smilesobabel@ii#1#2{%
+  \endgroup
+  \@smilesobabel@main{#1}{#2}%
+}
+\def\@smilesobabel@main#1#2{%
   \chemob@bel@exec{%
     \smilesob@bel@obabelcmd{#1}{#2} 2>\smilesob@belGetName.log
     && \chemob@bel@svgtoimgcmd{\smilesob@belGetName}{\chemob@belimgExt} 2>>\smilesob@belGetName.log
@@ -153,14 +167,28 @@
 % 1: (optional) options for includegraphics
 % 2: original files (.mol, .cdx, etc.)
 % 3: options for obabel
-\newcommand\chemobabel[1][scale=1]{%
+\newcommand\chemobabel{\@ifstar{\chemobabel@i}{\chemobabel@ii}}
+\newcommand\chemobabel@i[1][scale=1]{%
   \def\chemobabel@next{\includegraphics[#1]}%
   \begingroup
     \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
-    \@chemobabel
+    \@chemobabel@i
 }
-\newcommand\@chemobabel[2]{%
+\newcommand\chemobabel@ii[1][scale=1]{%
+  \def\chemobabel@next{\includegraphics[#1]}%
+  \begingroup
+    \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
+    \@chemobabel@ii
+}
+\def\@chemobabel@i#1{%
   \endgroup
+  \@chemobabel@main{#1}{}%
+}
+\def\@chemobabel@ii#1#2{%
+  \endgroup
+  \@chemobabel@main{#1}{#2}%
+}
+\def\@chemobabel@main#1#2{%
   \IfFileExists{"#1"}{%
     % the file exists: start processing
     % (``#1'' can contain spaces, so ``"'' required)
@@ -344,31 +372,51 @@
       Some chemical structures are extracted.\MessageBreak
       Run 'pdflatex -shell-escape ChemFigFile.tex'}}%
 }
-\renewcommand\smilesobabel{%
+% \smilesobabel*[#1]{#2} => normalized to \smilesobabel[#1]{#2}{#3}
+\renewcommand\smilesobabel@i{%
   \begingroup
-  \let\do\@makeother
-  \dospecials
-  \catcode`\{=1
-  \catcode`\}=2
-  \@@smilesobabel
+    \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
+    \@smilesobabel@i
 }
-\newcommand\@@smilesobabel[3][scale=1]{%
+\renewcommand\smilesobabel@ii{%
+  \begingroup
+    \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
+    \@smilesobabel@ii
+}
+\renewcommand\@smilesobabel@i[2][scale=1]{%
   \endgroup
+  \@smilesobabel@main{#1}{#2}{}%
+}
+\renewcommand\@smilesobabel@ii[3][scale=1]{%
+  \endgroup
+  \@smilesobabel@main{#1}{#2}{#3}%
+}
+\def\@smilesobabel@main#1#2#3{%
   \immediate\write\chemob@bel@outfile{%
     \string\smilesobabel[#1]{#2}{#3}%
     \string\newpage}%
   [\smilesob@belGetName.\chemob@belimgExt]%
   \addtocounter{smilesob@belCounter}{1}}
-\renewcommand\chemobabel{%
+% \chemobabel*[#1]{#2} => normalized to \chemobabel[#1]{#2}{#3}
+\renewcommand\chemobabel@i{%
   \begingroup
-  \let\do\@makeother
-  \dospecials
-  \catcode`\{=1
-  \catcode`\}=2
-  \@@chemobabel
+    \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
+    \@chemobabel@i
 }
-\newcommand\@@chemobabel[3][scale=1]{%
+\renewcommand\chemobabel@ii{%
+  \begingroup
+    \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
+    \@chemobabel@ii
+}
+\renewcommand\@chemobabel@i[2][scale=1]{%
   \endgroup
+  \@chemobabel@main{#1}{#2}{}%
+}
+\renewcommand\@chemobabel@ii[3][scale=1]{%
+  \endgroup
+  \@chemobabel@main{#1}{#2}{#3}%
+}
+\def\@chemobabel@main#1#2#3{%
   \immediate\write\chemob@bel@outfile{%
     \string\chemobabel[#1]{#2}{#3}%
     \string\newpage}%
