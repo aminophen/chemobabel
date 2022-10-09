@@ -76,14 +76,14 @@ For English documentation, please refer to chemobabel-en.pdf.
 \begin{figure}[ht]
   \centering
   \chemobabel[width=65mm]{draw/Firefly luciferin.mol}{} \quad
-  \chemobabel[width=90mm]{draw/Brevetoxin A.mol}{}
+  \chemobabel*[width=90mm]{draw/Brevetoxin A.mol}
   \caption{Firefly luciferin \& Brevetoxin A (from MDL Molfiles)}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
   \chemobabel[width=90mm]{draw/ATP.cdx}{} \hspace{1cm}
-  \chemobabel[width=35mm]{draw/Glucose.cdx}{}
+  \chemobabel*[width=35mm]{draw/Glucose.cdx}
   \caption{ATP (Adenosine triphosphate) \& Glucose (from ChemDraw files)}
 \end{figure}
 \begin{center}\small
@@ -94,15 +94,15 @@ becomes wrong.\\ See \url{https://github.com/openbabel/openbabel/issues/338}
 \begin{figure}[ht]
   \centering
   \smilesobabel[width=36mm]{CCO}{} \hspace{1cm}
-  \smilesobabel[width=40mm]{CC(C(=O)O)N}{} \hspace{1cm}
-  \smilesobabel[width=30mm]{C1[C@H](C)C[C@@H](O)C1}{}
+  \smilesobabel*[width=40mm]{CC(C(=O)O)N} \hspace{1cm}
+  \smilesobabel*[width=30mm]{C1[C@H](C)C[C@@H](O)C1}
   \caption{Ethanol, Alanine \& (1\textit{S},3\textit{S})-3-Methylcyclopentanol (from SMILES notations)}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[width=30mm]{CC(=O)Nc1ccc(cc1)O}{} \hspace{1cm}
-  \smilesobabel[width=40mm]{C([C@@H]1[C@H]([C@@H]([C@H]([C@H](O1)O)O)O)O)O}{}
+  \smilesobabel*[width=30mm]{CC(=O)Nc1ccc(cc1)O} \hspace{1cm}
+  \smilesobabel*[width=40mm]{C([C@@H]1[C@H]([C@@H]([C@H]([C@H](O1)O)O)O)O)O}
   \caption{Acetaminophen (Paracetamol) \& $\alpha$-\textsc{d}-Glucose (from SMILES notations)}
 \end{figure}
 
@@ -402,7 +402,7 @@ ChemDrawで描画したファイル，\verb|Brevetoxin A.mol| は
 
 \begin{verbatim}
 \chemobabel[width=90mm]{draw/ATP.cdx}{}
-\chemobabel[width=120mm]{draw/Brevetoxin A.mol}{}
+\chemobabel*[width=120mm]{draw/Brevetoxin A.mol}
 \end{verbatim}
 
 %<*en>
@@ -434,7 +434,7 @@ $ dvipdfmx test.dvi
 \begin{figure}[h]
   \centering
   \chemobabel[width=90mm]{draw/ATP.cdx}{} \\ \vspace{1cm}
-  \chemobabel[width=120mm]{draw/Brevetoxin A.mol}{}
+  \chemobabel*[width=120mm]{draw/Brevetoxin A.mol}
   \caption{Conversion from ATP.cdx and Brevetoxin A.mol}\label{fig:chem1}
 \end{figure}
 
@@ -442,26 +442,36 @@ $ dvipdfmx test.dvi
 %<ja>構文は以下のとおりです。
 \begin{center}
 \verb|\chemobabel[|\textit{options}\verb|]{|\textit{filename}\verb|}{|\textit{obabel options}\verb|}|
+\verb|\chemobabel*[|\textit{options}\verb|]{|\textit{filename}\verb|}|
 \end{center}
 %<*en>
-As parameters, \textit{filename} should be placed in the first braces, and
-\textit{obabel options} (see Section \ref{depict} for some examples)
-can be added in the second braces.
-You can leave the second parameter empty.
-
-You can give \textit{options} to be passed to \verb|\includegraphics|
-command as optional parameters in the box brackets.
-This option is not necessary, so can be omitted. In this case the default
-option ``scale=1" is passed to \verb|\includegraphics| command.
+\verb|\chemobabel| takes one optional parameter and two mandatory parameters.
+\begin{itemize}
+ \item The optional parameter \textit{options} in the box brackets
+   is passed to \verb|\includegraphics|.
+   If omitted, the default ``scale=1' is assumed.
+ \item The first mandatory parameter \textit{filename} is the file name
+   which contains chemical structural formula.
+ \item The second mandatory parameter \textit{obabel options}
+   is passed to \verb|obabel| command
+   (see Section \ref{depict} for some examples).
+\end{itemize}
+If you want to leave the second parameter empty,
+a shorthand form \verb|\chemobabel*| is also available
+(since \textsf{chemobabel} v0.9k [2022/10/09]).
 %</en>
 %<*ja>
-引数として，中括弧の1つめにファイル名を与え，2つめにobabelに送る
-オプション（例は第\ref{depict}節を参照）を指定してください。
-2つめの引数は空にすることもできます。
-
-また，オプションとして角括弧に \verb|\includegraphics| に渡すオプションを
-指定することができます。
-このオプションは省略可能で，何も指定しない場合は scale=1 が適用されます。
+\verb|\chemobabel| は1つのオプション引数と2つの必須引数をとります。
+\begin{itemize}
+ \item 角括弧内のオプション引数は \verb|\includegraphics| に渡されます。
+   省略された場合は \verb|scale=1| とみなされます。
+ \item 必須引数の1つめには化学構造式が描かれたファイル名を与えます。
+ \item 必須引数の2つめには \verb|obabel| に送るオプション
+   （例は第\ref{depict}節を参照）を指定します。
+\end{itemize}
+必須引数の2つめを空にしたい場合は，
+短縮形として \verb|\chemobabel*| を使用することもできます
+（\textsf{chemobabel} v0.9k [2022/10/09] 以降）。
 %</ja>
 
 %<*en>
@@ -488,7 +498,7 @@ Use \verb|\smilesobabel| command as follows:
 
 \begin{verbatim}
 \smilesobabel{CCO}{}
-\smilesobabel[width=35mm]{CC(=O)Nc1ccc(cc1)O}{}
+\smilesobabel*[width=25mm]{CC(=O)Nc1ccc(cc1)O}
 \end{verbatim}
 
 %<*en>
@@ -511,7 +521,7 @@ $ dvipdfmx test.dvi
 \begin{figure}[h]
   \centering
   \smilesobabel{CCO}{} \quad
-  \smilesobabel[width=25mm]{CC(=O)Nc1ccc(cc1)O}{}
+  \smilesobabel*[width=25mm]{CC(=O)Nc1ccc(cc1)O}
   \caption{Conversion from SMILES notation}\label{fig:smi1}
 \end{figure}
 
@@ -539,13 +549,13 @@ these special characters.
 特別な文字を含むことができる設計になっています。
 %</ja>
 \begin{verbatim}
-\smilesobabel[width=28mm]{Cl/C=C/Br}{}
-\smilesobabel[width=28mm]{Cl/C=C\Br}{}
+\smilesobabel*[width=28mm]{Cl/C=C/Br}
+\smilesobabel*[width=28mm]{Cl/C=C\Br}
 \end{verbatim}
 \begin{figure}[h]
   \centering
-  \smilesobabel[width=28mm]{Cl/C=C/Br}{} \quad
-  \smilesobabel[width=28mm]{Cl/C=C\Br}{}
+  \smilesobabel*[width=28mm]{Cl/C=C/Br} \quad
+  \smilesobabel*[width=28mm]{Cl/C=C\Br}
 \end{figure}
 
 %<*en>
@@ -897,14 +907,14 @@ Open BabelはSMILES表記から複雑な構造式を生成することができ�
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[width=55mm]{CN1CC[C@]23c4c5ccc(c4O[C@H]2[C@H](C=C[C@H]3[C@H]1C5)O)O}{}
+  \smilesobabel*[width=55mm]{CN1CC[C@]23c4c5ccc(c4O[C@H]2[C@H](C=C[C@H]3[C@H]1C5)O)O}
   \caption{($-$)-Morphine}
   SMILES: \verb|CN1CC[C@]23c4c5ccc(c4O[C@H]2[C@H](C=C[C@H]3[C@H]1C5)O)O|
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \smilesobabel[width=150mm]{C[C@@H]1C[C@H]2[C@@H](CC(=O)O2)O[C@H]3C[C@@H]4[C@H](C[C@@H]([C@@H]5[C@@H](O4)C/C=C\C[C@@H]6[C@@H](O5)C/C=C\[C@@H]7[C@@H](O6)CCC[C@@H]8[C@@](O7)(C[C@@H]9[C@@H](O8)C[C@@H]2[C@@H](O9)[C@H](C[C@H](O2)CC(=C)C=O)O)C)C)O[C@@]3(C1)C}{}
+  \smilesobabel*[width=150mm]{C[C@@H]1C[C@H]2[C@@H](CC(=O)O2)O[C@H]3C[C@@H]4[C@H](C[C@@H]([C@@H]5[C@@H](O4)C/C=C\C[C@@H]6[C@@H](O5)C/C=C\[C@@H]7[C@@H](O6)CCC[C@@H]8[C@@](O7)(C[C@@H]9[C@@H](O8)C[C@@H]2[C@@H](O9)[C@H](C[C@H](O2)CC(=C)C=O)O)C)C)O[C@@]3(C1)C}
   \caption{Brevetoxin A}
   SMILES (Sorry but too long): \verb|C[C@@H]1C[C@H]2[C@@H](CC(=O)O2)O[C@H]3C[C@@H]4[C@H](C[C@@H]([C@@H]5[C@@H](O4)C/C=C\C[C@@H]6[C@@H](O5)C/C=C\[C@@H]7[C@@H](O6)CCC[C@@H]8[C@@](O7)(C[C@@H]9[C@@H](O8)C[C@@H]2[C@@H](O9)[C@H](C[C@H](O2)CC(=C)C=O)O)C)C)O[C@@]3(C1)C|
 \end{figure}
@@ -963,7 +973,7 @@ Here we can see the formula generated from a SMILES notation lacks one double bo
   \caption{Firefly luciferin: exact structure from ChemSpider ID 4588411}
   \includegraphics[scale=0.6]{figures/Win232-FireflyLuciferin.pdf}
   \caption{Firefly luciferin?: output from Open Babel for Win 2.3.2}
-  \smilesobabel[width=66mm]{C1[C@@H](N/C(=c\2/nc3c(=CC(=O)C=C3)s2)/S1)C(=O)O}{}
+  \smilesobabel*[width=66mm]{C1[C@@H](N/C(=c\2/nc3c(=CC(=O)C=C3)s2)/S1)C(=O)O}
   \caption{Firefly luciferin?: output from current Open Babel}
   SMILES: \verb|C1[C@@H](N/C(=c\2/nc3c(=CC(=O)C=C3)s2)/S1)C(=O)O|
 \end{figure}
@@ -1179,6 +1189,9 @@ installed or not, before running programs.
 2022/09/11 v0.9h & Support Inkscape version 1.0 command line syntax. \\
 2022/09/12 v0.9i & Crop images before inclusion, add \verb|nocrop| option. \\
 2022/09/19 v0.9j & Check shell-escape status to show better error message. \\
+2022/10/09 v0.9k & Add \verb|\chemobabel*| and \verb|\smilesobabel*|. \\
+                 & Warn if a user need to run another \LaTeX. \\
+                 & Improve \verb|[extract]| to take over user-given package options. \\
 \end{tabular}
 \end{table}
 
