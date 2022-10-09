@@ -1024,7 +1024,7 @@ Jakob Lykke Andersenさんによる\Lpack{graphvizObabel.sty}が
 提供する \verb+\obabel+ \cite{JLA} は以下のようにして使うことになっています：
 %</ja>
 \begin{verbatim}
-% ----- for \smiles command -----
+%% ----- for \smiles command -----
 \newcounter{smilescounter}
 \setcounter{smilescounter}{1}
 \newcommand{\smiles}[1]{
@@ -1032,11 +1032,16 @@ Jakob Lykke Andersenさんによる\Lpack{graphvizObabel.sty}が
   \includegraphics{smilesimg\arabic{smilescounter}.png}
   \addtocounter{smilescounter}{1}
 }
-% ----- for \obabel command -----
-\usepackage{graphvizObabel}
-% ============ usage ============
+ ...
 \smiles{CCO}
+%% -----
+\end{verbatim}
+\begin{verbatim}
+%% ----- for \obabel command -----
+\usepackage{graphvizObabel}
+ ...
 \obabel[scale=0.6]{CCO}
+%% -----
 \end{verbatim}
 %<*en>
 However, \verb|\smiles| command creates raster graphics (.png) and
@@ -1189,6 +1194,7 @@ handled properly by changing category codes temporarily (like \verb+\verb+). \\
 2022/09/11 v0.9h & Support Inkscape version 1.0 command line syntax. \\
 2022/09/12 v0.9i & Crop images before inclusion, add \verb|nocrop| option. \\
 2022/09/19 v0.9j & Check shell-escape status to show better error message. \\
+                 & This is the first release on CTAN! \\
 2022/10/09 v0.9k & Add \verb|\chemobabel*| and \verb|\smilesobabel*|. \\
                  & Warn if a user need to run another \LaTeX. \\
                  & Improve \verb|[extract]| to take over user-given package options. \\
