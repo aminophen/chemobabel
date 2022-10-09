@@ -13,10 +13,12 @@ chemobabel-en.tex: chemobabel.dtx
 chemobabel-ja.tex: chemobabel.dtx
 	lualatex chemobabel.ins
 chemobabel-en.pdf: chemobabel.sty chemobabel-en.tex
+	obabel -V >obversion.txt
 	lualatex -shell-escape chemobabel-en.tex
 	lualatex chemobabel-en.tex
 	lualatex chemobabel-en.tex
 chemobabel-ja.pdf: chemobabel.sty chemobabel-ja.tex
+	obabel -V >obversion.txt
 	lualatex -shell-escape chemobabel-ja.tex
 	lualatex chemobabel-ja.tex
 	lualatex chemobabel-ja.tex

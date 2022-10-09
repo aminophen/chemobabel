@@ -64,17 +64,19 @@ a \LaTeX\ package for \textbf{generating chemical structural formulas}
 to be inserted in your documents.
 The formulas can be generated \textbf{from many kinds of chemical data
 formats}, including MDL Molfiles, ChemDraw files and even from
-SMILES notations, with the help of Open Babel and Inkscape.
-The formulas below are generated using this method.
+SMILES notations, with the help of Open Babel.
+The formulas below are generated using this method.\footnote{Unless
+otherwise noted, this documentation used \Lcode{\input{obversion.txt}}}
 
 日本語版ドキュメントはchemobabel-ja.pdfを参照してください。
 %</en>
 %<*ja>
 この文書では，\textbf{化学構造式を生成}して\LaTeX の文書中に挿入するための
-パッケージである\Lpack{chemobabel.sty}と同梱リソースの使い方を説明します。
+パッケージである\Lpack{chemobabel.sty}の使い方を説明します。
 構造式はOpen Babelの機能を利用することにより，MDL Molfile, ChemDrawファイル，
 さらにはSMILES表記法を含む\textbf{さまざまな化学データ形式から生成}できます。
-以下の構造式はこの方法によって出力されたものです。
+以下の構造式はこの方法によって出力されたものです\footnote{特に断りがない
+限り，この文書で使用した版は\Lcode{\input{obversion.txt}}です。}。
 
 For English documentation, please refer to chemobabel-en.pdf.
 %</ja>
@@ -88,8 +90,8 @@ For English documentation, please refer to chemobabel-en.pdf.
 
 \begin{figure}[ht]
   \centering
-  \chemobabel[width=90mm]{draw/ATP.cdx}{} \hspace{1cm}
-  \chemobabel*[width=35mm]{draw/Glucose.cdx}
+  \chemobabel[width=80mm]{draw/ATP.cdx}{} \hspace{1cm}
+  \chemobabel*[width=30mm]{draw/Glucose.cdx}
   \caption{ATP (Adenosine triphosphate) \& Glucose (from ChemDraw files)}
 \end{figure}
 \begin{center}\small
