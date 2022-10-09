@@ -170,3 +170,5 @@ chemobabelimgdir/*
 ChemFigFile.*
 chemobabel-en.tex
 chemobabel-ja.tex
+00archives/base-*.pdf
+00archives/chemobabelimgdir/*
