@@ -21,6 +21,6 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cml="http://www.xml-cml.org/sch
 <text x="22.000000" y="151.923068" fill="rgb(255,12,12)"  stroke="rgb(255,12,12)" stroke-width="1" font-size="16" >HO</text>
 <text x="62.000005" y="82.641036" fill="rgb(255,12,12)"  stroke="rgb(255,12,12)" stroke-width="1" font-size="16" >HO</text>
 <text font-size="18.000000" fill ="black" font-family="sans-serif"
-x="10.000000" y="20.000000" >draw/Glucose.cdx</text>
-<title>draw/Glucose.cdx - OBDepict</title>
+x="10.000000" y="20.000000" >../draw/Glucose.cdx</text>
+<title>../draw/Glucose.cdx - OBDepict</title>
 </svg>

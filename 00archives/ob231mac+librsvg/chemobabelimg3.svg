@@ -65,6 +65,6 @@ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cml="http://www.xml-cml.org/sch
 <text x="156.318379" y="119.715616" fill="rgb(255,12,12)"  stroke="rgb(255,12,12)" stroke-width="1" font-size="16" >O</text>
 <text x="74.772793" y="119.715616" fill="rgb(255,12,12)"  stroke="rgb(255,12,12)" stroke-width="1" font-size="16" >O</text>
 <text font-size="18.000000" fill ="black" font-family="sans-serif"
-x="10.000000" y="20.000000" >draw/ATP.cdx</text>
-<title>draw/ATP.cdx - OBDepict</title>
+x="10.000000" y="20.000000" >../draw/ATP.cdx</text>
+<title>../draw/ATP.cdx - OBDepict</title>
 </svg>
