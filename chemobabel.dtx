@@ -17,6 +17,7 @@
 \usepackage[nofontspec,defaultsups]{newpxtext}
 \usepackage[zerostyle=c,straightquotes]{newtxtt}
 \usepackage{newpxmath}
+\usepackage{ascmac}
 \usepackage[librsvg]{chemobabel}
 \usepackage[bookmarksnumbered=true,hidelinks,%
  pdftitle={User Manual for chemobabel.sty},%
@@ -121,6 +122,32 @@ becomes wrong.\\ See \url{https://github.com/openbabel/openbabel/issues/338}
 \url{https://github.com/aminophen/chemobabel}\par
 %<en>If you have questions, please let me know.
 %<ja>問い合わせや改善案などはGitHubのIssuesへお願いします。
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+%<en>Also available on CTAN:
+%<ja>CTANからも入手可能です →
+\url{https://www.ctan.org/pkg/chemobabel}\par
+%<en>Distributed with \TeX\ Live and MiK\TeX.
+%<en>Below is a short description for CTAN:\par
+%<ja>\TeX\ LiveやMiK\TeX でも配布されています。
+%<ja>以下はCTANの短い紹介文です。\par
+\begin{screen}
+This package provides a way to convert and include
+chemical structure graphics from various chemical formats,
+such as ChemDraw files, MDL molfile or SMILES notations
+using Open Babel.
+To use this \LaTeX\ package, it is necessary to enable execution
+of the following external commands via \Lcode{latex -shell-escape}.
+\begin{itemize}
+ \item \Lcode{obabel} (Open Babel)
+ \item \Lcode{inkscape} or \Lcode{rsvg-convert}
+   (for SVG -> PDF/EPS conversion)
+ \item \Lcode{pdfcrop} or \Lcode{ps2eps}
+   (optional; for cropping large margins of PDF/EPS)
+\end{itemize}
+\end{screen}
 \end{figure}
 
 \clearpage
