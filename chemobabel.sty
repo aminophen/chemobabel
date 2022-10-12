@@ -19,11 +19,26 @@
 \ProvidesPackage{chemobabel}
   [2022/10/09 v0.9k Chemical structures with Open Babel]
 
+\def\chemob@bel@error{\PackageError{chemobabel}}
+\def\chemob@bel@warn{\PackageWarningNoLine{chemobabel}}
+
 %% Start of package main code
 %% Thanks: http://imada.sdu.dk/~jlandersen/latex/graphvizObabel.sty
 
 \RequirePackage{verbatim}
 \RequirePackage{graphicx}
+
+%% ----- Check graphics/x driver -----
+% prefer .pdf but fallback to .eps if necessary
+% --- currently known drivers all support .eps
+\@ifundefined{Gin@rule@.pdf}{\@ifundefined{Gin@rule@.eps}{%
+  \chemob@bel@warn{Unsupported situation? cannot happen}}{}%
+  % EPS: dvips.def
+  \def\chemob@belimgExt@default{eps}%
+}{%
+  % PDF>EPS: dvipdfmx.def, dvisvgm.def, luatex.def, pdftex.def, xetex.def
+  \def\chemob@belimgExt@default{pdf}%
+}
 
 %% ----- Check status -----
 \chardef\chemob@bel@status\z@
@@ -52,7 +67,7 @@
 {\escapechar=-1 \xdef\chemob@bel@outname{\string\ChemFigFile}}
 \ifx\chemob@bel@jobname\chemob@bel@outname
   \ifnum\chemob@bel@shellescape=\@ne\else
-    \PackageError{chemobabel}{%
+    \chemob@bel@error{%
       Processing \chemob@bel@outname.tex needs -shell-escape.\MessageBreak
       Run 'pdflatex -shell-escape \chemob@bel@outname.tex'}\@ehc
   \fi
@@ -85,7 +100,7 @@
   \IfFileExists{\chemob@belImgName}{% the image exists: include it
     #1{\chemob@belImgName}%
   }{% the image was not created - show a warning and a hint
-    \PackageWarning{chemobabel}{Processing of #3\space failed}%
+    \chemob@bel@warn{Processing of #3\space failed}%
     \fbox{\begin{minipage}{0.9\textwidth}
       Warning in chemobabel: #3\space was not processed.
     \ifnum\chemob@bel@shellescape=\@ne
@@ -200,7 +215,7 @@
     \chemob@bel@common@maybeimg{\chemobabel@next}{\chemob@belGetName}{file ``#1''}%
   }{%
     % the file does not exist: show a std error
-    \PackageError{chemobabel}{File ``#1'' not found}\@ehc
+    \chemob@bel@error{File ``#1'' not found}\@ehc
     \fbox{\begin{minipage}{0.9\textwidth}
       Error in chemobabel: the file ``#1'' does not exist.
     \end{minipage}}%
@@ -247,7 +262,7 @@
 \let\chemob@bel@nocrop\relax
 \DeclareOption{nocrop}{\let\chemob@bel@nocrop\@empty}
 % default settings
-\ExecuteOptions{pdf,inkscape}
+\ExecuteOptions{\chemob@belimgExt@default,inkscape}
 % handle user settings - arbitrary order allowed
 \ProcessOptions*\relax
 \ifx\chemob@bel@nocrop\relax \else
@@ -279,7 +294,7 @@
 }
 \def\chemob@bel@atenddocument{%
   \ifnum\chemob@bel@status>\z@ % at least one is not an image
-      \PackageWarningNoLine{chemobabel}{%
+      \chemob@bel@warn{%
         Some processing failed.\MessageBreak
         Please rerun}%
   \else % all images
@@ -303,13 +318,13 @@
       % compare number of images with the previous shell-escape run
       \ifx\smilesob@bel@imgNum\@undefined\def\smilesob@bel@imgNum{0}\fi
       \ifnum\value{smilesob@belCounter}=\smilesob@bel@imgNum\relax\else
-        \PackageWarningNoLine{chemobabel}{%
+        \chemob@bel@warn{%
           Number of \noexpand\smilesobabel changed.\MessageBreak
           Please rerun}%
       \fi
       \ifx\chemob@bel@imgNum\@undefined\def\chemob@bel@imgNum{0}\fi
       \ifnum\value{chemob@belCounter}=\chemob@bel@imgNum\relax\else
-        \PackageWarningNoLine{chemobabel}{%
+        \chemob@bel@warn{%
           Number of \noexpand\chemobabel changed.\MessageBreak
           Please rerun}%
       \fi
@@ -331,13 +346,13 @@
 
 %% ----- Safety check before opening output file -----
 \ifx\chemob@bel@jobname\chemob@bel@outname
-  \PackageWarningNoLine{chemobabel}{%
+  \chemob@bel@warn{%
     Wow! Your file name is `\chemob@bel@outname'!\MessageBreak
     Option [extract] ignored to avoid overwriting}
   \expandafter\endinput
 \fi
 
-\PackageWarningNoLine{chemobabel}{%
+\chemob@bel@warn{%
   You are using [extract] option.\MessageBreak
   No chemical structures will be printed}
 
@@ -368,7 +383,7 @@
   \immediate\write\chemob@bel@outfile{\string\end{document}}%
   \immediate\closeout\chemob@bel@outfile
   \chemob@bel@ifnochem{}{%
-    \PackageWarningNoLine{chemobabel}{%
+    \chemob@bel@warn{%
       Some chemical structures are extracted.\MessageBreak
       Run 'pdflatex -shell-escape ChemFigFile.tex'}}%
 }
