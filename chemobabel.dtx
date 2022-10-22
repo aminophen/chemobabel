@@ -334,16 +334,21 @@ Noel O'Blog の記事\cite{NOB1}, \cite{NOB2}とコメント\cite{JLA}を見つ�
 First, you have to install \href{http://openbabel.org/}{Open Babel} and
 \href{https://inkscape.org/en/}{Inkscape}
 (or \href{http://librsvg.sourceforge.net/download/}{librsvg}) on your
-computer, and export PATH to the command-line binary of both programs,
+computer, and export PATH to the required command-line programs,
 \Lcode{obabel} and \Lcode{inkscape} (or \Lcode{rsvg-convert}).
+The package also uses \Lcode{pdfcrop} (or \Lcode{ps2eps}) to
+crop large margins, but it is included in \TeX\ Live.
 You can confirm by executing following commands:
 %</en>
 %<*ja>
 初めにコンピュータに\href{http://openbabel.org/}{Open Babel}と
 \href{https://inkscape.org/ja/}{Inkscape}（または
 \href{http://librsvg.sourceforge.net/download/}{librsvg}）をインストールし，
-コマンドライン実行ファイルである
-\Lcode{obabel}と\Lcode{inkscape}（または\Lcode{rsvg-convert}）にPATHを通します。
+必要なコマンドラインプログラムである
+\Lcode{obabel}と\Lcode{inkscape}（または\Lcode{rsvg-convert}）に
+PATHを通します。
+なお，生成画像の大きな余白を切り取るために\Lcode{pdfcrop}（または
+\Lcode{ps2eps}）も利用しますが，これは\TeX\ Liveに収録されています。
 正しくPATHが通っているかどうかは以下のコマンドによって確認できます：
 %</ja>
 %<en>In UNIX operating system:
@@ -458,8 +463,9 @@ obabelやinkscapeを呼んで実行できるようになります。
 \begin{verbatim}
 $ platex -shell-escape test.tex
 \end{verbatim}
-すると \verb|chemobabelimgdir| 以下に「chemobabelimg[NUM].pdf」という
-ファイルが生成します。得られたtest.dviに対して
+するとサブディレクトリ \verb|chemobabelimgdir| 以下に
+「chemobabelimg[NUM].pdf」というファイルが生成します。
+得られたtest.dviに対して
 \begin{verbatim}
 $ dvipdfmx test.dvi
 \end{verbatim}
@@ -484,7 +490,7 @@ $ dvipdfmx test.dvi
 \begin{itemize}
  \item The optional parameter \Lmeta{options} in the box brackets
    is passed to \verb|\includegraphics|.
-   If omitted, the default ``scale=1' is assumed.
+   If omitted, the default ``clip,scale=1' is assumed.
  \item The first mandatory parameter \Lmeta{filename} is the file name
    which contains chemical structural formula.
  \item The second mandatory parameter \Lmeta{obabel options}
@@ -499,7 +505,7 @@ a shorthand form \verb|\chemobabel*| is also available
 \verb|\chemobabel| は1つのオプション引数と2つの必須引数をとります。
 \begin{itemize}
  \item 角括弧内のオプション引数は \verb|\includegraphics| に渡されます。
-   省略された場合は \verb|scale=1| とみなされます。
+   省略された場合は \verb|clip,scale=1| とみなされます。
  \item 必須引数の1つめには化学構造式が描かれたファイル名を与えます。
  \item 必須引数の2つめには \verb|obabel| に送るオプション
    （例は第\ref{depict}節を参照）を指定します。
@@ -752,7 +758,7 @@ can be used.
 With \verb|extract| option, all \Lpack{chemobabel} does is extracting
 all \verb|\chemobabel| and \verb|\smilesobabel| commands from the
 original \LaTeX\ file.
-You will get ``ChemFigFile.tex'' in the same directory, a minimal
+You will get ``ChemFigFile.tex'' in the current directory, a minimal
 \LaTeX\ source file which includes all \verb|\chemobabel| and
 \verb|\smilesobabel| commands.
 You can simply typeset it by
@@ -766,7 +772,7 @@ $ platex test.tex
 \verb|extract| オプションを付けると，\Lpack{chemobabel}パッケージは
 単に元の\LaTeX ソースから \verb|\chemobabel| と \verb|\smilesobabel| コマンド
 だけを抽出するはたらきをします。
-その結果，同じディレクトリに「ChemFigFile.tex」というファイルが生成します。
+その結果，作業ディレクトリに「ChemFigFile.tex」というファイルが生成します。
 これは元のソースに書かれていた \verb|\chemobabel| と \verb|\smilesobabel| コマンド
 をすべて含む最小の \LaTeX ソースで，これは直接pdflatexでタイプセットできます。
 %</ja>
@@ -800,6 +806,27 @@ $ dvipdfmx test.dvi
 \end{verbatim}
 と実行すれば，適切に図を取り込んだ望みどおりの「test.pdf」が得られます。
 この方法を用いれば，タイプセットに要する時間を大幅に短縮することも期待できます。
+%</ja>
+
+%<*en>
+\paragraph{Note on the option \Lcode{-output-directory}}
+
+When using the option \Lcode{-output-directory} of \TeX,
+the extracted code ``ChemFigFile.tex'' goes there
+but the subdirectory \verb|chemobabelimgdir| and
+generated images stay in the current working directory.
+To process the resulting files correctly, it would be
+necessary to move files properly.
+%</en>
+%<*ja>
+\paragraph{注意：\Lcode{-output-directory}オプション}
+
+\TeX の\Lcode{-output-directory}オプションを使用すると，
+抽出ファイル「ChemFigFile.tex」はその指定先に書き出されますが，
+サブディレクトリ \verb|chemobabelimgdir| と生成画像は
+現在のディレクトリとなります。
+従って，抽出ファイルと元のファイルを正しく処理するためには
+ファイルを適切に配置する必要があります。
 %</ja>
 
 \clearpage

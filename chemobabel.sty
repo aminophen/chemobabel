@@ -143,13 +143,13 @@
 % 3: options for obabel
 \newcommand\smilesobabel{\@ifstar{\smilesobabel@i}{\smilesobabel@ii}}
 \newcommand\smilesobabel@i[1][scale=1]{%
-  \def\smilesobabel@next{\includegraphics[#1]}%
+  \def\smilesobabel@next{\includegraphics[clip,#1]}%
   \begingroup
     \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
     \@smilesobabel@i
 }
 \newcommand\smilesobabel@ii[1][scale=1]{%
-  \def\smilesobabel@next{\includegraphics[#1]}%
+  \def\smilesobabel@next{\includegraphics[clip,#1]}%
   \begingroup
     \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
     \@smilesobabel@ii
@@ -184,13 +184,13 @@
 % 3: options for obabel
 \newcommand\chemobabel{\@ifstar{\chemobabel@i}{\chemobabel@ii}}
 \newcommand\chemobabel@i[1][scale=1]{%
-  \def\chemobabel@next{\includegraphics[#1]}%
+  \def\chemobabel@next{\includegraphics[clip,#1]}%
   \begingroup
     \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
     \@chemobabel@i
 }
 \newcommand\chemobabel@ii[1][scale=1]{%
-  \def\chemobabel@next{\includegraphics[#1]}%
+  \def\chemobabel@next{\includegraphics[clip,#1]}%
   \begingroup
     \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
     \@chemobabel@ii
