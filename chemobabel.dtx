@@ -235,7 +235,7 @@ This new package, \Lpack{chemobabel.sty}, will offer a new choice for
 chemists who need chemical structures inserted in their \LaTeX\ documents.
 In this method, we use \href{http://openbabel.org/}{Open Babel} for
 generating chemical structural formulas in SVG format,
-and \href{https://inkscape.org/en/}{Inkscape} for converting SVG to PDF.
+and \href{https://inkscape.org/en/}{Inkscape} for converting SVG to PDF/EPS.
 Both programs are open source and cross-platform, and being actively maintained.
 %</en>
 %<*ja>
@@ -243,7 +243,8 @@ Both programs are open source and cross-platform, and being actively maintained.
 挿入する必要がある化学者に新たな選択肢を提供することでしょう。
 この方法では，\href{http://openbabel.org/}{Open Babel}によって
 SVG形式の構造式画像を生成し，
-さらに\href{https://inkscape.org/ja/}{Inkscape}によってSVGからPDFに変換します。
+さらに\href{https://inkscape.org/ja/}{Inkscape}によってSVGから
+PDFまたはEPS形式の画像に変換します。
 どちらのプログラムもオープンソースかつクロスプラットフォームであり，
 盛んに開発が行われています。
 %</ja>
@@ -662,8 +663,11 @@ dvipsなどのPDF非対応のドライバを使用する場合は，EPS形式の
 \usepackage[eps]{chemobabel}
 \end{verbatim}
 %<*en>
-The option \verb|eps| switches the image format (that is, output format
-from Inkscape) into EPS (since \Lver{v0.9d [2016/02/28]}).
+The option \verb|eps| switches the image format
+(that is, output format from Inkscape) into EPS (since
+\Lver{v0.9d [2016/02/28]}).\footnote{Moreover, since
+\Lver{v0.9l [2022/10/22]}, the package automatically switches to
+EPS mode when using dvips.}
 
 You can also change the image conversion program from ``Inkscape'' to
 ``rsvg-convert'' (since \Lver{v0.9e [2016/03/07]}).
@@ -672,7 +676,9 @@ For this purpose, use \verb|librsvg| option:
 %</en>
 %<*ja>
 というように \verb|eps| オプションを指定すれば，内部でInkscapeから出力される
-画像形式をPDFではなくEPSに変更します（\Lver{v0.9d [2016/02/28]}以降）。
+画像形式をPDFではなくEPSに変更します（\Lver{v0.9d [2016/02/28]}以降）
+\footnote{\Lver{v0.9l [2022/10/22]}以降ではさらに，dvipsの場合に
+自動的にEPSに切り替えるようにしました。}。
 
 また，画像変換プログラムを Inkscape から rsvg-convert に変更することもできます
 （\Lver{v0.9e [2016/03/07]}以降）。
@@ -1254,6 +1260,8 @@ handled properly by changing category codes temporarily (like \verb+\verb+). \\
 2022/10/09 v0.9k & Add \verb|\chemobabel*| and \verb|\smilesobabel*|. \\
                  & Warn if a user need to run another \LaTeX. \\
                  & Improve \verb|[extract]| to take over user-given package options. \\
+2022/10/22 v0.9l & Default to EPS mode if PDF inclusion is unsupported by the driver. \\
+                 & Default \verb|clip| for image inclusion. \\
 \end{tabular}
 \end{table}
 
