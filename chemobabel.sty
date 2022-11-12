@@ -74,8 +74,8 @@
 \fi
 
 %% ----- Make a directory for images -----
-\newcommand\chemobabelimgdir{chemobabelimgdir}
-\chemob@bel@exec{mkdir \chemobabelimgdir}
+\def\chemob@bel@imgdir{chemobabelimgdir}
+\chemob@bel@exec{mkdir \chemob@bel@imgdir}
 
 %% ----- Definition of external commands -----
 \def\smilesob@bel@obabelcmd#1#2{obabel -:"#1" -O \smilesob@belGetName.svg #2}
@@ -135,7 +135,7 @@
 %% ----- Definition of \smilesobabel -----
 \newcounter{smilesob@belCounter}
 \setcounter{smilesob@belCounter}{1}
-\newcommand\smilesob@belPrefix{\chemobabelimgdir/smilesobabelimg}
+\newcommand\smilesob@belPrefix{\chemob@bel@imgdir/smilesobabelimg}
 \newcommand\smilesob@belGetName{\smilesob@belPrefix\arabic{smilesob@belCounter}}
 
 % 1: (optional) options for includegraphics
@@ -176,7 +176,7 @@
 %% ----- Definition of \chemobabel -----
 \newcounter{chemob@belCounter}
 \setcounter{chemob@belCounter}{1}
-\newcommand\chemob@belPrefix{\chemobabelimgdir/chemobabelimg}
+\newcommand\chemob@belPrefix{\chemob@bel@imgdir/chemobabelimg}
 \newcommand\chemob@belGetName{\chemob@belPrefix\arabic{chemob@belCounter}}
 
 % 1: (optional) options for includegraphics
@@ -385,9 +385,9 @@
   \chemob@bel@ifnochem{}{%
     \chemob@bel@warn{%
       Some chemical structures are extracted.\MessageBreak
-      Run 'pdflatex -shell-escape ChemFigFile.tex'}}%
+      Run 'pdflatex -shell-escape \chemob@bel@outname.tex'}}%
 }
-% \smilesobabel*[#1]{#2} => normalized to \smilesobabel[#1]{#2}{#3}
+% \smilesobabel*[#1]{#2} => normalized to \smilesobabel[#1]{#2}{}
 \renewcommand\smilesobabel@i{%
   \begingroup
     \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
@@ -412,7 +412,7 @@
     \string\newpage}%
   [\smilesob@belGetName.\chemob@belimgExt]%
   \addtocounter{smilesob@belCounter}{1}}
-% \chemobabel*[#1]{#2} => normalized to \chemobabel[#1]{#2}{#3}
+% \chemobabel*[#1]{#2} => normalized to \chemobabel[#1]{#2}{}
 \renewcommand\chemobabel@i{%
   \begingroup
     \let\do\@makeother \dospecials \catcode`\{=1 \catcode`\}=2
